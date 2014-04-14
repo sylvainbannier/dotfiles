@@ -83,6 +83,25 @@ map <S-Insert>  	"+gP
 cmap <C-V>  	<C-R>+
 cmap <S-Insert> 	<C-R>+
 
+" select with shift+arrow
+imap <S-Up> <Esc>v
+imap <S-Down> <Esc>v
+imap <S-Right> <Esc>v
+imap <S-Left> <Esc>v
+
+nmap <S-Up> v
+nmap <S-Down> v
+nmap <S-Right> v
+nmap <S-Left> v
+
+vmap <S-Up> k
+vmap <S-Down> j
+vmap <S-Right> W
+vmap <S-Left> B
+
+
+
+
 " Pasting blockwise and linewise selections is not possible in Insert and
 " Visual mode without the +virtualedit feature.  They are pasted as if they
 " were characterwise instead.
