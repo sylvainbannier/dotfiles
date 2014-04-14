@@ -40,10 +40,9 @@ endif
 endfunction
 "AutoHighlightToggle()
 
-"theme desert par défaut
+"load desert colors
 colo desert
 
-"nmap <F4> :w<CR>:make<CR>:cw<CR>
 call pathogen#infect()
 call pathogen#helptags()
 
@@ -99,7 +98,11 @@ vmap <S-Down> j
 vmap <S-Right> W
 vmap <S-Left> B
 
+"search higlighted word il all files
+map <C-h> :execute "lvimgrep /" . expand("<cword>") . "/j **" <Bar> lopen<CR>
 
+" allows to change buffer without saving
+:set hidden
 
 
 " Pasting blockwise and linewise selections is not possible in Insert and
