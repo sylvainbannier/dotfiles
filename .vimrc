@@ -16,6 +16,12 @@ set smartcase
 set showmatch
 set hlsearch
 
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Monospace\ 9
+  endif
+endif
+
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
