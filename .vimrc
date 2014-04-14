@@ -10,7 +10,7 @@ set shiftwidth=4
 set number
 set backup
 
-"permet de faire des recherches non sensibles à la casse par défaut
+"case insentivie searches
 set ignorecase
 set smartcase
 set showmatch
@@ -60,7 +60,7 @@ command -nargs=0 -bar Update if &modified
 nnoremap <silent> <C-S> :<C-u>Update<CR>
 inoremap <c-s> <c-o>:Update<CR>
 
-" ouvre automatiquement nerdtree dans le répertoire courant
+" open NerdTree in current directory
 "function! StartUp()
 "if 0 == argc()
 	"NERDTree
@@ -116,7 +116,7 @@ vmap <S-Insert> 	<C-V>
 " Use CTRL-Q to do what CTRL-V used to do
 noremap <C-Q>   	<C-V>
 
-"CTRL Z pour annuler
+"CTRL Z to cancel
 noremap <C-Z> u
 inoremap <C-Z> <c-o>u
 
@@ -191,18 +191,18 @@ nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
-"permet la modification des tailles de fenêtres via + et -
+" changes windows size with + and -
 if bufwinnr(1)
   map <kMinus> :10winc <<CR> 
   map <kPlus> :10winc ><CR>
 endif
 
 " SMARTHOME
-" revient au 1er caractère de la ligne
+" home key gets bacj to line begining first
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 imap <silent> <Home> <C-O><Home>
 
-" paramétrage de ctrlP
+" ctrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
@@ -263,5 +263,5 @@ endfun
 nmap <C-]> :call SPLITAG()<CR>z.
 nmap <C-LeftMouse> :call SPLITAG()<CR>z.
 
-"ouvre la comparaison avec la dernière version locale du VCS
+"Opens VCS compare with last file version (in cache)
 map <F7> :VCSVimDiff<CR>
