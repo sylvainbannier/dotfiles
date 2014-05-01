@@ -243,10 +243,14 @@ let g:tagbar_type_javascript = {
 \ }
 
 let g:tagbar_autopreview = 1
+
+" automatically opens tabbar
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
-let g:UltiSnipsExpandTrigger="<tab>"
+
+" ulstisnips shortcut
+let g:UltiSnipsExpandTrigger="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
