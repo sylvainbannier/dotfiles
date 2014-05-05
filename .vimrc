@@ -152,6 +152,7 @@ fun! IsNTOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
+" either find current file in NERDTree or open NERDtree
 fun! ToggleAndSyncTree()
 	if IsNTOpen()
 		NERDTreeToggle

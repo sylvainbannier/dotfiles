@@ -114,3 +114,21 @@ export CHROME_CANARY_BIN=/usr/local/bin/canary
 eval "$(grunt --completion=bash)"
 
 export EDITOR=vim
+
+# use vim as a note taking system
+# @see http://jonreeve.com/blog/my-awesome-notetaking-system-2/
+# @see http://peterodding.com/code/vim/notes/
+# Opens a note
+ne() {
+	vim -c ":Note $*" 
+}
+
+## New Note: calls vim notes plugin
+n() { 
+	vim -c :Note
+}
+
+# Searches Notes
+nls() {
+	ls -c ~/notes/ | egrep -i "$*"
+}
