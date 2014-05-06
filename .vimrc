@@ -19,9 +19,13 @@ set showmatch
 set hlsearch
 
 if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Monospace\ 9
-  endif
+	if has("gui_gtk2")
+		set guifont=Monospace\ 9
+
+		"CTRL Z to cancel
+		noremap <C-Z> u
+		inoremap <C-Z> <c-o>u
+	endif
 endif
 
 " Highlight all instances of word under cursor, when idle.
@@ -126,10 +130,6 @@ vmap <S-Insert> 	<C-V>
 
 " Use CTRL-Q to do what CTRL-V used to do
 noremap <C-Q>   	<C-V>
-
-"CTRL Z to cancel
-"noremap <C-Z> u
-"inoremap <C-Z> <c-o>u
 
 " undo toggle shortcut
 nnoremap <F5> :GundoToggle<CR>
