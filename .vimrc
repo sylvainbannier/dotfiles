@@ -1,3 +1,5 @@
+set shell=/bin/bash
+set clipboard^=unnamed
 set smartindent
 "set expandtab
 filetype on
@@ -126,8 +128,8 @@ vmap <S-Insert> 	<C-V>
 noremap <C-Q>   	<C-V>
 
 "CTRL Z to cancel
-noremap <C-Z> u
-inoremap <C-Z> <c-o>u
+"noremap <C-Z> u
+"inoremap <C-Z> <c-o>u
 
 " undo toggle shortcut
 nnoremap <F5> :GundoToggle<CR>
