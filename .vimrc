@@ -25,6 +25,10 @@ if has("gui_running")
 		"CTRL Z to cancel
 		noremap <C-Z> u
 		inoremap <C-Z> <c-o>u
+
+		"removes toolbars
+		":set guioptions-=m  "remove menu bar
+		:set guioptions-=T  "remove toolbar
 	endif
 endif
 
@@ -138,8 +142,8 @@ inoremap <F5> <c-o>:GundoToggle<CR>
 "JS beautify
 noremap <C-F> g:Jsbeautify()
 
-" ignore tmp directories
-set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip
+" ignore directories in vimgrep
+set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.svn/*,node_modules/*,coverage/*,phonegap/*,test-results.xml
 
 " Adds NerdTree toggle 
 
