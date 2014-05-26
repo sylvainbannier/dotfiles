@@ -172,5 +172,83 @@ snippet ngdl "A directive with a linking function only."
 });
 endsnippet
 
+snippet protractor-it-test-element-presence "should have an element"
+it('should have a ${1:element} element', function() {
+	expect(browser.isElementPresent(by.css('${2:#$1}'))).toBe(true);
+});
+$0
+endsnippet
+
+snippet protractor-it "protractor basic test"
+it('${1:test description}', function() {
+		expect(${2:elementName}.isPresent()).toBe(true);
+		expect(browser.getCurrentUrl()).toMatch(/${3:urlEnd}/$/);
+		expect(browser.getTitle()).toBe("${3:pageTitle}");
+		$0
+		});
+endsnippet
+
+snippet protractor-desc "protractor basic description"
+describe('${1:action}', function() {
+		beforeEach(function() {
+			browser.get(${2:url});
+			var ${3:elementName} = element(by.css('${4:#$3}'));
+			});
+
+		$0
+		});
+endsnippet
+
+snippet protractor-css "protractor element CSS select"
+	var ${1:elementName} = element(by.css('${2:#$1}'));
+	$0
+endsnippet
+
+
+snippet protractor-desc-page-load "page load"
+describe('on ${1:url} page load', function() {
+	beforeEach(function() {
+		browser.get('${2:#/$1}');
+	});
+
+	it("should have title \"${3:$1}\"", function() {
+		expect(browser.getTitle()).toBe("$3");
+	});
+
+	$0
+});
+endsnippet
+
+snippet protractor-desc-click-element "element click"
+describe('on ${1:element} click', function() {
+	beforeEach(function() {
+		var ${2:$1Element} = element(by.css('${3:#$1}'));
+		$2.click();
+	});
+
+	$0
+});
+endsnippet
+
+snippet protractor-it-load-page "it loads new page"
+it('loads ${1:page} url', function() {
+	expect(browser.getCurrentUrl()).toMatch(/#\/${3:$1}$/);
+});
+
+it("should have title \"${3:$1}\"", function() {
+	expect(browser.getTitle()).toBe("${4:$3}");
+});
+
+$0
+endsnippet
+
+
+
+
+
+
+
+
+
 
 # vim:ft=snippets:
