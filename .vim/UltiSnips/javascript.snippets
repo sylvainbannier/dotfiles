@@ -1,3 +1,11 @@
+snippet js-for "for loop"
+var $2, $3;
+for (${3:${1/\./_/g}_i}  = 0, ${2:${1/\./_/g}_len} = ${1:list}.length; $3 < $2; $3++) {
+
+	$1[$3]$0;
+}
+endsnippet
+
 snippet ngc "Define a new Angular Controller. You can change the controller name and parameters."
 var ${1:controllerName} = function(${2:scope}, ${3:injectables}) {
   $0
@@ -173,40 +181,39 @@ snippet ngdl "A directive with a linking function only."
 endsnippet
 
 snippet protractor-it-test-element-presence "should have an element"
-it('should have a ${1:element} element', function() {
-	expect(browser.isElementPresent(by.css('${2:#$1}'))).toBe(true);
+it("should have a ${1:element} ${2:elementType}", function() {
+	expect(browser.isElementPresent(by.css('${3:$2#$1}'))).toBe(true);
 });
 $0
 endsnippet
 
 snippet protractor-it "protractor basic test"
-it('${1:test description}', function() {
-		expect(${2:elementName}.isPresent()).toBe(true);
-		expect(browser.getCurrentUrl()).toMatch(/${3:urlEnd}/$/);
-		expect(browser.getTitle()).toBe("${3:pageTitle}");
-		$0
-		});
+it("${1:test description}", function() {
+	expect(${2:elementName}.isPresent()).toBe(true);
+	expect(browser.getCurrentUrl()).toMatch(/${3:urlEnd}/$/);
+	expect(browser.getTitle()).toBe("${3:pageTitle}");
+	$0
+});
 endsnippet
 
 snippet protractor-desc "protractor basic description"
-describe('${1:action}', function() {
-		beforeEach(function() {
-			browser.get(${2:url});
-			var ${3:elementName} = element(by.css('${4:#$3}'));
-			});
-
-		$0
-		});
+describe("${1:action}", function() {
+	beforeEach(function() {
+		browser.get(${2:url});
+		var ${3:elementName} = element(by.css('${4:#$3}'));
+	});
+	$0
+});
 endsnippet
 
 snippet protractor-css "protractor element CSS select"
-	var ${1:elementName} = element(by.css('${2:#$1}'));
-	$0
+var ${1:elementName} = element(by.css('${2:#$1}'));
+$0
 endsnippet
 
 
 snippet protractor-desc-page-load "page load"
-describe('on ${1:url} page load', function() {
+describe("on ${1:url} page load", function() {
 	beforeEach(function() {
 		browser.get('${2:#/$1}');
 	});
@@ -214,29 +221,33 @@ describe('on ${1:url} page load', function() {
 	it("should have title \"${3:$1}\"", function() {
 		expect(browser.getTitle()).toBe("$3");
 	});
-
 	$0
 });
 endsnippet
 
 snippet protractor-desc-click-element "element click"
-describe('on ${1:element} click', function() {
+describe("on ${1:element} click", function() {
 	beforeEach(function() {
 		var ${2:$1Element} = element(by.css('${3:#$1}'));
 		$2.click();
 	});
+	$0
+});
+endsnippet
 
+snippet protractor-desc-send-keys "send keys"
+describe("on send keys \"${1:value}\" to input \"${2:element}\"", function() {
+	beforeEach(function() {
+		var ${3:$2Element} = element(by.css('${4:#$2}'));
+		$3.sendKeys("$1");
+	});
 	$0
 });
 endsnippet
 
 snippet protractor-it-load-page "it loads new page"
-it('loads ${1:page} url', function() {
+it("loads ${1:page} url", function() {
 	expect(browser.getCurrentUrl()).toMatch(/#\/${3:$1}$/);
-});
-
-it("should have title \"${3:$1}\"", function() {
-	expect(browser.getTitle()).toBe("${4:$3}");
 });
 
 $0
