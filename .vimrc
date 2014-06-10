@@ -9,6 +9,7 @@ set autoindent
 set cindent 
 set tabstop=4 
 set shiftwidth=4 
+set relativenumber
 set number
 set backup
 
@@ -222,6 +223,7 @@ imap <silent> <Home> <C-O><Home>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+imap <C-p> <Esc :CtrlP<CR><F5> 
 
 let g:tagbar_width = 20
 let g:tagbar_autofocus = 1 
@@ -285,3 +287,6 @@ nmap <C-LeftMouse> :call SPLITAG()<CR>z.
 
 "Opens VCS compare with last file version (in cache)
 map <F7> :VCSVimDiff<CR>
+
+" changes line color for insert mode
+set cursorline
