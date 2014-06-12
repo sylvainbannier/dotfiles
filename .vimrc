@@ -115,6 +115,14 @@ vmap <S-Down> j
 vmap <S-Right> W
 vmap <S-Left> B
 
+"outdent with Shift+Tab
+:imap <S-Tab> <Esc> <$i
+:vmap <S-Tab> <
+
+"indent with Tab
+:vmap <Tab> >
+
+
 "search higlighted word il all files
 map <C-h> :execute "lvimgrep /" . expand("<cword>") . "/j **" <Bar> lopen<CR>
 
@@ -223,7 +231,7 @@ imap <silent> <Home> <C-O><Home>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-imap <C-p> <Esc :CtrlP<CR><F5> 
+imap <C-p> <Esc> :CtrlP<CR><F5> 
 
 let g:tagbar_width = 20
 let g:tagbar_autofocus = 1 
