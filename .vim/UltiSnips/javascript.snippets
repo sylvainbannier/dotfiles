@@ -254,6 +254,14 @@ $0
 endsnippet
 
 
+snippet protractor--it-expect-value "it expects a value"
+it("loads ${1:page} url", function() {
+	expect(${1:element}.getAttribute('value')).toEqual("${2:value}");
+	});
+});
+
+$0
+endsnippet
 
 
 

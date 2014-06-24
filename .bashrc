@@ -132,3 +132,5 @@ n() {
 nls() {
 	ls -c ~/notes/ | egrep -i "$*"
 }
+
+xmodmap -e "keycode  65 = space space space space space"

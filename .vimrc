@@ -124,7 +124,7 @@ vmap <S-Left> B
 
 
 "search higlighted word il all files
-map <C-h> :execute "lvimgrep /" . expand("<cword>") . "/j **" <Bar> lopen<CR>
+map <C-h> :execute "lvimgrep /" . expand("<cword>") . "/j **" <Bar> lopen
 
 " allows to change buffer without saving
 :set hidden
@@ -298,3 +298,6 @@ map <F7> :VCSVimDiff<CR>
 
 " changes line color for insert mode
 set cursorline
+
+ let g:syntastic_javascript_checker = "jshint"
+ let g:jshint_highlight_color = "Red"
