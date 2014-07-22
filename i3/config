@@ -90,20 +90,20 @@ bindsym $mod+q focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+ampersand workspace 1
-bindsym $mod+eacute workspace 2
-bindsym $mod+quotedbl workspace 3
-bindsym $mod+apostrophe workspace 4
+bindsym $mod+ampersand workspace 1: term
+bindsym $mod+eacute workspace 2: mail
+bindsym $mod+quotedbl workspace 3: doc/chrome
+bindsym $mod+apostrophe workspace 4: 
 bindsym $mod+parenleft workspace 5
 bindsym $mod+minus workspace 6
 bindsym $mod+egrave workspace 7
-bindsym $mod+underscore workspace 8
-bindsym $mod+ccedilla workspace 9
-bindsym $mod+agrave workspace 10
+bindsym $mod+underscore workspace 8: eds/terms
+bindsym $mod+ccedilla workspace 9: eds/gvim
+bindsym $mod+agrave workspace 10: hamster
 
 # move focused container to workspace
 bindsym $mod+Shift+ampersand move container to workspace 1
-bindsym $mod+Shift+eacute move container to workspace 2
+# bindsym $mod+Shift+eacute move container to workspace 2
 bindsym $mod+Shift+quotedbl move container to workspace 3
 bindsym $mod+Shift+apostrophe move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
@@ -144,7 +144,12 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+
 bindsym $mod+r mode "resize"
+
+#bindsym $mod+eacute workspace 2: mail
+
+#exec_always --no-startup-id i3-msg 'workspace 2: mail'
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -154,4 +159,11 @@ bar {
 bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+ unmute
 bindsym XF86AudioLowerVolume  exec amixer -q sset Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q sset Master toggle
+
+# double screen config
+bindsym $mod+Shift+d exec xrandr --output HDMI1 --auto --right-of LVDS1
+# acts as a toggle too
+bindsym $mod+x move workspace to output Right
+bindsym $mod+shift+x move container to output Right
+
 
