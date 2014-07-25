@@ -30,7 +30,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+a kill
+bindsym $mod+w kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -40,10 +40,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+m focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#ibindsym $mod+m focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -52,10 +52,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+m move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+m move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -89,17 +89,21 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+#specific workspaces
+bindsym $mod+m workspace m: mail; exec gmail
+
 # switch to workspace
 bindsym $mod+ampersand workspace 1: term
 bindsym $mod+eacute workspace 2: mail
 bindsym $mod+quotedbl workspace 3: doc/chrome
-bindsym $mod+apostrophe workspace 4: 
-bindsym $mod+parenleft workspace 5
-bindsym $mod+minus workspace 6
+bindsym $mod+apostrophe workspace 4: redmine 
+bindsym $mod+parenleft workspace 5: canary
+bindsym $mod+minus workspace 6: canary/debug
 bindsym $mod+egrave workspace 7
 bindsym $mod+underscore workspace 8: eds/terms
 bindsym $mod+ccedilla workspace 9: eds/gvim
-bindsym $mod+agrave workspace 10: hamster
+bindsym $mod+agrave workspace 10
+bindsym $mod+shift+h workspace h: hamster
 
 # move focused container to workspace
 bindsym $mod+Shift+ampersand move container to workspace 1
@@ -146,6 +150,10 @@ mode "resize" {
 
 
 bindsym $mod+r mode "resize"
+#shortcut for resize
+bindsym $mod+KP_Add resize grow width 10 px or 10 ppt
+bindsym $mod+KP_Subtract resize shrink width 10 px or 10 ppt
+
 
 #bindsym $mod+eacute workspace 2: mail
 
@@ -165,5 +173,18 @@ bindsym $mod+Shift+d exec xrandr --output HDMI1 --auto --right-of LVDS1
 # acts as a toggle too
 bindsym $mod+x move workspace to output Right
 bindsym $mod+shift+x move container to output Right
+
+# do not focus on container on mous move
+focus_follows_mouse no
+
+# apps
+bindsym $mod+n exec pcmanfm
+
+# start network manager
+exec --no-startup-id nm-applet
+exec --no-startup-id hamster
+
+workspace_auto_back_and_forth yes
+bindsym $mod+Tab workspace back_and_forth
 
 
