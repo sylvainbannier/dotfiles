@@ -14,9 +14,10 @@ if [ $# -lt 2 ]; then
 	exit 2
 fi
 
-RUNNING=`pgrep $1`
+#RUNNING=`pgrep $1`
+RUNNING=`ps -ef | grep "$1" | wc -l`
 
-if [ "$RUNNING" ]; then
+if [ $RUNNING -gt 4 ]; then
 	i3-msg workspace $2;
 else
 	i3-msg "workspace \"$2\"; exec $1;"

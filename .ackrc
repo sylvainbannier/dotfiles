@@ -1,0 +1,5 @@
+--ignore-directory=is:bower_components
+--ignore-directory=is:dist
+--ignore-directory=is:.tmp
+--ignore-directory=is:coverage
+--ignore-directory=is:phonegap
