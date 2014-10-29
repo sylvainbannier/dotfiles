@@ -48,7 +48,9 @@ Plugin 'mattn/emmet-vim'
 Plugin 'tpope/vim-haml' " sass too
 Plugin 'groenewege/vim-less'
 Plugin 'elzr/vim-json'
-Plugin 'Lokaltog/vim-powerline'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'bling/vim-airline'
+let g:airline_powerline_fonts = 1
 Plugin 'tobyS/skeletons.vim'
 Plugin 'jakobwesthoff/whitespacetrail'
 Plugin 'sickill/vim-pasta'
@@ -61,6 +63,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown)
 
+
+Plugin 'regedarek/ZoomWin' "togle zoom on windows
 
 
 " All of your Plugins must be added before the following line
