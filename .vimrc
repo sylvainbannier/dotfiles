@@ -65,6 +65,7 @@ au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwi
 
 
 Plugin 'regedarek/ZoomWin' "togle zoom on windows
+Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
 
 
 " All of your Plugins must be added before the following line

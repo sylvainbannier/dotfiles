@@ -24,8 +24,10 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
- bindsym $mod+Return exec i3-sensible-terminal -e tmux
-# start tmux instead
+bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Shift+Return exec i3-sensible-terminal -e termcwd.sh
+bindsym $mod+Shift+Return exec gnome-terminal --working-directory="`xcwd`"
+# bindsym $mod+Return exec i3-sensible-terminal -e tmux #start tmux 
 
 # kill focused window
 bindsym $mod+Shift+a kill
@@ -110,7 +112,7 @@ bindsym $mod+parenleft workspace 5:mail
 bindsym $mod+minus workspace 6:notes
 bindsym $mod+egrave workspace 7:office
 bindsym $mod+underscore workspace 8:files
-bindsym $mod+ccedilla workspace 9
+bindsym $mod+ccedilla workspace 9:doc
 bindsym $mod+agrave workspace 10:perso
 
 # move focused container to workspace
@@ -123,7 +125,7 @@ bindsym $mod+Shift+5 move container to workspace 5:mail
 bindsym $mod+Shift+minus move container to workspace 6:notes
 bindsym $mod+Shift+egrave move container to workspace 7:office
 bindsym $mod+Shift+underscore move container to workspace 8:files
-bindsym $mod+Shift+ccedilla move container to workspace 9
+bindsym $mod+Shift+ccedilla move container to workspace 9:doc
 bindsym $mod+Shift+agrave move container to workspace 10:perso
 
 # reload the configuration file
