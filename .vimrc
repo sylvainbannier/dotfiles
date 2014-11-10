@@ -146,4 +146,5 @@ imap <silent> <Home> <C-O><Home>
 nnoremap <F6> :NERDTreeToggle<CR>
 inoremap <F6> :NERDTreeToggle<CR>
 
-
+" languagetool
+let g:languagetool_jar='/usr/local/LanguageTool-2.7/languagetool-commandline.jar'
