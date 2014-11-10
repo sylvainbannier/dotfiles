@@ -1,0 +1,2 @@
+alias libreoffice="libreoffice --norestore"
+

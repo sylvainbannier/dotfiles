@@ -204,6 +204,7 @@ bar {
 assign [class="Eclipse"] 2:ide
 assign [class="Firefox"] 3:web
 assign [class="Gmail"] 5:mail
+assign [class="Thunderbird"] 5:mail
 assign [class="Vimperator"] 3:web
 assign [class="Jitsi"] 4:im
 assign [class="Hangouts"] 4:im
