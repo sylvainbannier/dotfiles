@@ -67,6 +67,23 @@ au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwi
 Plugin 'regedarek/ZoomWin' "togle zoom on windows
 Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
 
+Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
+
+Plugin 'dpelle/vim-LanguageTool' "Grammar check
+let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
+
+Plugin 'tyru/open-browser.vim'
+
+" Angular JS
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'claco/jasmine.vim'
+Plugin 'burnettk/vim-angular'
+
+let g:angular_find_ignore = ['build/', 'dist/']
+let g:angular_source_directory = 'app/scripts'
+let g:angular_test_directory = 'test/specs'
+let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "smile-']
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -146,5 +163,3 @@ imap <silent> <Home> <C-O><Home>
 nnoremap <F6> :NERDTreeToggle<CR>
 inoremap <F6> :NERDTreeToggle<CR>
 
-" languagetool
-let g:languagetool_jar='/usr/local/LanguageTool-2.7/languagetool-commandline.jar'
