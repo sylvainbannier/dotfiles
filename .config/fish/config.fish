@@ -16,3 +16,9 @@ set fish_plugins git php percol vundle
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
 
+# aliases
+
+alias o "gnome-open"
+alias lll "ls -alh"
+
+
