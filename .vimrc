@@ -19,6 +19,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-shell'
 Plugin 'kien/ctrlp.vim'
+Plugin 'sgur/ctrlp-extensions.vim' "search in history 
 Plugin 'xolox/vim-notes'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -84,6 +85,8 @@ let g:angular_find_ignore = ['build/', 'dist/']
 let g:angular_source_directory = 'app/scripts'
 let g:angular_test_directory = 'test/specs'
 let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "smile-']
+
+Plugin 'KabbAmine/zeavim.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
