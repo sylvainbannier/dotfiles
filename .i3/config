@@ -217,8 +217,8 @@ assign [class="office"] 7:office
 
 
 # apps shortcuts
-# starts vim note with a blank note
-bindsym $mod+n exec gvim note:
+# search note and open it
+bindsym $mod+n exec gnome-terminal -e "fish -c vim_note_percol_open"
 
 # Take a screenshot
 bindsym Print exec shutter -s -e -o=/tmp/%Y-%m-%d_%T.png

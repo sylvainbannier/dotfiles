@@ -26,10 +26,19 @@ alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
 alias cheatsheet-add-last-history "history | head -n 1 >> ~/doc/cheatsheet"
 alias history-search "fish -c 'history | percol | tr -d \'\\n\' | parcellite > /dev/null'"
 
+# search history (oh my fish)
+# @see https://github.com/bpinto/oh-my-fish/tree/master/plugins/percol
+function fish_user_key_bindings
+  bind \cr percol_select_history
+end
+
+
 # GIT aliases
 alias gpom "git push origin master"
 alias gr "git reset HEAD"
 alias gc "git checkout --"
+alias gs "git status"
+alias gd "git diff"
 
 # xrandr aliases
 alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
