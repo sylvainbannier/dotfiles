@@ -35,10 +35,13 @@ end
 
 # GIT aliases
 alias gpom "git push origin master"
-alias gr "git reset HEAD"
-alias gc "git checkout --"
+alias gunstage "git reset HEAD"
+alias greverse "git checkout --"
 alias gs "git status"
 alias gd "git diff"
+alias gall "git add ."
+alias ga "git add"
+alias gc "git commit -m"
 
 # xrandr aliases
 alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
