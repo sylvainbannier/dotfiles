@@ -21,12 +21,31 @@ Plugin 'xolox/vim-shell'
 Plugin 'kien/ctrlp.vim'
 Plugin 'sgur/ctrlp-extensions.vim' "search in history 
 Plugin 'xolox/vim-notes'
+Plugin 'Valloric/YouCompleteMe' " make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return snippet
+    else
+        return "\<CR>"
+    endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 Plugin 'scrooloose/nerdtree'
 "Plugin 'jistr/vim-nerdtree-tab' "not working with vundle
 "Plugin 'tmhedberg/matchit' " already included in vim
-Plugin 'Valloric/YouCompleteMe' " make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/syntastic'
