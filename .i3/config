@@ -223,3 +223,5 @@ bindsym Print exec shutter -s -e -o=/tmp/%Y-%m-%d_%T.png
 # hamster
 bindsym $mod+t exec hamster-time-tracker edit
 
+# open new terminal window to search in cheatsheet
+bindsym $mod+c exec gnome-terminal -e "fish -c cheatsheet"

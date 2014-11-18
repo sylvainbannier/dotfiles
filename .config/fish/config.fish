@@ -21,6 +21,11 @@ set fish_plugins git php percol vundle
 alias o "gnome-open"
 alias lll "ls -Galh"
 alias encfs_syban "encfs /home/syban/.encrypted /home/syban/.decrypted"
+alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | percol | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
+alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
 
+alias gpom "git push origin master"
+alias gr "git reset HEAD"
+alias gc "git checkout --"
 
 
