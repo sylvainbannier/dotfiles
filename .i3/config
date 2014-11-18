@@ -93,14 +93,14 @@ bindsym $mod+q focus parent
 workspace term output eDP1
 workspace 1:chrome output eDP1
 workspace 2:ide output HDMI1
-workspace 3:web output eDP1
-workspace 4:im output eDP1
-workspace 5:mail output eDP1
-workspace 6:notes output eDP1
-workspace 7:office output eDP1
-workspace 8:files output eDP1
-workspace 9 output eDP1
-workspace 10:perso output eDP1
+workspace 3:web output HDMI1
+workspace 4:im output HDMI1
+workspace 5:mail output HDMI1
+workspace 6:notes output HDMI1 
+workspace 7:office output HDMI1
+workspace 8:files output HDMI1
+workspace 9:doc output eDP1
+workspace 10:perso output HDMI1
 
 # switch to workspace
 bindsym $mod+twosuperior workspace term
@@ -212,6 +212,9 @@ assign [class="Hangouts"] 4:im
 assign [class="Buddy List"] 4:im
 assign [class="Pidgin"] 4:im
 assign [class="zeal"] 9:doc
+assign [class="Google Keep"] 10:perso
+assign [class="office"] 7:office
+
 
 # apps shortcuts
 # starts vim note with a blank note
@@ -225,3 +228,6 @@ bindsym $mod+t exec hamster-time-tracker edit
 
 # open new terminal window to search in cheatsheet
 bindsym $mod+c exec gnome-terminal -e "fish -c cheatsheet"
+
+# open terminal to search history and copy to clipboard
+bindsym $mod+shift+h exec gnome-terminal -e "fish -c history-search"

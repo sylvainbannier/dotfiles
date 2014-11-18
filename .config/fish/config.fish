@@ -23,9 +23,20 @@ alias lll "ls -Galh"
 alias encfs_syban "encfs /home/syban/.encrypted /home/syban/.decrypted"
 alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | percol | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
 alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
+alias cheatsheet-add-last-history "history | head -n 1 >> ~/doc/cheatsheet"
+alias history-search "fish -c 'history | percol | tr -d \'\\n\' | parcellite > /dev/null'"
 
+# GIT aliases
 alias gpom "git push origin master"
 alias gr "git reset HEAD"
 alias gc "git checkout --"
+
+# xrandr aliases
+alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
+alias xrandr-desktop "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --right-of eDP1"
+
+# backup
+alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --exclude '**' ~ scp://capcadonline/backups/laptop"
+
 
 
