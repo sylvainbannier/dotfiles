@@ -27,14 +27,16 @@ Plugin 'honza/vim-snippets'
 
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
-function ExpandSnippetOrCarriageReturn()
-    let snippet = UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-        return snippet
-    else
-        return "\<CR>"
-    endif
-endfunction
+if !exists("*ExpandSnippetOrCarriageReturn")
+	function ExpandSnippetOrCarriageReturn()
+		let snippet = UltiSnips#ExpandSnippetOrJump()
+		if g:ulti_expand_or_jump_res > 0
+			return snippet
+		else
+			return "\<CR>"
+		endif
+	endfunction
+endif
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -71,7 +73,9 @@ Plugin 'elzr/vim-json'
 "Plugin 'Lokaltog/vim-powerline'
 Plugin 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
-Plugin 'tobyS/skeletons.vim'
+"Plugin 'tobyS/skeletons.vim' basic skeleton : single skeleton per file type
+Plugin 'pgilad/vim-skeletons'
+
 Plugin 'jakobwesthoff/whitespacetrail'
 Plugin 'sickill/vim-pasta'
 Plugin 'jiangmiao/auto-pairs'
@@ -82,7 +86,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown)
-
+let g:vim_markdown_initial_foldlevel=1
 
 Plugin 'regedarek/ZoomWin' "togle zoom on windows
 Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
@@ -105,7 +109,13 @@ let g:angular_source_directory = 'app/scripts'
 let g:angular_test_directory = 'test/specs'
 let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "smile-']
 
-Plugin 'KabbAmine/zeavim.vim'
+Plugin 'KabbAmine/zeavim.vim' "open doc in zeal with <c-z>
+
+" PHP
+Plugin 'StanAngeloff/php.vim'
+
+"SCM integration
+Plugin 'mhinz/vim-signify'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -121,6 +131,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+let skeletons#skeletonsDir = "~/.vim/bundle/vim-skeletons/skeletons/"
+call skeletons#skeletonsOn()
 
 syntax on
 set background=dark

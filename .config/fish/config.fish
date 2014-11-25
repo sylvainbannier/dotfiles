@@ -48,7 +48,7 @@ alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800
 alias xrandr-desktop "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --right-of eDP1"
 
 # backup
-alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --exclude '**' ~ scp://capcadonline/backups/laptop"
+alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://capcadonline/backups/laptop"
 
 
 
