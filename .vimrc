@@ -24,6 +24,7 @@ Plugin 'xolox/vim-notes'
 Plugin 'Valloric/YouCompleteMe' " make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'chrisgillis/vim-bootstrap3-snippets'
 
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
@@ -103,6 +104,7 @@ Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'claco/jasmine.vim'
 Plugin 'burnettk/vim-angular'
+"Plugin 'curist/vim-angular-template' "Syntax highlighting for angularjs templates in html/jade.
 
 let g:angular_find_ignore = ['build/', 'dist/']
 let g:angular_source_directory = 'app/scripts'
