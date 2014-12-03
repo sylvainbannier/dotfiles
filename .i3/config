@@ -97,7 +97,7 @@ workspace 3:web output HDMI1
 workspace 4:im output HDMI1
 workspace 5:mail output HDMI1
 workspace 6:notes output HDMI1 
-workspace 7:office output HDMI1
+workspace 7:specs output HDMI1
 workspace 8:files output HDMI1
 workspace 9:doc output eDP1
 workspace 10:perso output HDMI1
@@ -110,7 +110,7 @@ bindsym $mod+quotedbl workspace 3:web
 bindsym $mod+apostrophe workspace 4:im
 bindsym $mod+parenleft workspace 5:mail
 bindsym $mod+minus workspace 6:notes
-bindsym $mod+egrave workspace 7:office
+bindsym $mod+egrave workspace 7:specs
 bindsym $mod+underscore workspace 8:files
 bindsym $mod+ccedilla workspace 9:doc
 bindsym $mod+agrave workspace 10:perso
@@ -123,7 +123,7 @@ bindsym $mod+Shift+quotedbl move container to workspace 3:web
 bindsym $mod+Shift+apostrophe move container to workspace 4:im
 bindsym $mod+Shift+5 move container to workspace 5:mail
 bindsym $mod+Shift+minus move container to workspace 6:notes
-bindsym $mod+Shift+egrave move container to workspace 7:office
+bindsym $mod+Shift+egrave move container to workspace 7:specs
 bindsym $mod+Shift+underscore move container to workspace 8:files
 bindsym $mod+Shift+ccedilla move container to workspace 9:doc
 bindsym $mod+Shift+agrave move container to workspace 10:perso
@@ -213,7 +213,7 @@ assign [class="Buddy List"] 4:im
 assign [class="Pidgin"] 4:im
 assign [class="zeal"] 9:doc
 assign [class="Google Keep"] 10:perso
-assign [class="office"] 7:office
+assign [class="office"] 7:specs
 
 
 # apps shortcuts

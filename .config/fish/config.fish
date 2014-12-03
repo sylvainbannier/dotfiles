@@ -42,6 +42,11 @@ alias gd "git diff"
 alias gall "git add ."
 alias ga "git add"
 alias gc "git commit -m"
+alias gl "git log --pretty=format:'%h - %an, %ar : %s'"
+alias gf "git fetch origin master"
+
+#git flow aliases
+alias gffs "git flow feature start"
 
 # xrandr aliases
 alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
@@ -52,4 +57,9 @@ alias xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 19
 alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://capcadonline/backups/laptop"
 
 
-
+# colors  
+alias tail "grc tail"
+alias ps "grc ps"
+alias ping "grc ping"
+alias netstat "grc netstat"
+alias cat "grc cat"
