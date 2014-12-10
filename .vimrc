@@ -200,3 +200,14 @@ imap <silent> <Home> <C-O><Home>
 nnoremap <F6> :NERDTreeToggle<CR>
 inoremap <F6> :NERDTreeToggle<CR>
 
+" same moves as in insert mode
+nmap <C-Left> b
+nmap <C-Right> w
+
+" different cursor shape in insert mode
+silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+if has("autocmd")
+  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+endif
