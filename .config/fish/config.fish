@@ -58,7 +58,7 @@ alias xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 19
 alias xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --left-of eDP1"
 
 # backup
-alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --include /etc/sudoers.d --exclude '**' ~ scp://capcadonline/backups/laptop"
+alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://capcadonline/backups/laptop"
 
 
 # colors  
