@@ -47,7 +47,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 Plugin 'scrooloose/nerdtree'
-"Plugin 'jistr/vim-nerdtree-tab' "not working with vundle
+Bundle 'jistr/vim-nerdtree-tabs' 
 "Plugin 'tmhedberg/matchit' " already included in vim
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
@@ -81,7 +81,7 @@ Plugin 'jakobwesthoff/whitespacetrail'
 Plugin 'sickill/vim-pasta'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'bkad/CamelCaseMotion'
-"Plugin 'kshenoy/vim-signature'
+Plugin 'kshenoy/vim-signature'
 
 " markdown
 Plugin 'godlygeek/tabular'

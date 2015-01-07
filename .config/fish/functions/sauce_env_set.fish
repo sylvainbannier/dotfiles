@@ -1,0 +1,1 @@
+/home/syban/.decrypted/sauce_env_set.fish

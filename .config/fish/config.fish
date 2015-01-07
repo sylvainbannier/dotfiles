@@ -34,16 +34,19 @@ end
 
 
 # GIT aliases
-alias gpom "git push origin master"
-alias gunstage "git reset HEAD"
-alias greverse "git checkout --"
-alias gs "git status"
-alias gd "git diff"
-alias gall "git add ."
-alias ga "git add"
-alias gc "git commit -m"
-alias gl "git log --pretty=format:'%h - %an, %ar : %s'"
-alias gf "git fetch origin master"
+alias gipom "git push origin master"
+alias giunstage "git reset HEAD"
+alias gireverse "git checkout --"
+alias gis "git status"
+alias gid "git diff"
+alias giall "git add ."
+alias gia "git add"
+alias gic "git commit -m"
+alias gil "git log --pretty=format:'%h - %an, %ar : %s'"
+alias gif "git fetch origin master"
+alias gico "git checkout"
+alias gib "git branch"
+
 
 #git flow aliases
 alias gffs "git flow feature start"
@@ -52,9 +55,10 @@ alias gffs "git flow feature start"
 alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
 alias xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --right-of eDP1"
 alias xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1200 --primary --left-of eDP1"
+alias xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --left-of eDP1"
 
 # backup
-alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://capcadonline/backups/laptop"
+alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --include /etc/sudoers.d --exclude '**' ~ scp://capcadonline/backups/laptop"
 
 
 # colors  
