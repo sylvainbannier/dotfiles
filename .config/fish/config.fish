@@ -56,7 +56,7 @@ alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800
 alias xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --right-of eDP1"
 alias xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1200 --primary --left-of eDP1"
 alias xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --right-of eDP1"
-alias xrandr-airpl-ber "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --left-of eDP1"
+alias xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1280x1024 --primary --left-of eDP1"
 
 # backup
 alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://capcadonline/backups/laptop"
@@ -68,3 +68,6 @@ alias ps "grc ps"
 alias ping "grc ping"
 alias netstat "grc netstat"
 alias cat "grc cat"
+
+# default tree settings
+alias treee tree -L 2

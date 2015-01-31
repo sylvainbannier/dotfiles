@@ -116,3 +116,8 @@ fi
 if [ -f ~/.decrypted/.bash_secret ]; then
 	. ~/.decrypted/.bash_secret
 fi
+
+# GO
+GOPATH=$HOME/.go
+export GOPATH
+PATH=\$PATH:\$GOPATH/bin 

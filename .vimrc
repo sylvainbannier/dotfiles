@@ -10,6 +10,12 @@ call vundle#begin()
 " ignore directories in vimgrep ack CtrlP etc.
 set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.svn/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*~
 
+" make vim put swap, backup and undo files in a special location instead of the working directory of the file being edited
+" http://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
@@ -19,13 +25,14 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-shell'
 Plugin 'kien/ctrlp.vim'
-Plugin 'sgur/ctrlp-extensions.vim' "search in history 
+"Plugin 'sgur/ctrlp-extensions.vim' "search in history 
 Plugin 'xolox/vim-notes'
 Plugin 'Valloric/YouCompleteMe' " make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'chrisgillis/vim-bootstrap3-snippets'
+"Plugin 'chrisgillis/vim-bootstrap3-snippets'
 
+" use enter to insert auto complete suggestion
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
 if !exists("*ExpandSnippetOrCarriageReturn")
@@ -50,9 +57,9 @@ Plugin 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs' 
 "Plugin 'tmhedberg/matchit' " already included in vim
 Plugin 'tpope/vim-surround'
-Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/syntastic'
-Plugin 'mbbill/undotree'
+"Plugin 'mbbill/undotree'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'MarcWeber/vim-addon-local-vimrc'
@@ -74,12 +81,13 @@ Plugin 'elzr/vim-json'
 "Plugin 'Lokaltog/vim-powerline'
 Plugin 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
-"Plugin 'tobyS/skeletons.vim' basic skeleton : single skeleton per file type
+"Plugin 'tobyS/skeletons.vim' basic skeleton : single skeleton per file type i
+" use pgilad instead as it allows multiple skeletons
 Plugin 'pgilad/vim-skeletons'
 
 Plugin 'jakobwesthoff/whitespacetrail'
-Plugin 'sickill/vim-pasta'
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'sickill/vim-pasta' "pasting with indentation
+Plugin 'jiangmiao/auto-pairs' "insert matching { [ ( ...
 "Plugin 'bkad/CamelCaseMotion'
 Plugin 'kshenoy/vim-signature'
 
@@ -92,32 +100,37 @@ let g:vim_markdown_initial_foldlevel=1
 Plugin 'regedarek/ZoomWin' "togle zoom on windows
 Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
 
-Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
+"Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
 
-Plugin 'dpelle/vim-LanguageTool' "Grammar check
-let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
+"Plugin 'dpelle/vim-LanguageTool' "Grammar check
+"let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
 
-Plugin 'tyru/open-browser.vim'
+"Plugin 'tyru/open-browser.vim' "Open URI with browser
 
 " Angular JS
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'matthewsimo/angular-vim-snippets'
-Plugin 'claco/jasmine.vim'
-Plugin 'burnettk/vim-angular'
+"Plugin 'othree/javascript-libraries-syntax.vim'
+"Plugin 'matthewsimo/angular-vim-snippets'
+"Plugin 'claco/jasmine.vim'
+"Plugin 'burnettk/vim-angular'
 "Plugin 'curist/vim-angular-template' "Syntax highlighting for angularjs templates in html/jade.
 
-let g:angular_find_ignore = ['build/', 'dist/']
-let g:angular_source_directory = 'app/scripts'
-let g:angular_test_directory = 'test/specs'
-let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "smile-']
 
-Plugin 'KabbAmine/zeavim.vim' "open doc in zeal with <c-z>
+"let g:angular_find_ignore = ['build/', 'dist/']
+"let g:angular_source_directory = 'app/scripts'
+"let g:angular_test_directory = 'test/specs'
+"let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "smile-']
+
+"Plugin 'KabbAmine/zeavim.vim' "open doc in zeal with <c-z>
 
 " PHP
 Plugin 'StanAngeloff/php.vim'
 
 "SCM integration
 Plugin 'mhinz/vim-signify'
+ 
+
+" livestyle support
+" Plugin 'mattn/livestyle-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
