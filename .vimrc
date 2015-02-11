@@ -12,7 +12,8 @@ set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.s
 
 " make vim put swap, backup and undo files in a special location instead of the working directory of the file being edited
 " http://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
-set backupdir=~/.vim/backup//
+"set backupdir=~/.vim/backup// " can't keep backups because of this bug https://github.com/paulmillr/chokidar/issues/35
+set nowritebackup
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
@@ -25,7 +26,17 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-shell'
 Plugin 'kien/ctrlp.vim'
+Plugin 'nathanaelkane/vim-indent-guides' "Show indent guides
+"Plugin 'junegunn/vim-easy-align' "align
+"Plugin 'terryma/vim-multiple-cursors' "multiple selections
+Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
+Plugin 'Wolfy87/vim-enmasse' "search/replace in files
+
+
 "Plugin 'sgur/ctrlp-extensions.vim' "search in history 
+Plugin 'tacahiroy/ctrlp-funky' "search in functions
+"Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
+"Plugin 'ivalkeen/vim-ctrlp-tjump' " search in tags
 Plugin 'xolox/vim-notes'
 Plugin 'Valloric/YouCompleteMe' " make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 Plugin 'SirVer/ultisnips'
@@ -61,7 +72,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 "Plugin 'mbbill/undotree'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 Plugin 'MarcWeber/vim-addon-local-vimrc'
 
 " colors
@@ -100,7 +112,7 @@ let g:vim_markdown_initial_foldlevel=1
 Plugin 'regedarek/ZoomWin' "togle zoom on windows
 Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
 
-"Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
+Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
 
 "Plugin 'dpelle/vim-LanguageTool' "Grammar check
 "let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
@@ -198,10 +210,10 @@ nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
-" changes windows size with + and -
+" changes windows size with num pag + and -
 if bufwinnr(1)
 	map <kMinus> :10winc <<CR> 
-	map <kPlus> :10winc ><CR>
+	nmap <silent> <C-Right> :10winc ><CR> 
 endif
 
 " SMARTHOME
