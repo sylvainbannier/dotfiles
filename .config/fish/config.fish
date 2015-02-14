@@ -73,7 +73,7 @@ alias cat "grc cat"
 alias treee "tree -L 2 | less"
 
 # mysql with usefull options
-alias mysql "mysql -h 127.0.0.1 -u root --auto-rehash --tee=mysql_(date +%F_%I-%M-%S).log"
+alias mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
 
 # creates ssh tunnel for mysql ssh_mysql <server>
 alias ssh_mysql "ssh -L 3306:localhost:3306 -fNg"

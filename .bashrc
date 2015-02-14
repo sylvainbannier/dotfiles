@@ -120,4 +120,4 @@ fi
 # GO
 GOPATH=$HOME/.go
 export GOPATH
-PATH=\$PATH:\$GOPATH/bin 
+PATH=$PATH:$GOPATH/bin 

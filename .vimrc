@@ -27,6 +27,8 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-shell'
 Plugin 'kien/ctrlp.vim'
 Plugin 'nathanaelkane/vim-indent-guides' "Show indent guides
+let g:indent_guides_enable_on_vim_startup = 1
+
 "Plugin 'junegunn/vim-easy-align' "align
 "Plugin 'terryma/vim-multiple-cursors' "multiple selections
 Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
@@ -114,8 +116,10 @@ Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
 
 Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
 
-"Plugin 'dpelle/vim-LanguageTool' "Grammar check
-"let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
+Plugin 'vim-scripts/dbext.vim'
+
+Plugin 'dpelle/vim-LanguageTool' "Grammar check
+let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
 
 "Plugin 'tyru/open-browser.vim' "Open URI with browser
 
