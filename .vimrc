@@ -26,6 +26,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-shell'
 Plugin 'kien/ctrlp.vim'
+let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
+
 Plugin 'nathanaelkane/vim-indent-guides' "Show indent guides
 let g:indent_guides_enable_on_vim_startup = 1
 
@@ -35,7 +37,7 @@ Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 Plugin 'Wolfy87/vim-enmasse' "search/replace in files
 
 
-"Plugin 'sgur/ctrlp-extensions.vim' "search in history 
+"Plugin 'sgur/ctrlp-extensions.vim' "search in history
 Plugin 'tacahiroy/ctrlp-funky' "search in functions
 "Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
 "Plugin 'ivalkeen/vim-ctrlp-tjump' " search in tags
@@ -67,14 +69,17 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 Plugin 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs' 
+Bundle 'jistr/vim-nerdtree-tabs'
 "Plugin 'tmhedberg/matchit' " already included in vim
 Plugin 'tpope/vim-surround'
 "Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/syntastic'
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_aggregate_errors = 1
 "Plugin 'mbbill/undotree'
 Plugin 'tomtom/tcomment_vim'
-" Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim' "Replaced by Ag
 Plugin 'rking/ag.vim'
 Plugin 'MarcWeber/vim-addon-local-vimrc'
 
@@ -121,6 +126,13 @@ Plugin 'vim-scripts/dbext.vim'
 Plugin 'dpelle/vim-LanguageTool' "Grammar check
 let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
 
+" tags
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+
+Plugin 'xolox/vim-easytags' "Auto updates tags
+let g:easytags_async=1
+
 "Plugin 'tyru/open-browser.vim' "Open URI with browser
 
 " Angular JS
@@ -140,6 +152,16 @@ let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
 
 " PHP
 Plugin 'StanAngeloff/php.vim'
+Plugin 'evidens/vim-twig'
+Plugin 'vim-php/tagbar-phpctags.vim' "needs phpctags bin. better tagbar for php
+Plugin 'arnaud-lb/vim-php-namespace' "insert namespaces
+inoremap <Leader>u <C-O>:call PhpInsertUse()<CR> " \u to insert use
+noremap <Leader>u :call PhpInsertUse()<CR>
+Plugin '2072/PHP-Indenting-for-VIm' "better indent
+set tags+=vendor.tags,pear.tags,php.tags "split tags in different files
+Plugin 'joonty/vdebug'
+let g:syntastic_php_checkers=['php', 'phpcs']
+let g:syntastic_php_phpcs_args="--report=csv --standard=PSR2"
 
 "SCM integration
 Plugin 'mhinz/vim-signify'
@@ -194,6 +216,9 @@ set ttymouse=xterm2
 " Highlight all occurrence of a selected word
 set hlsearch
 
+set wildmenu "better completion in menus
+set wildmode=longest:full,full
+
 if has("gui_running")
 	if has("gui_gtk2")
 		set guifont=Monospace\ 9
@@ -240,3 +265,14 @@ if has("autocmd")
   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
 endif
+
+" Enable colors for php comments
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
