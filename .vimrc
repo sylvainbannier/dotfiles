@@ -1,3 +1,6 @@
+"
+" NEEDED AT TOP
+"
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -7,45 +10,85 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" ignore directories in vimgrep ack CtrlP etc.
-set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.svn/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*~
-
-" make vim put swap, backup and undo files in a special location instead of the working directory of the file being edited
-" http://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
-"set backupdir=~/.vim/backup// " can't keep backups because of this bug https://github.com/paulmillr/chokidar/issues/35
-set nowritebackup
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
-
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" aditionnal plugins
+"
+" SETTINGS
+"
 Plugin 'tpope/vim-sensible' "defaults
-Plugin 'tpope/vim-fugitive'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-shell'
-Plugin 'kien/ctrlp.vim'
-let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
+Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
+Plugin 'MarcWeber/vim-addon-local-vimrc'
 
+"
+" GUI
+"
+Plugin 'bling/vim-airline' "footer line
+let g:airline_powerline_fonts = 1
+Plugin 'kshenoy/vim-signature'
 Plugin 'nathanaelkane/vim-indent-guides' "Show indent guides
 let g:indent_guides_enable_on_vim_startup = 1
+Plugin 'regedarek/ZoomWin' "togle zoom on windows
 
+Plugin 'scrooloose/syntastic'
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_aggregate_errors = 1
+Plugin 'goatslacker/mango.vim' "colors
+"Plugin 'mbbill/undotree'
+
+"
+" EDITING
+"
+Plugin 'sickill/vim-pasta' "pasting with indentation
+Plugin 'jiangmiao/auto-pairs' "insert matching { [ ( ...
+Plugin 'pgilad/vim-skeletons' "files templates
+Plugin 'jakobwesthoff/whitespacetrail' "removes whitespaces from end of lines
+Plugin 'Valloric/YouCompleteMe' " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-surround' "work with surrounding tags, ' {...
+Plugin 'Lokaltog/vim-easymotion' "quick moves
+Plugin 'Wolfy87/vim-enmasse' "search/replace in files
+Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 "Plugin 'junegunn/vim-easy-align' "align
 "Plugin 'terryma/vim-multiple-cursors' "multiple selections
-Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
-Plugin 'Wolfy87/vim-enmasse' "search/replace in files
 
-
+"
+" FILE NAV
+"
+Plugin 'kien/ctrlp.vim'
+let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
 "Plugin 'sgur/ctrlp-extensions.vim' "search in history
-Plugin 'tacahiroy/ctrlp-funky' "search in functions
+"Plugin 'tacahiroy/ctrlp-funky' "search in functions
 "Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
 "Plugin 'ivalkeen/vim-ctrlp-tjump' " search in tags
-Plugin 'xolox/vim-notes'
-Plugin 'Valloric/YouCompleteMe' " make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+
+"Auto updates tags
+Plugin 'xolox/vim-easytags'
+let g:easytags_async=1
+
+" file tree browser
+Plugin 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+nnoremap <F6> :NERDTreeToggle<CR>
+inoremap <F6> :NERDTreeToggle<CR>
+
+Plugin 'rking/ag.vim' "fils search based on ag
+
+"
+" NOTEBOOK
+"
+Plugin 'xolox/vim-notes' "notebook
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-shell'
+
+"
+" SNIPPETS
+"
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-"Plugin 'chrisgillis/vim-bootstrap3-snippets'
 
 " use enter to insert auto complete suggestion
 let g:UltiSnipsExpandTrigger = "<nop>"
@@ -68,129 +111,107 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-Plugin 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-"Plugin 'tmhedberg/matchit' " already included in vim
-Plugin 'tpope/vim-surround'
-"Plugin 'Lokaltog/vim-easymotion'
-Plugin 'scrooloose/syntastic'
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_aggregate_errors = 1
-"Plugin 'mbbill/undotree'
-Plugin 'tomtom/tcomment_vim'
-" Plugin 'mileszs/ack.vim' "Replaced by Ag
-Plugin 'rking/ag.vim'
-Plugin 'MarcWeber/vim-addon-local-vimrc'
+"
+" SCM/GIT integration
+"
+Plugin 'tpope/vim-fugitive'
+Plugin 'mhinz/vim-signify' "displays chneged line in gutter
 
-" colors
-"Plugin 'altercation/vim-colors-solarized'
-Plugin 'goatslacker/mango.vim'
+""""""""""""""""""""""""""""""
+" LANGUAGE SPECIFIC FEATURES "
+""""""""""""""""""""""""""""""
 
-" web dev plugins
+"
+" JAVASCRIPT
+"
 Plugin 'pangloss/vim-javascript' "syntax and indent all in one
-"Plugin 'jelera/vim-javascript-syntax' " better syntax but no indent use it with https://gist.github.com/nisaacson/6939960 to indent
-"Plugin 'walm/jshint.vim' " alternative for syntastic 
-Plugin 'maksimr/vim-jsbeautify' 
+Plugin 'maksimr/vim-jsbeautify'
 Plugin 'marijnh/tern_for_vim' " run npm install in bundle/tern_for_vim
-Plugin 'mattn/emmet-vim' 
+Plugin 'elzr/vim-json'
+
+"
+" HTML
+"
+Plugin 'mattn/emmet-vim'
+Plugin 'chrisgillis/vim-bootstrap3-snippets'
+
+"
+" CSS/LESS/SASS
+"
 Plugin 'tpope/vim-haml' " sass too
 Plugin 'groenewege/vim-less'
-Plugin 'elzr/vim-json'
-"Plugin 'Lokaltog/vim-powerline'
-Plugin 'bling/vim-airline'
-let g:airline_powerline_fonts = 1
-"Plugin 'tobyS/skeletons.vim' basic skeleton : single skeleton per file type i
-" use pgilad instead as it allows multiple skeletons
-Plugin 'pgilad/vim-skeletons'
 
-Plugin 'jakobwesthoff/whitespacetrail'
-Plugin 'sickill/vim-pasta' "pasting with indentation
-Plugin 'jiangmiao/auto-pairs' "insert matching { [ ( ...
-"Plugin 'bkad/CamelCaseMotion'
-Plugin 'kshenoy/vim-signature'
-
-" markdown
+"
+" MARKDOWN
+"
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
 au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown)
 let g:vim_markdown_initial_foldlevel=1
 
-Plugin 'regedarek/ZoomWin' "togle zoom on windows
-Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
-
-Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
-
+"
+" SQL
+"
 Plugin 'vim-scripts/dbext.vim'
 
+"
+" SPELLCHECK
+"
 Plugin 'dpelle/vim-LanguageTool' "Grammar check
 let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
 
-" tags
-Plugin 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
-
-Plugin 'xolox/vim-easytags' "Auto updates tags
-let g:easytags_async=1
-
-"Plugin 'tyru/open-browser.vim' "Open URI with browser
-
-" Angular JS
-"Plugin 'othree/javascript-libraries-syntax.vim'
-"Plugin 'matthewsimo/angular-vim-snippets'
-"Plugin 'claco/jasmine.vim'
-"Plugin 'burnettk/vim-angular'
-"Plugin 'curist/vim-angular-template' "Syntax highlighting for angularjs templates in html/jade.
-
-
-"let g:angular_find_ignore = ['build/', 'dist/']
-"let g:angular_source_directory = 'app/scripts'
-"let g:angular_test_directory = 'test/specs'
-"let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "smile-']
-
-"Plugin 'KabbAmine/zeavim.vim' "open doc in zeal with <c-z>
-
+"
 " PHP
-Plugin 'StanAngeloff/php.vim'
+"
 Plugin 'evidens/vim-twig'
 Plugin 'vim-php/tagbar-phpctags.vim' "needs phpctags bin. better tagbar for php
-Plugin 'arnaud-lb/vim-php-namespace' "insert namespaces
-inoremap <Leader>u <C-O>:call PhpInsertUse()<CR> " \u to insert use
-noremap <Leader>u :call PhpInsertUse()<CR>
 Plugin '2072/PHP-Indenting-for-VIm' "better indent
-set tags+=vendor.tags,pear.tags,php.tags "split tags in different files
-Plugin 'joonty/vdebug'
+Plugin 'joonty/vdebug' "debugger integration
 let g:syntastic_php_checkers=['php', 'phpcs']
-let g:syntastic_php_phpcs_args="--report=csv --standard=PSR2"
+"let g:syntastic_php_phpcs_args="--report=csv --standard=PSR2" "DISABLED : activate with spcific projects
+"Plugin 'arnaud-lb/vim-php-namespace' "insert namespaces . DISABLED : very usefull relies on tags which make vim to slow. TODO find why
+"inoremap <Leader>u <C-O>:call PhpInsertUse()<CR> " \u to insert use
+"noremap <Leader>u :call PhpInsertUse()<CR>
+"Plugin 'StanAngeloff/php.vim' " provides better syntax outline. DISABLED : conflicts with CtrlP
 
-"SCM integration
-Plugin 'mhinz/vim-signify'
- 
-
-" livestyle support
-" Plugin 'mattn/livestyle-vim'
+" PHP autocomplete
+"Bundle 'Shougo/vimproc' "Needed for phpcomplete-extended
+"Bundle 'Shougo/unite.vim' "Needed for phpcomplete-extended
+"Bundle 'm2mdas/phpcomplete-extended' " DISABLED : errors on ez publish projet
+"index
+"Bundle 'm2mdas/phpcomplete-extended-symfony' "DISABLED : relies on
+"phpcomplete-extended
+"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP "activate phpcomplete-extended
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
+
+""""""""""""""""""""
+" PLUGINS SETTINGS "
+""""""""""""""""""""
 let skeletons#skeletonsDir = "~/.vim/bundle/vim-skeletons/skeletons/"
 call skeletons#skeletonsOn()
+colorscheme mango
+
+
+"""""""""""""""""""""""
+" NATIVE VIM SETTINGS "
+"""""""""""""""""""""""
+" ignore directories in vimgrep ack CtrlP etc.
+set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.svn/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*~
+
+" make vim put swap, backup and undo files in a special location instead of the working directory of the file being edited
+" http://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
+"set backupdir=~/.vim/backup// " can't keep backups because of this bug https://github.com/paulmillr/chokidar/issues/35
+set nowritebackup
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
 syntax on
 set background=dark
-colorscheme mango
 
 set clipboard=unnamedplus "sets common clipboard for x11 & vim
 set cursorline "highlight current line
@@ -216,6 +237,7 @@ set ttymouse=xterm2
 " Highlight all occurrence of a selected word
 set hlsearch
 
+" command menu
 set wildmenu "better completion in menus
 set wildmode=longest:full,full
 
@@ -229,8 +251,16 @@ if has("gui_running")
 	endif
 endif
 
+" different cursor shape in insert mode
+silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+if has("autocmd")
+  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+endif
+
 "
-" SHORTCUTS
+" KEY SHORTCUTS
 "
 
 " Alt+leftarrow will go one window left, etc.
@@ -241,38 +271,16 @@ nmap <silent> <A-Right> :wincmd l<CR>
 
 " changes windows size with num pag + and -
 if bufwinnr(1)
-	map <kMinus> :10winc <<CR> 
-	nmap <silent> <C-Right> :10winc ><CR> 
+	map <kMinus> :10winc <<CR>
+	nmap <silent> <C-Right> :10winc ><CR>
 endif
 
-" SMARTHOME
-" home key gets back to line begining first
+" SMARTHOME : home key gets back to line begining first
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 imap <silent> <Home> <C-O><Home>
-
-" NerdTree toggle 
-nnoremap <F6> :NERDTreeToggle<CR>
-inoremap <F6> :NERDTreeToggle<CR>
 
 " same moves as in insert mode
 nmap <C-Left> b
 nmap <C-Right> w
 
-" different cursor shape in insert mode
-silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-if has("autocmd")
-  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-endif
 
-" Enable colors for php comments
-function! PhpSyntaxOverride()
-  hi! def link phpDocTags  phpDefine
-  hi! def link phpDocParam phpType
-endfunction
-
-augroup phpSyntaxOverride
-  autocmd!
-  autocmd FileType php call PhpSyntaxOverride()
-augroup END
