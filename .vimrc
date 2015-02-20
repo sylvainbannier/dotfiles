@@ -47,7 +47,7 @@ Plugin 'jakobwesthoff/whitespacetrail' "removes whitespaces from end of lines
 Plugin 'Valloric/YouCompleteMe' " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-surround' "work with surrounding tags, ' {...
-Plugin 'Lokaltog/vim-easymotion' "quick moves
+"Plugin 'Lokaltog/vim-easymotion' "quick moves
 Plugin 'Wolfy87/vim-enmasse' "search/replace in files
 Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 "Plugin 'junegunn/vim-easy-align' "align
@@ -57,17 +57,21 @@ Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 " FILE NAV
 "
 Plugin 'kien/ctrlp.vim'
+Plugin 'sgur/ctrlp-extensions.vim' "search in history
+Plugin 'ivalkeen/vim-ctrlp-tjump' " search in tags
+Plugin 'tacahiroy/ctrlp-funky' "search in functions
+nnoremap <leader><leader> :CtrlPMRUFiles<CR>
 let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
-"Plugin 'sgur/ctrlp-extensions.vim' "search in history
-"Plugin 'tacahiroy/ctrlp-funky' "search in functions
+"Symfony specific dirs ignored
+let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr']
+let g:ctrlp_extensions = ['tag']
 "Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
-"Plugin 'ivalkeen/vim-ctrlp-tjump' " search in tags
 Plugin 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
 
 "Auto updates tags
-Plugin 'xolox/vim-easytags'
-let g:easytags_async=1
+"Plugin 'xolox/vim-easytags'
+"let g:easytags_async=1
 
 " file tree browser
 Plugin 'scrooloose/nerdtree'
@@ -168,7 +172,17 @@ Plugin 'evidens/vim-twig'
 Plugin 'vim-php/tagbar-phpctags.vim' "needs phpctags bin. better tagbar for php
 Plugin '2072/PHP-Indenting-for-VIm' "better indent
 Plugin 'joonty/vdebug' "debugger integration
+Plugin 'shawncplus/phpcomplete.vim' "auto complete based on tags
 let g:syntastic_php_checkers=['php', 'phpcs']
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+set completeopt=menu,longest
+nnoremap <silent><C-B> :!ctags -f .tags.php<CR>
+set tags=.tags.php
+let php_sql_query=1
+let php_htmlInStrings=1
+let php_folding=0
+
+set makeprg=php\ -l\ %
 "let g:syntastic_php_phpcs_args="--report=csv --standard=PSR2" "DISABLED : activate with spcific projects
 "Plugin 'arnaud-lb/vim-php-namespace' "insert namespaces . DISABLED : very usefull relies on tags which make vim to slow. TODO find why
 "inoremap <Leader>u <C-O>:call PhpInsertUse()<CR> " \u to insert use
@@ -200,8 +214,8 @@ colorscheme mango
 """""""""""""""""""""""
 " NATIVE VIM SETTINGS "
 """""""""""""""""""""""
-" ignore directories in vimgrep ack CtrlP etc.
-set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.svn/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*~
+" ignore most common directories and files in vimgrep ack CtrlP etc.
+set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.svn/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*~,*/cache/*,*/log/*,*/logs/*
 
 " make vim put swap, backup and undo files in a special location instead of the working directory of the file being edited
 " http://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
@@ -260,8 +274,13 @@ if has("autocmd")
 endif
 
 "
-" KEY SHORTCUTS
+" SHORTCUTS
 "
+"
+nnoremap <silent><TAB> >>
+nnoremap <silent><S-TAB> <<
+vnoremap <silent><TAB> >gv
+vnoremap <silent><S-TAB> <gv
 
 " Alt+leftarrow will go one window left, etc.
 nmap <silent> <A-Up> :wincmd k<CR>
