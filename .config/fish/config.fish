@@ -11,7 +11,7 @@ set fish_theme robbyrussell
 # Path to your custom folder (default path is $FISH/custom)
 #set fish_custom $HOME/dotfiles/oh-my-fish
 
-set fish_plugins git php percol vundle	
+set fish_plugins git php percol vundle
 
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
@@ -34,7 +34,6 @@ end
 
 
 # GIT aliases
-alias gipom "git push origin master"
 alias giunstage "git reset HEAD"
 alias gireverse "git checkout --"
 alias gis "git status"
@@ -43,9 +42,10 @@ alias giall "git add ."
 alias gia "git add"
 alias gic "git commit -m"
 alias gil "git log --pretty=format:'%h - %an, %ar : %s'"
-alias gif "git fetch origin master"
+alias gif "git fetch origin"
 alias gico "git checkout"
 alias gib "git branch"
+alias gip "git push"
 
 
 #git flow aliases
@@ -62,7 +62,7 @@ alias xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mo
 alias backup "duplicity --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://capcadonline/backups/laptop"
 
 
-# colors  
+# colors
 alias tail "grc tail"
 alias ps "grc ps"
 alias ping "grc ping"
