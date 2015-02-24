@@ -172,6 +172,12 @@ Plugin 'evidens/vim-twig'
 Plugin 'vim-php/tagbar-phpctags.vim' "needs phpctags bin. better tagbar for php
 Plugin '2072/PHP-Indenting-for-VIm' "better indent
 Plugin 'joonty/vdebug' "debugger integration
+let g:vdebug_options = {}
+"let g:vdebug_options["port"] = 9009
+"let g:vdebug_options["path_maps"] = {
+"\    "/var/www": "/home/lxc/.../var/www"
+"\}
+"let g:vdebug_options['server'] = "local LXC IP"
 Plugin 'shawncplus/phpcomplete.vim' "auto complete based on tags
 let g:syntastic_php_checkers=['php', 'phpcs']
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
