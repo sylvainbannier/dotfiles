@@ -221,6 +221,7 @@ colorscheme mango
 " needs to be there to prevent vimshel from opening file explorer
 let g:nerdtree_tabs_autofind=1
 noremap <F6> :NERDTreeTabsToggle<CR>
+noremap <c-F6> :NERDTreeTabsFind<CR>
 
 """""""""""""""""""""""
 " NATIVE VIM SETTINGS "
