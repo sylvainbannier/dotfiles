@@ -150,9 +150,11 @@ Plugin 'groenewege/vim-less'
 "
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-voom/VOoM'
 Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
 au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown)
-let g:vim_markdown_initial_foldlevel=1
+let g:vim_markdown_folding_disabled=1
+"autocmd FileType markdown :Voom markdown
 
 "
 " SQL
