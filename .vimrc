@@ -76,8 +76,8 @@ nmap <F8> :TagbarToggle<CR>
 " file tree browser
 Plugin 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
-nnoremap <F6> :NERDTreeToggle<CR>
-inoremap <F6> :NERDTreeToggle<CR>
+
+
 
 Plugin 'rking/ag.vim' "fils search based on ag
 
@@ -86,7 +86,7 @@ Plugin 'rking/ag.vim' "fils search based on ag
 "
 Plugin 'xolox/vim-notes' "notebook
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-shell'
+"Plugin 'xolox/vim-shell' "easy navigation between your notes and environment like local files and directories
 
 "
 " SNIPPETS
@@ -216,6 +216,9 @@ let skeletons#skeletonsDir = "~/.vim/bundle/vim-skeletons/skeletons/"
 call skeletons#skeletonsOn()
 colorscheme mango
 
+" needs to be there to prevent vimshel from opening file explorer
+let g:nerdtree_tabs_autofind=1
+noremap <F6> :NERDTreeTabsToggle<CR>
 
 """""""""""""""""""""""
 " NATIVE VIM SETTINGS "
