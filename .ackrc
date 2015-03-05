@@ -3,3 +3,10 @@
 --ignore-directory=is:.tmp
 --ignore-directory=is:coverage
 --ignore-directory=is:phonegap
+--type-add=html=tpl
+--type-add=html=twig
+--type-set=tpl=tpl
+--type-add=tpl=twig
+--type-set=twig=twig
+--type-set=ini=.ini,.ini.append.php
+
