@@ -59,11 +59,17 @@ Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 Plugin 'kien/ctrlp.vim'
 Plugin 'sgur/ctrlp-extensions.vim' "search in history
 Plugin 'ivalkeen/vim-ctrlp-tjump' " search in tags
+Plugin 'sjbach/lusty' " buffer switch
+Plugin 'ton/vim-bufsurf'
+map <C-Up> :BufSurfBack<CR>
+imap <C-Up> <C-O>:BufSurfBack<CR>
+map <C-Down> :BufSurfForward<CR>
+imap <C-Down> <C-O>:BufSurfForward<CR>
 Plugin 'tacahiroy/ctrlp-funky' "search in functions
 nnoremap <leader><leader> :CtrlPMRUFiles<CR>
 let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
 "Symfony specific dirs ignored
-let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr']
+let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr', '.vimrc']
 let g:ctrlp_extensions = ['tag']
 "Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
 Plugin 'majutsushi/tagbar'
@@ -205,6 +211,11 @@ set makeprg=php\ -l\ %
 "Bundle 'm2mdas/phpcomplete-extended-symfony' "DISABLED : relies on
 "phpcomplete-extended
 "autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP "activate phpcomplete-extended
+"
+
+" cucumber syntax
+Plugin 'tpope/vim-cucumber'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -226,6 +237,9 @@ noremap <c-F6> :NERDTreeTabsFind<CR>
 """""""""""""""""""""""
 " NATIVE VIM SETTINGS "
 """""""""""""""""""""""
+
+set hidden " hide modified buffers on change instead of closing them
+
 " ignore most common directories and files in vimgrep ack CtrlP etc.
 set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.svn/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*~,*/cache/*,*/log/*,*/logs/*
 
