@@ -1,0 +1,66 @@
+snippet sb-angular-ngroute "créé une nouvelle route dans un module existant"
+angular.module('${1:url}RouteModule',[ngRoute])
+.config(function($routeProvider, $locationProvider) {
+  $routeProvider
+  .when('/$1/:${2:param}', {
+	templateUrl: '$1.html',
+	controller: '$1Controller',
+	resolve: {
+	  // I will cause a 1 second delay
+	  delay: function($q, $timeout) {
+		var delay = $q.defer();
+		$timeout(delay.resolve, 1000);
+		return delay.promise;
+	  }
+	}
+  })
+  .when('/$1/:$2', {
+	templateUrl: '$1.html',
+	controller: '$1Controller'
+  });
+
+  // configure html5 to get links working on jsfiddle
+  $locationProvider.html5Mode(true);
+});
+endsnippet
+
+snippet sb-angular-directive-attribute "nouvelle directive attribut"
+angular.module('${1:myComponent}Module', [])
+  .directive('${2:myComponent}', [
+    '${3:dependency}',
+    function $2($3) {
+      return {
+        restrict: 'A', 
+        scope: {},
+        link: function $2Link(scope, element) {
+          scope.$on('$destroy', function on$2Destroy() {
+          });
+        }
+      };
+    }
+  ]);
+endsnippet
+
+snippet sb-angular-directive-element "nouvelle directive element"
+angular.module('${1:myComponent}Module', [])
+  .directive('${2:myComponent}', [
+    '${3:dependency}',
+    function $2($3) {
+      return {
+        restrict: 'E', 
+        scope: {},
+		controllerAs: 'ctrl',
+		bindToController : true,
+		templateUrl: '${4:app/scripts/components/my-component.template.html}'
+		require: '^${5:parentDirectiveName}',
+        link: function $2Link(scope, element) {
+          scope.$on('$destroy', function on$2Destroy() {
+          });
+        }
+		controller:  ['$scope','$element','$attrs', function($scope,$element,$attrs) {
+			$0
+		},
+      };
+    }
+  ]);
+endsnippet

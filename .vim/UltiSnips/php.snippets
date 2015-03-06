@@ -1,0 +1,203 @@
+## eZ publish
+
+snippet ez-search "ezpublish content search"
+$searchService = $this->getRepository()->getSearchService();
+$query = new Query();
+$query->criterion = new Criterion\LogicalAnd(
+	$criterionArray
+);
+// array( new SortClause\ContentId() )
+$query->sortClauses = $sortMethodsArray;
+$query->limit = 20;
+$query->offset = 0;
+$searchService->findContent($query);
+endsnippet
+
+snippet Criterion-Operator-BETWEEN "Criterion\Operator::BETWEEN"
+Criterion\Operator::BETWEEN; // Criterion\Operator::BETWEEN, array( 1033920275, 1033920794 )
+endsnippet
+
+snippet Criterion-Operator-EQ "Criterion\Operator::EQ"
+Criterion\Operator::EQ; // Criterion\Operator::EQ, 'Members'
+endsnippet
+
+snippet Criterion-Operator-GT "Criterion\Operator::GT"
+Criterion\Operator::GT; // Criterion\Operator::GT,1343140540
+endsnippet
+
+snippet Criterion-Operator-GTE "Criterion\Operator::GTE"
+Criterion\Operator::GTE;
+endsnippet
+
+snippet Criterion-Operator-IN "Criterion\Operator::IN"
+Criterion\Operator::IN; // Operator::IN, array( 10, 14 )
+endsnippet
+
+snippet Criterion-Operator-LIKE "Criterion\Operator::LIKE"
+Criterion\Operator::LIKE; // '*ezpublish*'
+endsnippet
+
+snippet Criterion-Operator-LT "Criterion\Operator::LT"
+Criterion\Operator::LT;
+endsnippet
+
+snippet Criterion-Operator-LTE "Criterion\Operator::LTE"
+Criterion\Operator::LTE;
+endsnippet
+
+## Logical Criterions:
+
+snippet Criterion-LogicalAnd "Criterion\LogicalAnd"
+Criterion\LogicalAnd;
+endsnippet
+
+snippet Criterion-LogicalNot "Criterion\LogicalNot"
+Criterion\LogicalNot;
+endsnippet
+
+snippet Criterion-LogicalOr "Criterion\LogicalOr"
+Criterion\LogicalOr;
+endsnippet
+
+
+## Search Criterions
+
+snippet Criterion-DateMetadata "Criterion\DateMetadata"
+new Criterion\DateMetadata( Criterion\DateMetadata::MODIFIED, Criterion\Operator::BETWEEN, array( 1033920275, 1033920794 ) );
+endsnippet
+
+snippet Criterion-ContentTypeIdentifier "Criterion\ContentTypeIdentifier"
+new Criterion\ContentTypeIdentifier( array( 'article', 'folder' ) );
+endsnippet
+
+snippet Criterion-LocationId "Criterion\LocationId"
+new Criterion\LocationId( array( 1, 2, 5 ) );
+endsnippet
+
+snippet Criterion-Subtree "Criterion\Subtree"
+new Criterion\Subtree( "/1/2/" );
+endsnippet
+
+snippet Criterion-SectionId "Criterion\SectionId"
+new Criterion\SectionId( array( 2 ) );
+endsnippet
+
+snippet Criterion-ParentLocationId "Criterion\ParentLocationId"
+new Criterion\ParentLocationId(  array( 1 ) );
+endsnippet
+
+snippet Criterion-UserMetadata "Criterion\UserMetadata"
+new Criterion\UserMetadata( Criterion\UserMetadata::CREATOR, Operator::IN, array( 10, 14 ) );
+endsnippet
+
+snippet Criterion-UserMetadata-CREATOR "Criterion\UserMetadata::CREATOR"
+Criterion\UserMetadata::CREATOR;
+endsnippet
+
+snippet Criterion-UserMetadata-GROUP "Criterion\UserMetadata::GROUP"
+Criterion\UserMetadata::GROUP;
+endsnippet
+
+snippet Criterion-UserMetadata-MODIFIER "Criterion\UserMetadata::MODIFIER"
+Criterion\UserMetadata::MODIFIER;
+endsnippet
+
+snippet Criterion-UserMetadata-OWNER "Criterion\UserMetadata::OWNER"
+Criterion\UserMetadata::OWNER;
+endsnippet
+
+snippet Criterion-Visibility "Criterion\Visibility"
+new Criterion\Visibility( Criterion\Visibility::VISIBLE );
+endsnippet
+
+snippet Criterion-Visibility-VISIBLE "Criterion\Visibility::VISIBLE"
+Criterion\Visibility::VISIBLE;
+endsnippet
+
+snippet Criterion-Visibility-HIDDEN "Criterion\Visibility::HIDDEN"
+Criterion\Visibility::HIDDEN;
+endsnippet
+
+snippet Criterion-ContentId "Criterion\ContentId"
+new Criterion\ContentId(array( 1, 4, 10 ));
+endsnippet
+
+snippet Criterion-ContentTypeId "Criterion\ContentTypeId"
+new Criterion\ContentTypeId( 4 );
+endsnippet
+
+snippet Criterion-ContentTypeGroupId "Criterion\ContentTypeGroupId"
+new Criterion\ContentTypeGroupId(2);
+endsnippet
+
+snippet Criterion-DateMetadata "Criterion\DateMetadata"
+new Criterion\DateMetadata(Criterion\DateMetadata::MODIFIED,Criterion\Operator::GT,1343140540);
+endsnippet
+
+snippet Criterion-FullText "Criterion\FullText"
+new Criterion\FullText( 'Contact*' );
+endsnippet
+
+snippet Criterion-Field "Criterion\Field"
+new Criterion\Field(  'name', Criterion\Operator::EQ,  'Members'  );
+endsnippet
+
+snippet Criterion-Status "Criterion\Status"
+new Criterion\Status( array( Criterion\Status::STATUS_PUBLISHED ) );
+endsnippet
+
+snippet Criterion-LocationRemoteId "Criterion\LocationRemoteId"
+new Criterion\LocationRemoteId( array( '3f6d92f8044aed134f32153517850f5a', 'f3e90596361e31d496d4026eb624c983' ) );
+endsnippet
+
+
+## Sort Clauses:
+
+snippet Clause-Field "Clause\Field"
+new SortClause\Field('blog_post', 'publication_date', Query::SORT_DESC);
+endsnippet
+
+snippet Clause-ContentId "Clause\ContentId"
+new SortClause\ContentId();
+endsnippet
+
+snippet Clause-LocationPathString "Clause\LocationPathString"
+new SortClause\LocationPathString( Query::SORT_DESC );
+endsnippet
+
+snippet Clause-LocationDepth "Clause\LocationDepth"
+new SortClause\LocationDepth( Query::SORT_ASC );
+endsnippet
+
+snippet Clause-ContentName "Clause\ContentName"
+new SortClause\ContentName( Query::SORT_ASC );
+endsnippet
+
+snippet Clause-LocationPriority "Clause\LocationPriority"
+new SortClause\LocationPriority( Query::SORT_DESC );
+endsnippet
+
+snippet Clause-DatePublished "Clause\DatePublished"
+new SortClause\DatePublished();
+endsnippet
+
+snippet Clause-DateModified "Clause\DateModified"
+new SortClause\DateModified();
+endsnippet
+
+snippet Clause-SectionIdentifier "Clause\SectionIdentifier"
+new SortClause\SectionIdentifier();
+endsnippet
+
+snippet Clause-SectionName "Clause\SectionName"
+new SortClause\SectionName();
+endsnippet
+
+snippet Clause-ContentName "Clause\ContentName"
+new SortClause\ContentName();
+endsnippet
+
+snippet Clause-Field "Clause\Field"
+new SortClause\Field( "folder", "name" );
+endsnippet
+
