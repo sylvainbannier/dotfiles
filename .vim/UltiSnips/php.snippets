@@ -1,6 +1,75 @@
 ## eZ publish
 
-snippet ez-search "ezpublish content search"
+# https://doc.ez.no/display/EZP/2.+Browsing,+finding,+viewing
+
+snippet "eZ Displaying values from a Content"
+$repository = $this->getContainer()->get( 'ezpublish.api.repository' );
+$contentService = $repository->getContentService();
+$contentTypeService = $this->getRepository()->getContentTypeService();
+$fieldTypeService = $repository->getFieldTypeService();
+
+try
+{
+    $content = $contentService->loadContent( 66 );
+    $contentType = $contentTypeService->loadContentType( $content->contentInfo->contentTypeId );
+    // iterate over the field definitions of the content type and print out each field's identifier and value
+    foreach( $contentType->fieldDefinitions as $fieldDefinition )
+    {
+        $output->write( $fieldDefinition->identifier . ": " );
+        $fieldType = $fieldTypeService->getFieldType( $fieldDefinition->fieldTypeIdentifier );
+        $field = $content->getField( $fieldDefinition->identifier );
+
+        // We use the Field's toHash() method to get readable content out of the Field
+        $valueHash = $fieldType->toHash( $field->value );
+        $output->writeln( $valueHash );
+    }
+}
+catch( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+{
+    // if the id is not found
+    $output->writeln( "No content with id $contentId" );
+}
+catch( \eZ\Publish\API\Repository\Exceptions\UnauthorizedException $e )
+{
+    // not allowed to read this content
+    $output->writeln( "Anonymous users are not allowed to read content with id $contentId" );
+}
+endsnippet
+
+snippet "eZ trasversing a location subtree"
+try
+{
+    // load the starting location and browse
+    $location = $this->locationService->loadLocation( $locationId );
+    $this->browseLocation( $location, $output );
+}
+catch ( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+{
+    $output->writeln( "<error>No location found with id $locationId</error>" );
+}
+catch( \eZ\Publish\API\Repository\Exceptions\UnauthorizedException $e )
+{
+    $output->writeln( "<error>Current users are not allowed to read location with id $locationId</error>" );
+}
+endsnippet
+
+snippet "EZ Iterating over a Location's children"
+private function browseLocation( Location $location, OutputInterface $output, $depth = 0 )
+{
+    $childLocationList = $this->locationService->loadLocationChildren( $location, $offset = 0, $limit = -1 );
+    // If offset and limit had been specified to something else then "all", then $childLocationList->totalCount contains the total count for iteration use
+    foreach ( $childLocationList->locations as $childLocation )
+    {
+        $this->browseLocation( $childLocation, $output, $depth + 1 );
+    }
+}
+endsnippet
+
+# http://share.ez.no/blogs/thiago-campos-viana/ez-publish-5-tip-search-cheat-sheet
+
+snippet "eZ ezpublish content search"
+// use eZ\Publish\API\Repository\Values\Content\Query;
+// use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 $searchService = $this->getRepository()->getSearchService();
 $query = new Query();
 $query->criterion = new Criterion\LogicalAnd(
@@ -13,191 +82,207 @@ $query->offset = 0;
 $searchService->findContent($query);
 endsnippet
 
-snippet Criterion-Operator-BETWEEN "Criterion\Operator::BETWEEN"
+snippet "eZ ezpublish location search"
+// use eZ\Publish\API\Repository\Values\Content\LocationQuery;
+// use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
+// use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Location;
+
+$searchService = $this->getRepository()->getSearchService();
+$query = new LocationQuery();
+$query->filter = new Criterion\LogicalAnd(array(
+	new Location\ParentLocationId( 2 ),
+	new Criterion\ContentTypeIdentifier( array( "folder", "blog", "landing_page" ) )
+));
+$searchResult = $this->getRepository()
+->getSearchService()
+->findLocations( $query );
+endsnippet
+
+snippet "eZ Criterion\Operator::BETWEEN"
 Criterion\Operator::BETWEEN; // Criterion\Operator::BETWEEN, array( 1033920275, 1033920794 )
 endsnippet
 
-snippet Criterion-Operator-EQ "Criterion\Operator::EQ"
+snippet "eZ Criterion\Operator::EQ"
 Criterion\Operator::EQ; // Criterion\Operator::EQ, 'Members'
 endsnippet
 
-snippet Criterion-Operator-GT "Criterion\Operator::GT"
+snippet "eZ Criterion\Operator::GT"
 Criterion\Operator::GT; // Criterion\Operator::GT,1343140540
 endsnippet
 
-snippet Criterion-Operator-GTE "Criterion\Operator::GTE"
+snippet "eZ Criterion\Operator::GTE"
 Criterion\Operator::GTE;
 endsnippet
 
-snippet Criterion-Operator-IN "Criterion\Operator::IN"
+snippet "eZ Criterion\Operator::IN"
 Criterion\Operator::IN; // Operator::IN, array( 10, 14 )
 endsnippet
 
-snippet Criterion-Operator-LIKE "Criterion\Operator::LIKE"
+snippet "eZ Criterion\Operator::LIKE"
 Criterion\Operator::LIKE; // '*ezpublish*'
 endsnippet
 
-snippet Criterion-Operator-LT "Criterion\Operator::LT"
+snippet "eZ Criterion\Operator::LT"
 Criterion\Operator::LT;
 endsnippet
 
-snippet Criterion-Operator-LTE "Criterion\Operator::LTE"
+snippet "eZ Criterion\Operator::LTE"
 Criterion\Operator::LTE;
 endsnippet
 
 ## Logical Criterions:
 
-snippet Criterion-LogicalAnd "Criterion\LogicalAnd"
+snippet "eZ Criterion\LogicalAnd"
 Criterion\LogicalAnd;
 endsnippet
 
-snippet Criterion-LogicalNot "Criterion\LogicalNot"
+snippet "eZ Criterion\LogicalNot"
 Criterion\LogicalNot;
 endsnippet
 
-snippet Criterion-LogicalOr "Criterion\LogicalOr"
+snippet "eZ Criterion\LogicalOr"
 Criterion\LogicalOr;
 endsnippet
 
 
 ## Search Criterions
 
-snippet Criterion-DateMetadata "Criterion\DateMetadata"
+snippet "eZ Criterion\DateMetadata"
 new Criterion\DateMetadata( Criterion\DateMetadata::MODIFIED, Criterion\Operator::BETWEEN, array( 1033920275, 1033920794 ) );
 endsnippet
 
-snippet Criterion-ContentTypeIdentifier "Criterion\ContentTypeIdentifier"
+snippet "eZ Criterion\ContentTypeIdentifier"
 new Criterion\ContentTypeIdentifier( array( 'article', 'folder' ) );
 endsnippet
 
-snippet Criterion-LocationId "Criterion\LocationId"
+snippet "eZ Criterion\LocationId"
 new Criterion\LocationId( array( 1, 2, 5 ) );
 endsnippet
 
-snippet Criterion-Subtree "Criterion\Subtree"
+snippet "eZ Criterion\Subtree"
 new Criterion\Subtree( "/1/2/" );
 endsnippet
 
-snippet Criterion-SectionId "Criterion\SectionId"
+snippet "eZ Criterion\SectionId"
 new Criterion\SectionId( array( 2 ) );
 endsnippet
 
-snippet Criterion-ParentLocationId "Criterion\ParentLocationId"
+snippet "eZ Criterion\ParentLocationId"
 new Criterion\ParentLocationId(  array( 1 ) );
 endsnippet
 
-snippet Criterion-UserMetadata "Criterion\UserMetadata"
+snippet "eZ Criterion\UserMetadata"
 new Criterion\UserMetadata( Criterion\UserMetadata::CREATOR, Operator::IN, array( 10, 14 ) );
 endsnippet
 
-snippet Criterion-UserMetadata-CREATOR "Criterion\UserMetadata::CREATOR"
+snippet "eZ Criterion\UserMetadata::CREATOR"
 Criterion\UserMetadata::CREATOR;
 endsnippet
 
-snippet Criterion-UserMetadata-GROUP "Criterion\UserMetadata::GROUP"
+snippet "eZ Criterion\UserMetadata::GROUP"
 Criterion\UserMetadata::GROUP;
 endsnippet
 
-snippet Criterion-UserMetadata-MODIFIER "Criterion\UserMetadata::MODIFIER"
+snippet "eZ Criterion\UserMetadata::MODIFIER"
 Criterion\UserMetadata::MODIFIER;
 endsnippet
 
-snippet Criterion-UserMetadata-OWNER "Criterion\UserMetadata::OWNER"
+snippet "eZ Criterion\UserMetadata::OWNER"
 Criterion\UserMetadata::OWNER;
 endsnippet
 
-snippet Criterion-Visibility "Criterion\Visibility"
+snippet "eZ Criterion\Visibility"
 new Criterion\Visibility( Criterion\Visibility::VISIBLE );
 endsnippet
 
-snippet Criterion-Visibility-VISIBLE "Criterion\Visibility::VISIBLE"
+snippet "eZ Criterion\Visibility::VISIBLE"
 Criterion\Visibility::VISIBLE;
 endsnippet
 
-snippet Criterion-Visibility-HIDDEN "Criterion\Visibility::HIDDEN"
+snippet "eZ Criterion\Visibility::HIDDEN"
 Criterion\Visibility::HIDDEN;
 endsnippet
 
-snippet Criterion-ContentId "Criterion\ContentId"
+snippet "eZ Criterion\ContentId"
 new Criterion\ContentId(array( 1, 4, 10 ));
 endsnippet
 
-snippet Criterion-ContentTypeId "Criterion\ContentTypeId"
+snippet "eZ Criterion\ContentTypeId"
 new Criterion\ContentTypeId( 4 );
 endsnippet
 
-snippet Criterion-ContentTypeGroupId "Criterion\ContentTypeGroupId"
+snippet "eZ Criterion\ContentTypeGroupId"
 new Criterion\ContentTypeGroupId(2);
 endsnippet
 
-snippet Criterion-DateMetadata "Criterion\DateMetadata"
+snippet "eZ Criterion\DateMetadata"
 new Criterion\DateMetadata(Criterion\DateMetadata::MODIFIED,Criterion\Operator::GT,1343140540);
 endsnippet
 
-snippet Criterion-FullText "Criterion\FullText"
+snippet "eZ Criterion\FullText"
 new Criterion\FullText( 'Contact*' );
 endsnippet
 
-snippet Criterion-Field "Criterion\Field"
+snippet "eZ Criterion\Field"
 new Criterion\Field(  'name', Criterion\Operator::EQ,  'Members'  );
 endsnippet
 
-snippet Criterion-Status "Criterion\Status"
+snippet "eZ Criterion\Status"
 new Criterion\Status( array( Criterion\Status::STATUS_PUBLISHED ) );
 endsnippet
 
-snippet Criterion-LocationRemoteId "Criterion\LocationRemoteId"
+snippet "eZ Criterion\LocationRemoteId"
 new Criterion\LocationRemoteId( array( '3f6d92f8044aed134f32153517850f5a', 'f3e90596361e31d496d4026eb624c983' ) );
 endsnippet
 
 
 ## Sort Clauses:
 
-snippet Clause-Field "Clause\Field"
+snippet "eZ Clause\Field"
 new SortClause\Field('blog_post', 'publication_date', Query::SORT_DESC);
 endsnippet
 
-snippet Clause-ContentId "Clause\ContentId"
+snippet "eZ Clause\ContentId"
 new SortClause\ContentId();
 endsnippet
 
-snippet Clause-LocationPathString "Clause\LocationPathString"
+snippet "eZ Clause\LocationPathString"
 new SortClause\LocationPathString( Query::SORT_DESC );
 endsnippet
 
-snippet Clause-LocationDepth "Clause\LocationDepth"
+snippet "eZ Clause\LocationDepth"
 new SortClause\LocationDepth( Query::SORT_ASC );
 endsnippet
 
-snippet Clause-ContentName "Clause\ContentName"
+snippet "eZ Clause\ContentName"
 new SortClause\ContentName( Query::SORT_ASC );
 endsnippet
 
-snippet Clause-LocationPriority "Clause\LocationPriority"
+snippet "eZ Clause\LocationPriority"
 new SortClause\LocationPriority( Query::SORT_DESC );
 endsnippet
 
-snippet Clause-DatePublished "Clause\DatePublished"
+snippet "eZ Clause\DatePublished"
 new SortClause\DatePublished();
 endsnippet
 
-snippet Clause-DateModified "Clause\DateModified"
+snippet "eZ Clause\DateModified"
 new SortClause\DateModified();
 endsnippet
 
-snippet Clause-SectionIdentifier "Clause\SectionIdentifier"
+snippet "eZ Clause\SectionIdentifier"
 new SortClause\SectionIdentifier();
 endsnippet
 
-snippet Clause-SectionName "Clause\SectionName"
+snippet "eZ Clause\SectionName"
 new SortClause\SectionName();
 endsnippet
 
-snippet Clause-ContentName "Clause\ContentName"
+snippet "eZ Clause\ContentName"
 new SortClause\ContentName();
 endsnippet
 
-snippet Clause-Field "Clause\Field"
+snippet "eZ Clause\Field"
 new SortClause\Field( "folder", "name" );
 endsnippet
 
