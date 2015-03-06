@@ -256,6 +256,7 @@ set background=dark
 set clipboard=unnamedplus "sets common clipboard for x11 & vim
 set cursorline "highlight current line
 set relativenumber "line numbers relative to current line
+set number " adds line number to the current line
 
 set tabstop=4     " tabs are at proper location
 "set expandtab     " don't use actual tab character (ctrl-v)
