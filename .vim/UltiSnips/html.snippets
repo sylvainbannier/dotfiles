@@ -2,26 +2,26 @@
 
 # https://raw.githubusercontent.com/dspe/ez5_cheatsheet/master/eng/templates.md
 
-snippet "eZ  Retrieve a view parameter"
+snippet eZ-Retrieve-a-view-parameter "eZ Retrieve a view parameter"
 {{ app.request.attributes.get( 'viewParameters' ).offset }}
 endsnippet
 
-snippet "eZ Name of a content"
+snippet eZ-Name-of-a-content "eZ Name of a content"
 {{ content.contentInfo.name }}
 endsnippet
 
-snippet "eZ Get a FieldType"
+snippet eZ-Get-a-FieldType "eZ Get a FieldType"
 {{ content.getField( 'url' ).value.link }}
 endsnippet
 
-snippet "eZ Render a FieldType"
+snippet eZ-Render-a-FieldType "eZ Render a FieldType"
 {{ ez_render_field( <content>, <field_name>, {
 'template': 'eZDemoBundle:fields:fields.html.twig',
 'lang': 'eng-GB'
 } ) }}
 endsnippet
 
-snippet "eZ Render an image with variations"
+snippet eZ-Render-an-image-with-variations "eZ Render an image with variations"
 <img src="{{ asset( ez_image_alias( <field>, <versionInfo>, <parameter_alias> ).uri ) }}" alt="{{  <field>.value.alternativeText }}">
 {* or *}
 {{ ez_render_field(content, 'image', {
@@ -30,7 +30,7 @@ attr:{ class:'maClasse', custom_attribute:'value' }
 })}}
 endsnippet
 
-snippet "eZ Render ezbinaryfile download link with nice file name"
+snippet eZ-Render-ezbinaryfile-download-link-with-nice-file-name "eZ Render ezbinaryfile download link with nice file name"
 <a href="{{ path( 'ez_legacy', { 'module_uri': 'content/download/' ~
 <content>.contentInfo.id ~ '/' ~
 <field>.id ~
@@ -41,7 +41,7 @@ snippet "eZ Render ezbinaryfile download link with nice file name"
 </a>
 endsnippet
 
-snippet "eZ Render a content type via ESI"
+snippet eZ-Render-a-content-type-via-ESI "eZ Render a content type via ESI"
 {{ render( controller( "ez_content:viewLocation", { "locationId": 123, "viewType": "line" }, {"strategy": "esi"} )) }}
 {*
 *ez_content* : service definied in service.yml
@@ -49,37 +49,37 @@ snippet "eZ Render a content type via ESI"
 *}
 endsnippet
 
-snippet "eZ Render a content type via Asynchronous method"
+snippet eZ-Render-a-content-type-via-Asynchronous-method "eZ Render a content type via Asynchronous method"
 {{ render( controller( "ez_content:viewLocation", { "locationId": 123, "viewType": "line" }, {"strategy": "hinclude"} )) }}
 {*
 => Don't forget to add hinclude.js (http://mnot.github.io/hinclude/)
 *}
 endsnippet
 
-snippet "eZ Extends viewbaseLayout"
+snippet eZ-Extends-viewbaseLayout "eZ Extends viewbaseLayout"
 {% extends viewbaseLayout %}
 {*
 => *eZ/Bundle/EzPublishCoreBundle/Resources/views/viewbase_layout.html.twig*
 *}
 endsnippet
 
-snippet "eZ Url to legacy module/view"
+snippet eZ-Url-to-legacy-module/view "eZ Url to legacy module/view"
 {{ path( 'ez_legacy', { 'module_uri': 'my_modyle/my_view/(param1)/value1' } ) }}
 endsnippet
 
-snippet "eZ Link to content Relative"
+snippet eZ-Link-to-content-Relative "eZ Link to content Relative"
 {{ path( 'ez_urlalias', {'locationId': content.contentInfo.mainLocationId} ) }}
 or
 {{ path( location_object ) }}
 endsnippet
 
-snippet "eZ Absolute"
+snippet eZ-Absolute "eZ Absolute"
 {{ url( 'ez_urlalias', {'locationId': content.contentInfo.mainLocationId} ) }}
 {* or *}
 {{ url( location_object ) }}
 endsnippet
 
-snippet "eZ How to know if an user is authenticated"
+snippet eZ-How-to-know-if-an-user-is-authenticated "eZ How to know if an user is authenticated"
 {% if app.security.token.authenticated %}
 ...
 {% else %}
@@ -115,3 +115,38 @@ snippet ezpublish.legacy "ezpublish.legacy"
 ezpublish.legacy
 endsnippet
 
+## Twig
+
+snippet twig-bl "twig block" b
+{% block ${1} %}
+${2}
+{% endblock $1 %}
+endsnippet
+
+snippet twig-js "twig javascripts" b
+{% javascripts '${1}' %}
+<script src="{{ asset_url  }}"></script>
+{% endjavascripts %}
+endsnippet
+
+snippet twig-css "twig stylesheets" b
+{% stylesheets '${1}' %}
+<link rel="stylesheet" href="{{ asset_url  }}">
+{% endstylesheets %}
+endsnippet
+
+snippet twig-if "twig if" b
+{% if ${1} %}
+${2}
+{% endif %}
+endsnippet
+
+snippet twig-for "twig for" b
+{% for ${1} in ${2} %}
+${3}
+{% endfor %}
+endsnippet
+
+snippet twig-ext "twig extends" b
+{% extends ${1} %}
+endsnippet

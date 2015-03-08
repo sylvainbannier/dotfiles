@@ -1,0 +1,71 @@
+# ez
+
+snippet ez-location-view-content-type-ruleset "eZ location view ruleset based on content type identifier"
+full:
+	# A simple unique key for your matching ruleset
+	$1$2Ruleset:
+		template: ${3:MyVendorMyBundle}:${2:full}:$1.html.twig
+		match:
+			Identifier\ContentType: [${1:folder}]
+endsnippet
+
+snippet Id\Content "Matches the ID number of the content"
+Id\Content # Matches the ID number of the content
+endsnippet
+
+snippet Id\ContentType "Matches the ID number of the content type whose content is an instance of"
+Id\ContentType # Matches the ID number of the content type whose content is an instance of
+endsnippet
+
+snippet Id\ContentTypeGroup "Matches the ID number of the group of the content type whose content is an instance of belongs to"
+Id\ContentTypeGroup # Matches the ID number of the group of the content type whose content is an instance of belongs to
+endsnippet
+
+snippet Id\Location "Matches the ID number of a location. In the case of a Content, matched against the main location."
+Id\Location # Matches the ID number of a location.
+endsnippet
+
+snippet Id\ParentContentType "Matches the ID number of the parent content type. In the case of a Content, matched against the main location."
+Id\ParentContentType # Matches the ID number of the parent content type.
+endsnippet
+
+snippet Id\ParentLocation "Matches the ID number of the parent location.  In the case of a Content, matched against the main location."
+Id\ParentLocation # Matches the ID number of the parent location.  In the case of a Content, matched against the main location.
+endsnippet
+
+snippet Id\Remote "Matches the remoteId of either content or location, depending on the object matched."
+Id\Remote # Matches the remoteId of either content or location, depending on the object matched.
+endsnippet
+
+snippet Id\Section "Matches the ID number of the section whose content belongs to"
+Id\Section # Matches the ID number of the section whose content belongs to
+endsnippet
+
+snippet Id\State "Not supported yet.  "
+Id\State # Not supported yet.
+endsnippet
+
+snippet Identifier\ContentType "Matches the identifier of the content type whose content is an instance of "
+Identifier\ContentType # Matches the identifier of the content type whose content is an instance of
+endsnippet
+
+snippet Identifier\ParentContentType "Matches the identifier of the parent content type.  In the case of a Content, matched against the main location. "
+Identifier\ParentContentType # Matches the identifier of the parent content type.  In the case of a Content, matched against the main location.
+endsnippet
+
+snippet Identifier\Section "Matches the identifier of the section whose content belongs to"
+Identifier\Section # Matches the identifier of the section whose content belongs to
+endsnippet
+
+snippet Identifier\State "Not supported yet."
+Identifier\State # Not supported yet.
+endsnippet
+
+snippet Depth "Matches the depth of the location. The depth of a top level location is 1."
+Depth # Matches the depth of the location. The depth of a top level location is 1.
+endsnippet
+
+snippet UrlAlias "Matches the virtual URL of the location (i.e. /My/Content-Uri).  Important: Matches when the UrlAlias of the location starts with the value passed.  Not supported for Content (aka content_view). "
+UrlAlias # Matches the virtual URL of the location (i.e. /My/Content-Uri).  Important: Matches when the UrlAlias of the location starts with the value passed.  Not supported for Content (aka content_view).
+endsnippet
+
