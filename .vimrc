@@ -278,6 +278,8 @@ set ttymouse=xterm2
 " Highlight all occurrence of a selected word
 set hlsearch
 highlight Search  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
+highlight SpellBad 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+highlight SyntasticError 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
 
 " command menu
 set wildmenu "better completion in menus
