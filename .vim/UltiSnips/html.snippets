@@ -26,6 +26,26 @@ snippet ez-field-empty "tests if field is empty"
 ez_is_field_empty( content, "${1:field_identifier}" )
 endsnippet
 
+snippet ez_content_name "ez_content_name"
+{{ ez_content_name(content) }}
+endsnippet
+
+snippet ez_field_description "ez_field_description"
+{{ ez_field_description(content, "${1:field_identifier}" ) }}
+endsnippet
+
+snippet ez_field_name "ez_field_name"
+{{ ez_field_name(content, "${1:field_identifier}" ) }}
+endsnippet
+
+snippet ez_file_size "onvert a number from byte to the correct suffixe"
+{{ nb_bytes|ez_file_size() }}
+endsnippet
+
+snippet ez_trans_prop "ez_trans_prop"
+{{ ez_trans_prop(content, "${1:field_identifier}" ) }}
+endsnippet
+
 snippet eZ-Render-a-FieldType "eZ Render a FieldType"
 {{ ez_render_field( <content>, <field_name>, {
 'template': 'eZDemoBundle:fields:fields.html.twig',
