@@ -14,6 +14,18 @@ snippet eZ-Get-a-FieldType "eZ Get a FieldType"
 {{ content.getField( 'url' ).value.link }}
 endsnippet
 
+snippet ez-render-field "render field"
+{{ ez_render_field( content, ${2:field_identifier} }}
+endsnippet
+
+snippet ez-field-value "render field"
+{{ ez_field_value( content, ${2:field_identifier} }}
+endsnippet
+
+snippet ez-field-empty "tests if field is empty"
+ez_is_field_empty( content, "${1:field_identifier}" )
+endsnippet
+
 snippet eZ-Render-a-FieldType "eZ Render a FieldType"
 {{ ez_render_field( <content>, <field_name>, {
 'template': 'eZDemoBundle:fields:fields.html.twig',
@@ -168,3 +180,10 @@ snippet ez-link-content "links from content id"
 {* Important: Links generated from a Content ID will point to its main location.  *}
 endsnippet
 
+snippet ez-field-value-if-not-empty "tests if a field exists and displays value"
+{% if not ez_is_field_empty( content, "${1:field_identifier}" ) %}
+{{ ez_field_value( content, '$1' ) }}
+{% else %}
+$0
+{% endif %}
+endsnippet
