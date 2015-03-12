@@ -150,3 +150,21 @@ endsnippet
 snippet twig-ext "twig extends" b
 {% extends ${1} %}
 endsnippet
+
+snippet twig-include-with "twig include with"
+{% include '${1:MyVendorMyBundle}::${2:my_template.html.twig}' with {'${3:myVar}': ${4:my_value} } %}
+endsnippet
+
+snippet ez-link-location "links from location"
+<a href="{{ path( ${1:location} ) }}">${2:link text}</a>
+endsnippet
+
+snippet ez-link-location_id "links from location id"
+<a href="{{ path( "ez_urlalias", {"locationId": ${1:locationId}} ) }}">${2:link text}</a>
+endsnippet
+
+snippet ez-link-content "links from content id"
+<a href="{{ path( "ez_urlalias", {"contentId": ${1:locationId}} ) }}">${2:link text}</a>
+{* Important: Links generated from a Content ID will point to its main location.  *}
+endsnippet
+

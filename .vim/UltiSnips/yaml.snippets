@@ -1,12 +1,11 @@
 # ez
 
 snippet ez-location-view-content-type-ruleset "eZ location view ruleset based on content type identifier"
-full:
-	# A simple unique key for your matching ruleset
-	$1$2Ruleset:
-		template: ${3:MyVendorMyBundle}:${2:full}:$1.html.twig
-		match:
-			Identifier\ContentType: [${1:folder}]
+# A simple unique key for your matching ruleset
+$1_$2:
+	template: ${3:MyVendorMyBundle}:${2:full}:$1.html.twig
+	match:
+		Identifier\ContentType: [${1:folder}]
 endsnippet
 
 snippet Id\Content "Matches the ID number of the content"
@@ -68,4 +67,16 @@ endsnippet
 snippet UrlAlias "Matches the virtual URL of the location (i.e. /My/Content-Uri).  Important: Matches when the UrlAlias of the location starts with the value passed.  Not supported for Content (aka content_view). "
 UrlAlias # Matches the virtual URL of the location (i.e. /My/Content-Uri).  Important: Matches when the UrlAlias of the location starts with the value passed.  Not supported for Content (aka content_view).
 endsnippet
+
+snippet service-ez "insert service with injected setting"
+# see https://doc.ez.no/display/EZP/Dynamic+settings+injection
+parameters:
+    acme_test.my_service.class: Acme\TestBundle\MyServiceClass
+
+services:
+    acme_test.my_service:
+        class: %acme_test.my_service.class%
+        arguments: ["$languages$"]
+endsnippet
+
 
