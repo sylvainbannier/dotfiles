@@ -239,7 +239,7 @@ endsnippet
 ## Sort Clauses:
 
 snippet "eZ Clause\Field"
-new SortClause\Field('blog_post', 'publication_date', Query::SORT_DESC);
+new SortClause\Field('${1:class_identifier}', '${2:field_identifier}', Query::SORT_DESC);
 endsnippet
 
 snippet "eZ Clause\ContentId"
@@ -282,7 +282,4 @@ snippet "eZ Clause\ContentName"
 new SortClause\ContentName();
 endsnippet
 
-snippet "eZ Clause\Field"
-new SortClause\Field( "folder", "name" );
-endsnippet
 

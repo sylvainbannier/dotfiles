@@ -149,37 +149,49 @@ endsnippet
 
 ## Twig
 
-snippet twig-bl "twig block" b
+snippet twig-bl "twig block"
 {% block ${1} %}
 ${2}
 {% endblock $1 %}
 endsnippet
 
-snippet twig-js "twig javascripts" b
-{% javascripts '${1}' %}
+snippet twig-js "twig javascripts"
+{% javascripts
+	'bundles/${1:bundle}/js/${2:path.js}'
+%}
 <script src="{{ asset_url  }}"></script>
 {% endjavascripts %}
 endsnippet
 
-snippet twig-css "twig stylesheets" b
-{% stylesheets '${1}' %}
+snippet twig-css "twig stylesheets"
+{% stylesheets filter='cssrewrite'
+	'bundles/${1:bundle}/css/${2:path.css}'
+%}
 <link rel="stylesheet" href="{{ asset_url  }}">
 {% endstylesheets %}
 endsnippet
 
-snippet twig-if "twig if" b
+snippet img-asset "image asset twig"
+<img src="{{ asset('bundles/${1:bundle}/images/${2:path.png}') }}" alt="${3:alt}" height="${4:height}" widht="${4:width}"/>
+endsnippet
+
+snippet asset "asset twig"
+asset('bundles/${1:bundle}/images/${2:path.png}') }}
+endsnippet
+
+snippet twig-if "twig if"
 {% if ${1} %}
 ${2}
 {% endif %}
 endsnippet
 
-snippet twig-for "twig for" b
+snippet twig-for "twig for"
 {% for ${1} in ${2} %}
 ${3}
 {% endfor %}
 endsnippet
 
-snippet twig-ext "twig extends" b
+snippet twig-ext "twig extends"
 {% extends ${1} %}
 endsnippet
 
@@ -189,6 +201,10 @@ endsnippet
 
 snippet ez-link-location "links from location"
 <a href="{{ path( ${1:location} ) }}">${2:link text}</a>
+endsnippet
+
+snippet ez-text-linked "text linked to a location"
+{{ render( controller( "ez_content:viewLocation", { "locationId": item, "viewType": "text_linked" } )) }}
 endsnippet
 
 snippet ez-link-location_id "links from location id"

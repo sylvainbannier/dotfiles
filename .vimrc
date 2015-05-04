@@ -59,6 +59,9 @@ Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 Plugin 'kien/ctrlp.vim'
 Plugin 'sgur/ctrlp-extensions.vim' "search in history
 Plugin 'ivalkeen/vim-ctrlp-tjump' " search in tags
+Plugin 'FelikZ/ctrlp-py-matcher' "faster ctrlpsearch
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 Plugin 'sjbach/lusty' " buffer switch
 Plugin 'ton/vim-bufsurf'
 map <C-Up> :BufSurfBack<CR>
@@ -67,6 +70,7 @@ map <C-Down> :BufSurfForward<CR>
 imap <C-Down> <C-O>:BufSurfForward<CR>
 Plugin 'tacahiroy/ctrlp-funky' "search in functions
 nnoremap <leader><leader> :CtrlPMRUFiles<CR>
+nnoremap <leader>t :CtrlPtjump<CR>
 let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
 "Symfony specific dirs ignored
 let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr', '.vimrc']
@@ -216,6 +220,9 @@ set makeprg=php\ -l\ %
 " cucumber syntax
 Plugin 'tpope/vim-cucumber'
 
+" doc search
+Plugin 'KabbAmine/zeavim.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -332,4 +339,10 @@ imap <silent> <Home> <C-O><Home>
 nmap <C-Left> b
 nmap <C-Right> w
 
+" FIX slow ctags issue
+" http://www.stefanwienert.de/blog/2012/02/29/vim-sane-and-fast-auto-completion-with-ctags/
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+set path=.
+set tags=tags
 

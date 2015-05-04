@@ -77,3 +77,16 @@ alias mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
 
 # creates ssh tunnel for mysql ssh_mysql <server>
 alias ssh_mysql "ssh -L 3306:localhost:3306 -fNg"
+
+# defaults for ag
+alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -R'"
+
+alias less "less -R"
+
+set -gx PATH ~/.node/bin ~/.go/bin $PATH
+set -gx NODE_PATH /home/syban/.node/lib/node_modules $NODE_PATH
+
+function fuck
+    eval (thefuck $history[1])
+end
+

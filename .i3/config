@@ -27,7 +27,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 # bindsym $mod+Shift+Return exec i3-sensible-terminal -e termcwd.sh
 bindsym $mod+Shift+Return exec gnome-terminal --working-directory="`xcwd`"
-# bindsym $mod+Return exec i3-sensible-terminal -e tmux #start tmux 
+# bindsym $mod+Return exec i3-sensible-terminal -e tmux #start tmux
 
 # kill focused window
 bindsym $mod+Shift+a kill
@@ -96,7 +96,7 @@ workspace 2:ide output HDMI1
 workspace 3:web output HDMI1
 workspace 4:im output HDMI1
 workspace 5:mail output HDMI1
-workspace 6:notes output HDMI1 
+workspace 6:notes output HDMI1
 workspace 7:specs output HDMI1
 workspace 8:files output HDMI1
 workspace 9:doc output eDP1
@@ -167,7 +167,6 @@ bindsym $mod+KP_Subtract resize shrink width 10 px or 10 ppt
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
-exec --no-startup-id /usr/bin/hamster-indicator
 #exec --no-startup-id pidgin
 exec --no-startup-id parcellite
 exec --no-startup-id java -cp /usr/local/LanguageTool/languagetool-server.jar org.languagetool.server.HTTPServer
