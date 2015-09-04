@@ -258,8 +258,8 @@ snippet "eZ Clause\ContentName"
 new SortClause\ContentName( Query::SORT_ASC );
 endsnippet
 
-snippet "eZ Clause\LocationPriority"
-new SortClause\LocationPriority( Query::SORT_DESC );
+snippet "eZ Clause\Location\Priority"
+new SortClause\Location\Priority( Query::SORT_DESC );
 endsnippet
 
 snippet "eZ Clause\DatePublished"
@@ -282,4 +282,25 @@ snippet "eZ Clause\ContentName"
 new SortClause\ContentName();
 endsnippet
 
+snippet "redimensionnement d'image dans un contrôleur avec liip imagine"
+class MyController extends Controller
+{
+    public function indexAction()
+    {
+        // RedirectResponse object
+        $imagemanagerResponse = $this->container
+            ->get('liip_imagine.controller')
+                ->filterAction(
+                    $this->request          // http request
+                    'uploads/foo.jpg',      // original image you want to apply a filter to
+                    'my_thumb'              // filter defined in config.yml
+        );
 
+        // string to put directly in the "src" of the tag <img>
+        $cacheManager = $this->container->get('liip_imagine.cache.manager');
+        $srcPath = $cacheManager->getBrowserPath('uploads/foo.jpg', 'my_thumb');
+
+        // ..
+    }
+}
+endsnippet

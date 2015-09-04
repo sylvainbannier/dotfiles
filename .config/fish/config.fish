@@ -53,7 +53,7 @@ alias gffs "git flow feature start"
 
 # xrandr aliases
 alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
-alias xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --right-of eDP1"
+alias xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --left-of eDP1"
 alias xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1200 --primary --left-of eDP1"
 alias xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --right-of eDP1"
 alias xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1280x1024 --primary --left-of eDP1"
@@ -79,7 +79,7 @@ alias mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
 alias ssh_mysql "ssh -L 3306:localhost:3306 -fNg"
 
 # defaults for ag
-alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -R'"
+alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
 
 alias less "less -R"
 
@@ -89,4 +89,9 @@ set -gx NODE_PATH /home/syban/.node/lib/node_modules $NODE_PATH
 function fuck
     eval (thefuck $history[1])
 end
+
+# set -x JAVA_HOME "/usr/lib/jvm/java-8-oracle"
+set -x JAVA_HOME "/usr/lib/jvm/java-7-openjdk-amd64"
+
+
 

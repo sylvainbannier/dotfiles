@@ -41,7 +41,7 @@ Plugin 'goatslacker/mango.vim' "colors
 " EDITING
 "
 Plugin 'sickill/vim-pasta' "pasting with indentation
-Plugin 'jiangmiao/auto-pairs' "insert matching { [ ( ...
+" Plugin 'jiangmiao/auto-pairs' "insert matching { [ ( ...
 Plugin 'pgilad/vim-skeletons' "files templates
 Plugin 'jakobwesthoff/whitespacetrail' "removes whitespaces from end of lines
 Plugin 'Valloric/YouCompleteMe' " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
@@ -49,6 +49,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-surround' "work with surrounding tags, ' {...
 "Plugin 'Lokaltog/vim-easymotion' "quick moves
 Plugin 'Wolfy87/vim-enmasse' "search/replace in files
+Plugin 'tpope/vim-abolish' "search/replace keeping case and other stuffs
 Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 "Plugin 'junegunn/vim-easy-align' "align
 "Plugin 'terryma/vim-multiple-cursors' "multiple selections
@@ -90,6 +91,7 @@ Bundle 'jistr/vim-nerdtree-tabs'
 
 
 Plugin 'rking/ag.vim' "fils search based on ag
+" Plugin 'ervandew/ag' "better ag plugin ?
 
 "
 " NOTEBOOK
@@ -140,8 +142,10 @@ Plugin 'mhinz/vim-signify' "displays chneged line in gutter
 "
 Plugin 'pangloss/vim-javascript' "syntax and indent all in one
 Plugin 'maksimr/vim-jsbeautify'
+Plugin 'mxw/vim-jsx'
 Plugin 'marijnh/tern_for_vim' " run npm install in bundle/tern_for_vim
 Plugin 'elzr/vim-json'
+let g:syntastic_javascript_checkers = ['eslint']
 
 "
 " HTML
@@ -222,6 +226,15 @@ Plugin 'tpope/vim-cucumber'
 
 " doc search
 Plugin 'KabbAmine/zeavim.vim'
+
+" taskjuggler
+Plugin 'kalafut/vim-taskjuggler'
+
+" Graphviz
+Plugin 'wannesm/wmgraphviz.vim'
+
+" Asciidoc
+"Plugin 'dahu/vim-asciidoc' "bug ?
 
 
 " All of your Plugins must be added before the following line
