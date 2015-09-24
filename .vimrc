@@ -25,6 +25,7 @@ Plugin 'MarcWeber/vim-addon-local-vimrc'
 "
 Plugin 'bling/vim-airline' "footer line
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled=1
 Plugin 'kshenoy/vim-signature'
 Plugin 'nathanaelkane/vim-indent-guides' "Show indent guides
 let g:indent_guides_enable_on_vim_startup = 1
@@ -86,7 +87,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " file tree browser
 Plugin 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 
 
