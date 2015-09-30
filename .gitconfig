@@ -1,3 +1,12 @@
 [user]
 	name = Sylvain BANNIER
 	email = sylvain.bannier@smile.fr
+[push]
+	default = simple
+[core]
+	excludesfile = /home/syban/.gitignore_global
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
