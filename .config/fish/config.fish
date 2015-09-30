@@ -19,6 +19,7 @@ set fish_plugins git php percol vundle
 # aliases
 
 alias o "gnome-open"
+alias web "chromium-browser"
 alias lll "ls -Galh"
 alias lld "ls -Galht"
 alias encfs_syban "encfs /home/syban/.encrypted /home/syban/.decrypted"

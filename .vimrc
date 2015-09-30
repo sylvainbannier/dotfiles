@@ -157,6 +157,7 @@ Plugin 'chrisgillis/vim-bootstrap3-snippets'
 "
 " CSS/LESS/SASS
 "
+Plugin 'hail2u/vim-css3-syntax' " CSS3
 Plugin 'tpope/vim-haml' " sass too
 Plugin 'groenewege/vim-less'
 
@@ -254,6 +255,25 @@ colorscheme mango
 let g:nerdtree_tabs_autofind=1
 noremap <F6> :NERDTreeTabsToggle<CR>
 noremap <c-F6> :NERDTreeTabsFind<CR>
+
+" CSS with YCM
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_semantic_triggers = {
+  \ 'c' : ['->', '.'],
+  \ 'objc' : ['->', '.'],
+  \ 'ocaml' : ['.', '#'],
+  \ 'cpp,objcpp' : ['->', '.', '::'],
+  \ 'perl' : ['->'],
+  \ 'php' : ['->', '::'],
+  \ 'haskell,java,javascript,d,vim,ruby' : ['.'],
+  \ 'css,less,scss,sass': [' ', '	', ': ', '  '],
+  \ 'python,perl6,scala,vb,elixir,go' : ['.'],
+  \ 'lua' : ['.', ':'],
+  \ 'erlang' : [':'],
+  \ }
 
 """""""""""""""""""""""
 " NATIVE VIM SETTINGS "

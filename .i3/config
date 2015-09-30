@@ -24,9 +24,11 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-# bindsym $mod+Shift+Return exec i3-sensible-terminal -e termcwd.sh
-bindsym $mod+Shift+Return exec gnome-terminal --working-directory="`xcwd`"
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termcwd.sh
+# bindsym $mod+Return exec gnome-terminal -e "cd `xcwd` && fish"
+#
+# bindsym $mod+Return exec gnome-terminal --working-directory="`xcwd`"
 # bindsym $mod+Return exec i3-sensible-terminal -e tmux #start tmux
 
 # kill focused window
