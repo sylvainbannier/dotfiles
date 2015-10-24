@@ -120,6 +120,7 @@ if !exists("*ExpandSnippetOrCarriageReturn")
 		endif
 	endfunction
 endif
+" <expr> : evaluate expression
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -372,6 +373,18 @@ imap <silent> <Home> <C-O><Home>
 " same moves as in insert mode
 nmap <C-Left> b
 nmap <C-Right> w
+
+" moves inside long lines up and down with arrows
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+" removes <Up> and <Down> from YCM selects keys and add them back manually to
+" avoid override of my custom mapping by YCM
+let g:ycm_key_list_select_completion = [ '<C-Tab>' ]
+let g:ycm_key_list_previous_completion = [ '<C-S-Tab>' ]
+inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<C-O>gj"
+inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<C-O>gk"
 
 " FIX slow ctags issue
 " http://www.stefanwienert.de/blog/2012/02/29/vim-sane-and-fast-auto-completion-with-ctags/
