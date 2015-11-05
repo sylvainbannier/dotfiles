@@ -145,8 +145,12 @@ Plugin 'mhinz/vim-signify' "displays chneged line in gutter
 Plugin 'pangloss/vim-javascript' "syntax and indent all in one
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'mxw/vim-jsx'
-Plugin 'marijnh/tern_for_vim' " run npm install in bundle/tern_for_vim
+Plugin 'ternjs/tern_for_vim'  " run npm install in bundle/tern_for_vim
 Plugin 'elzr/vim-json'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/yajs.vim'
+Plugin 'othree/es.next.syntax.vim'
+
 let g:syntastic_javascript_checkers = ['eslint']
 
 "

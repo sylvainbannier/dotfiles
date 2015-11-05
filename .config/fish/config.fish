@@ -20,8 +20,11 @@ set fish_plugins git php percol vundle
 
 alias o "gnome-open"
 alias web "chromium-browser"
-alias lll "ls -Galh"
-alias lld "ls -Galht"
+alias r "ranger"
+alias l "ls -C --group-directories-first"
+alias ll "ls -1 --group-directories-first"
+alias lll "ls -GAlh --group-directories-first"
+alias lld "ls -GAlht"
 alias encfs_syban "encfs /home/syban/.encrypted /home/syban/.decrypted"
 alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | percol | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
 alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
