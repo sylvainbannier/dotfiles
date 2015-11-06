@@ -150,6 +150,7 @@ Plugin 'elzr/vim-json'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/yajs.vim'
 Plugin 'othree/es.next.syntax.vim'
+Plugin 'leafgarland/typescript-vim'
 
 let g:syntastic_javascript_checkers = ['eslint']
 
