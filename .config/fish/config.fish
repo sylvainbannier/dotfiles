@@ -94,3 +94,6 @@ set -gx NODE_PATH /home/syban/.npm-packages/lib/node_modules
 # set -x JAVA_HOME "/usr/lib/jvm/java-8-oracle"
 set -x JAVA_HOME "/usr/lib/jvm/java-7-openjdk-amd64"
 
+# GULP competion
+complete -c gulp -a "(gulp --tasks-simple)" -f
+
