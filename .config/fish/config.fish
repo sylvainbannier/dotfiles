@@ -22,7 +22,7 @@ alias o "gnome-open"
 alias web "chromium-browser"
 alias r "ranger"
 alias l "ls -C --group-directories-first"
-alias ll "ls -1 --group-directories-first"
+alias ll "ls -A1 --group-directories-first"
 alias lll "ls -Alh --group-directories-first"
 alias lld "ls -GAlht"
 alias encfs_syban "encfs /home/syban/.encrypted /home/syban/.decrypted"
@@ -89,14 +89,8 @@ alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '
 alias less "less -R"
 
 set -gx PATH ~/.npm-packages/bin ~/.go/bin $PATH
-set -gx NODE_PATH /home/syban/.node/lib/node_modules $NODE_PATH
-
-function fuck
-    eval (thefuck $history[1])
-end
+set -gx NODE_PATH /home/syban/.npm-packages/lib/node_modules
 
 # set -x JAVA_HOME "/usr/lib/jvm/java-8-oracle"
 set -x JAVA_HOME "/usr/lib/jvm/java-7-openjdk-amd64"
-
-
 
