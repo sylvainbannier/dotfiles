@@ -2,75 +2,68 @@
 " NEEDED AT TOP
 "
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 "
 " SETTINGS
 "
-Plugin 'tpope/vim-sensible' "defaults
-Plugin 'editorconfig/editorconfig-vim' "load editorconfig file
-Plugin 'MarcWeber/vim-addon-local-vimrc'
+Plug 'tpope/vim-sensible' "defaults
+Plug 'editorconfig/editorconfig-vim' "load editorconfig file
+Plug 'MarcWeber/vim-addon-local-vimrc'
 
 "
 " GUI
 "
-Plugin 'bling/vim-airline' "footer line
+Plug 'bling/vim-airline' "footer line
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled=1
-Plugin 'kshenoy/vim-signature'
-Plugin 'nathanaelkane/vim-indent-guides' "Show indent guides
+Plug 'kshenoy/vim-signature'
+Plug 'nathanaelkane/vim-indent-guides' "Show indent guides
 let g:indent_guides_enable_on_vim_startup = 1
-Plugin 'regedarek/ZoomWin' "togle zoom on windows
+Plug 'regedarek/ZoomWin' "togle zoom on windows
 
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_aggregate_errors = 1
-Plugin 'goatslacker/mango.vim' "colors
+Plug 'goatslacker/mango.vim' "colors
 "Plugin 'mbbill/undotree'
 
 "
 " EDITING
 "
-Plugin 'sickill/vim-pasta' "pasting with indentation
+Plug 'sickill/vim-pasta' "pasting with indentation
 " Plugin 'jiangmiao/auto-pairs' "insert matching { [ ( ...
-Plugin 'pgilad/vim-skeletons' "files templates
-Plugin 'jakobwesthoff/whitespacetrail' "removes whitespaces from end of lines
-Plugin 'Valloric/YouCompleteMe' " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-surround' "work with surrounding tags, ' {...
+Plug 'pgilad/vim-skeletons' "files templates
+Plug 'jakobwesthoff/whitespacetrail' "removes whitespaces from end of lines
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround' "work with surrounding tags, ' {...
 "Plugin 'Lokaltog/vim-easymotion' "quick moves
-Plugin 'Wolfy87/vim-enmasse' "search/replace in files
-Plugin 'tpope/vim-abolish' "search/replace keeping case and other stuffs
-Plugin 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
+Plug 'Wolfy87/vim-enmasse' "search/replace in files
+Plug 'tpope/vim-abolish' "search/replace keeping case and other stuffs
+Plug 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 "Plugin 'junegunn/vim-easy-align' "align
 "Plugin 'terryma/vim-multiple-cursors' "multiple selections
 
 "
 " FILE NAV
 "
-Plugin 'kien/ctrlp.vim'
-Plugin 'sgur/ctrlp-extensions.vim' "search in history
-Plugin 'ivalkeen/vim-ctrlp-tjump' " search in tags
-Plugin 'FelikZ/ctrlp-py-matcher' "faster ctrlpsearch
+Plug 'kien/ctrlp.vim'
+Plug 'sgur/ctrlp-extensions.vim' "search in history
+Plug 'ivalkeen/vim-ctrlp-tjump' " search in tags
+Plug 'FelikZ/ctrlp-py-matcher' "faster ctrlpsearch
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-Plugin 'sjbach/lusty' " buffer switch
-Plugin 'ton/vim-bufsurf'
+Plug 'sjbach/lusty' " buffer switch
+Plug 'ton/vim-bufsurf'
 map <C-Up> :BufSurfBack<CR>
 imap <C-Up> <C-O>:BufSurfBack<CR>
 map <C-Down> :BufSurfForward<CR>
 imap <C-Down> <C-O>:BufSurfForward<CR>
-Plugin 'tacahiroy/ctrlp-funky' "search in functions
+Plug 'tacahiroy/ctrlp-funky' "search in functions
 nnoremap <leader><leader> :CtrlPMRUFiles<CR>
 nnoremap <leader>t :CtrlPtjump<CR>
 let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
@@ -78,7 +71,7 @@ let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP r
 let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr', '.vimrc']
 let g:ctrlp_extensions = ['tag']
 "Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
 
 "Auto updates tags
@@ -86,26 +79,26 @@ nmap <F8> :TagbarToggle<CR>
 "let g:easytags_async=1
 
 " file tree browser
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 
 
 
-Plugin 'rking/ag.vim' "fils search based on ag
+Plug 'rking/ag.vim' "fils search based on ag
 " Plugin 'ervandew/ag' "better ag plugin ?
 
 "
 " NOTEBOOK
 "
-Plugin 'xolox/vim-notes' "notebook
-Plugin 'xolox/vim-misc'
+Plug 'xolox/vim-notes' "notebook
+Plug 'xolox/vim-misc'
 "Plugin 'xolox/vim-shell' "easy navigation between your notes and environment like local files and directories
 
 "
 " SNIPPETS
 "
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " use enter to insert auto complete suggestion
 let g:UltiSnipsExpandTrigger = "<nop>"
@@ -132,8 +125,8 @@ let g:UltiSnipsEditSplit="vertical"
 "
 " SCM/GIT integration
 "
-Plugin 'tpope/vim-fugitive'
-Plugin 'mhinz/vim-signify' "displays chneged line in gutter
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify' "displays chneged line in gutter
 
 """"""""""""""""""""""""""""""
 " LANGUAGE SPECIFIC FEATURES "
@@ -142,40 +135,40 @@ Plugin 'mhinz/vim-signify' "displays chneged line in gutter
 "
 " JAVASCRIPT
 "
-Plugin 'pangloss/vim-javascript' "syntax and indent all in one
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'mxw/vim-jsx'
-Plugin 'justinj/vim-react-snippets'
+Plug 'pangloss/vim-javascript' "syntax and indent all in one
+Plug 'maksimr/vim-jsbeautify'
+Plug 'mxw/vim-jsx'
+Plug 'justinj/vim-react-snippets'
 
-Plugin 'ternjs/tern_for_vim'  " run npm install in bundle/tern_for_vim
-Plugin 'elzr/vim-json'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'othree/yajs.vim'
-Plugin 'othree/es.next.syntax.vim'
-Plugin 'leafgarland/typescript-vim'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " run npm install in bundle/tern_for_vim
+Plug 'elzr/vim-json'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
+Plug 'leafgarland/typescript-vim'
 
 let g:syntastic_javascript_checkers = ['eslint']
 
 "
 " HTML
 "
-Plugin 'mattn/emmet-vim'
-Plugin 'chrisgillis/vim-bootstrap3-snippets'
+Plug 'mattn/emmet-vim'
+Plug 'chrisgillis/vim-bootstrap3-snippets'
 
 "
 " CSS/LESS/SASS
 "
-Plugin 'hail2u/vim-css3-syntax' " CSS3
-Plugin 'tpope/vim-haml' " sass too
-Plugin 'groenewege/vim-less'
+Plug 'hail2u/vim-css3-syntax' " CSS3
+Plug 'tpope/vim-haml' " sass too
+Plug 'groenewege/vim-less'
 
 "
 " MARKDOWN
 "
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'vim-voom/VOoM'
-Plugin 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'vim-voom/VOoM'
+Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
 au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown)
 let g:vim_markdown_folding_disabled=1
 "autocmd FileType markdown :Voom markdown
@@ -188,28 +181,28 @@ let g:vim_markdown_folding_disabled=1
 "
 " NEO4J
 "
-Plugin 'neo4j-contrib/cypher-vim-syntax'
+Plug 'neo4j-contrib/cypher-vim-syntax'
 
 "
 " SPELLCHECK
 "
-Plugin 'dpelle/vim-LanguageTool' "Grammar check
+Plug 'dpelle/vim-LanguageTool' "Grammar check
 let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
 
 "
 " PHP
 "
-Plugin 'evidens/vim-twig'
-Plugin 'vim-php/tagbar-phpctags.vim' "needs phpctags bin. better tagbar for php
-Plugin '2072/PHP-Indenting-for-VIm' "better indent
-Plugin 'joonty/vdebug' "debugger integration
+Plug 'evidens/vim-twig'
+Plug 'vim-php/tagbar-phpctags.vim' "needs phpctags bin. better tagbar for php
+Plug '2072/PHP-Indenting-for-VIm' "better indent
+Plug 'joonty/vdebug' "debugger integration
 let g:vdebug_options = {}
 "let g:vdebug_options["port"] = 9009
 "let g:vdebug_options["path_maps"] = {
 "\    "/var/www": "/home/lxc/.../var/www"
 "\}
 "let g:vdebug_options['server'] = "local LXC IP"
-Plugin 'shawncplus/phpcomplete.vim' "auto complete based on tags
+Plug 'shawncplus/phpcomplete.vim' "auto complete based on tags
 let g:syntastic_php_checkers=['php', 'phpcs']
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 set completeopt=menu,longest
@@ -237,24 +230,23 @@ set makeprg=php\ -l\ %
 "
 
 " cucumber syntax
-Plugin 'tpope/vim-cucumber'
+Plug 'tpope/vim-cucumber'
 
 " doc search
-Plugin 'KabbAmine/zeavim.vim'
+" Plug 'KabbAmine/zeavim.vim' " mappgin existant
 
 " taskjuggler
-Plugin 'kalafut/vim-taskjuggler'
+Plug 'kalafut/vim-taskjuggler'
 
 " Graphviz
-Plugin 'wannesm/wmgraphviz.vim'
+Plug 'wannesm/wmgraphviz.vim'
 
 " Asciidoc
 "Plugin 'dahu/vim-asciidoc' "bug ?
 
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 
 """"""""""""""""""""
