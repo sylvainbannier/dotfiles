@@ -145,6 +145,8 @@ Plugin 'mhinz/vim-signify' "displays chneged line in gutter
 Plugin 'pangloss/vim-javascript' "syntax and indent all in one
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'mxw/vim-jsx'
+Plugin 'justinj/vim-react-snippets'
+
 Plugin 'ternjs/tern_for_vim'  " run npm install in bundle/tern_for_vim
 Plugin 'elzr/vim-json'
 Plugin 'jelera/vim-javascript-syntax'
@@ -181,7 +183,12 @@ let g:vim_markdown_folding_disabled=1
 "
 " SQL
 "
-Plugin 'vim-scripts/dbext.vim'
+" Plugin 'vim-scripts/dbext.vim'
+
+"
+" NEO4J
+"
+Plugin 'neo4j-contrib/cypher-vim-syntax'
 
 "
 " SPELLCHECK

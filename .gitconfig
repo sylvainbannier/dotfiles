@@ -4,7 +4,7 @@
 [push]
 	default = simple
 [core]
-	excludesfile = /home/syban/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [alias]
 	co = checkout
 	br = branch
