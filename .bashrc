@@ -128,3 +128,5 @@ PATH="$PATH:$HOME/.node/bin"
 export NVM_DIR="/home/syban/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 export NODE_PATH=/home/syban/.node/lib/node_modules:/usr/lib/nodejs:/usr/lib/node_modules:/usr/share/javascript:/home/syban/.npm-packages/lib/node_modules
+
+[[ -s /home/syban/.autojump/etc/profile.d/autojump.sh ]] && source /home/syban/.autojump/etc/profile.d/autojump.sh

@@ -30,7 +30,7 @@ angular.module('${1:myComponent}Module', [])
     '${3:dependency}',
     function $2($3) {
       return {
-        restrict: 'A', 
+        restrict: 'A',
         scope: {},
         link: function $2Link(scope, element) {
           scope.$on('$destroy', function on$2Destroy() {
@@ -47,7 +47,7 @@ angular.module('${1:myComponent}Module', [])
     '${3:dependency}',
     function $2($3) {
       return {
-        restrict: 'E', 
+        restrict: 'E',
         scope: {},
 		controllerAs: 'ctrl',
 		bindToController : true,
@@ -63,4 +63,18 @@ angular.module('${1:myComponent}Module', [])
       };
     }
   ]);
+endsnippet
+
+snippet sb-react-component "react component"
+var ${1:myComponent} = React.createClass({
+  render: () =>
+  <div class="${2:$1}">${0:$1}</div>
+});
+endsnippet
+
+snippet sb-react-render "react render"
+ReactDOM.render(
+  <${1:myComponent} />,
+  document.getElementById('${2:$1}')
+);
 endsnippet

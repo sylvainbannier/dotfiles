@@ -167,11 +167,14 @@ Plug 'groenewege/vim-less'
 "
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'vim-voom/VOoM'
 Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
-au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown)
+" au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown) only neede with tpope md
 let g:vim_markdown_folding_disabled=1
 "autocmd FileType markdown :Voom markdown
+" let g:vim_markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml'] "not working ?
+let g:vim_markdown_frontmatter=1
+
+"Plug 'vim-voom/VOoM'" 2 pane editor for markdown, asciidoc and others
 
 "
 " SQL

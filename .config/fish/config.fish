@@ -111,3 +111,7 @@ function fuck -d "Correct your previous console command"
         end
     end
 end
+
+#load autojump
+. /home/syban/.autojump/share/autojump/autojump.fish
+
