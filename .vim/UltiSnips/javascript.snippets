@@ -67,8 +67,11 @@ endsnippet
 
 snippet sb-react-component "react component"
 var ${1:myComponent} = React.createClass({
-  render: () =>
-  <div class="${2:$1}">${0:$1}</div>
+  render: function () {
+    return (
+      <div class="${2:$1}">${0:$1}</div>
+    )
+  }
 });
 endsnippet
 

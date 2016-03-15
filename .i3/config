@@ -212,7 +212,7 @@ assign [class="Jitsi"] 4:im
 assign [class="Hangouts"] 4:im
 assign [class="Buddy List"] 4:im
 assign [class="Pidgin"] 4:im
-assign [class="zeal"] 9:doc
+assign [class="Zeal"] 9:doc
 assign [class="Google Keep"] 10:perso
 assign [class="office"] 7:specs
 
@@ -224,14 +224,14 @@ bindsym $mod+n exec gnome-terminal -e "fish -c vim_note_percol_open"
 # Take a screenshot
 bindsym Print exec shutter -s -e -o=/tmp/%Y-%m-%d_%T.png
 
-# hamster
-bindsym $mod+t exec hamster-time-tracker edit
-
 # open new terminal window to search in cheatsheet
 bindsym $mod+c exec gnome-terminal -e "fish -c cheatsheet"
 
 # open terminal to search history and copy to clipboard
 bindsym $mod+shift+h exec gnome-terminal -e "fish -c history-search"
+
+# open terminal to search history and copy to clipboard
+bindsym $mod+w exec chromium-browser
 
 # WM_CLASS(STRING) = "Google-chrome (/tmp/.com.google.Chrome.LGl7BD)", "Google-chrome"
 # for_window [class="^Google-chrome \(/tmp/\.com\.google.*$"] floating enable

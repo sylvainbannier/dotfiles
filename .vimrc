@@ -51,7 +51,7 @@ Plug 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 "
 " FILE NAV
 "
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'sgur/ctrlp-extensions.vim' "search in history
 Plug 'ivalkeen/vim-ctrlp-tjump' " search in tags
 Plug 'FelikZ/ctrlp-py-matcher' "faster ctrlpsearch
@@ -81,8 +81,9 @@ nmap <F8> :TagbarToggle<CR>
 " file tree browser
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-
-
+Plug 'ryanoasis/vim-devicons'
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 11
+set encoding=utf8
 
 Plug 'rking/ag.vim' "fils search based on ag
 " Plugin 'ervandew/ag' "better ag plugin ?

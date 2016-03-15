@@ -31,6 +31,8 @@ alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
 alias cheatsheet-add-last-history "history | head -n 1 >> ~/doc/cheatsheet"
 alias history-search "fish -c 'history | percol | tr -d \'\\n\' | parcellite > /dev/null'"
 
+alias op "sed -nr 's/.*href=\"([^\"]*)\".*/\1/p' ~/.local/share/recently-used.xbel | percol | xargs gnome-open"
+
 # search history (oh my fish)
 # @see https://github.com/bpinto/oh-my-fish/tree/master/plugins/percol
 function fish_user_key_bindings
