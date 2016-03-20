@@ -81,3 +81,62 @@ ReactDOM.render(
   document.getElementById('${2:$1}')
 );
 endsnippet
+
+snippet node-http-get "node http get"
+ReactDOM.render(
+var postData = querystring.stringify({
+  'msg' : 'Hello World!'
+});
+
+var options = {
+  hostname: 'www.google.com',
+  port: 80,
+  path: '/upload',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Length': postData.length
+  }
+};
+
+var req = http.request(options, (res) => {
+  console.log(`STATUS: ${res.statusCode}`);
+  console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+  res.setEncoding('utf8');
+  res.on('data', (chunk) => {
+    console.log(`BODY: ${chunk}`);
+  });
+  res.on('end', () => {
+    console.log('No more data in response.')
+  })
+});
+
+req.on('error', (e) => {
+  console.log(`problem with request: ${e.message}`);
+});
+
+// write data to request body
+req.write(postData);
+req.end();
+endsnippet
+
+
+snippet node-http-get-simple "Node HTTP simple get"
+http.get('/datas.json', (res) => {
+  if(res.statusCode != 200) {
+    throw("not found");
+  }
+  res.on('data', (chunk) => {
+    var json = JSON.parse(chunk);
+    console.debug(json);
+  })
+  res.on('error', (err) => {
+    console.error('error  occured');
+  })
+});
+endsnippet
+
+
+snippet cl "console log"
+console.log($0)
+endsnippet

@@ -330,6 +330,7 @@ set hlsearch
 highlight Search  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
 highlight SpellBad 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
 highlight SyntasticError 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+highlight Visual  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
 
 " command menu
 set wildmenu "better completion in menus
