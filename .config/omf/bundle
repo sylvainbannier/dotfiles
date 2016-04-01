@@ -1,4 +1,6 @@
 package fasd
 package fzf
+package grc
+package thefuck
 theme default
 theme ocean
