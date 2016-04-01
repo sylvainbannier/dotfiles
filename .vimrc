@@ -71,6 +71,8 @@ let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP r
 "Symfony specific dirs ignored
 let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr', '.vimrc']
 let g:ctrlp_extensions = ['tag']
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "fuzzy finder
+
 "Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
 Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
