@@ -57,6 +57,7 @@ Plug 'ivalkeen/vim-ctrlp-tjump' " search in tags
 Plug 'FelikZ/ctrlp-py-matcher' "faster ctrlpsearch
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_mruf_relative = 1 " search MRU in working directory
 Plug 'sjbach/lusty' " buffer switch
 Plug 'ton/vim-bufsurf'
 map <C-Up> :BufSurfBack<CR>
@@ -139,9 +140,12 @@ Plug 'mhinz/vim-signify' "displays chneged line in gutter
 Plug 'pangloss/vim-javascript' "syntax and indent all in one
 Plug 'maksimr/vim-jsbeautify'
 Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0 " syntax and indent in .js files (not only jsx)
 Plug 'justinj/vim-react-snippets'
 
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " run npm install in bundle/tern_for_vim
+let g:tern_map_keys=1 "enable keyboard shortcuts for tern
+Plug 'ramitos/jsctags'
 Plug 'elzr/vim-json'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'othree/yajs.vim'
@@ -246,8 +250,10 @@ Plug 'kalafut/vim-taskjuggler'
 Plug 'wannesm/wmgraphviz.vim'
 
 " Asciidoc
-"Plugin 'dahu/vim-asciidoc' "bug ?
+Plug 'dahu/vim-asciidoc' "bug ?
 
+" RAML
+Plug 'IN3D/vim-raml'
 
 " All of your Plugins must be added before the following line
 call plug#end()

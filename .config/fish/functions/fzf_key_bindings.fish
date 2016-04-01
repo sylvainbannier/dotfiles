@@ -1,0 +1,1 @@
+/home/syban/.fzf/shell/key-bindings.fish

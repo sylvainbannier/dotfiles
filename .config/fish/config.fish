@@ -20,10 +20,12 @@ set fish_plugins git php percol vundle
 
 alias o "gnome-open"
 alias web "chromium-browser"
+alias cal "ncal -MC"
 alias r "ranger"
 alias l "ls -C --group-directories-first"
 alias ll "ls -A1 --group-directories-first"
-alias lll "ls -Alh --group-directories-first"
+alias lll "ls -Alh --group-directories-first --time-style=long-iso"
+alias llt "ls -Alhtr --group-directories-first --time-style=long-iso"
 alias lld "ls -GAlht"
 alias encfs_syban "encfs /home/syban/.encrypted /home/syban/.decrypted"
 alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | percol | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
@@ -43,16 +45,16 @@ end
 # GIT aliases
 alias giunstage "git reset HEAD"
 alias gireverse "git checkout --"
-alias gis "git status"
-alias gid "git diff"
-alias giall "git add ."
-alias gia "git add"
-alias gic "git commit -m"
-alias gil "git log --pretty=format:'%h - %an, %ar : %s'"
-alias gif "git fetch origin"
-alias gico "git checkout"
-alias gib "git branch"
-alias gip "git push"
+abbr gis "git status"
+abbr gid "git diff"
+abbr giall "git add ."
+abbr gia "git add"
+abbr gic "git commit -m"
+abbr gil "git log --pretty=format:'%h - %an, %ar : %s'"
+abbr gif "git fetch origin"
+abbr gico "git checkout"
+abbr gib "git branch"
+abbr gip "git push"
 
 
 #git flow aliases
@@ -71,6 +73,7 @@ alias backup "duplicity --include ~/.decrypted --include ~/doc/cheatsheet --incl
 
 # colors
 alias tail "grc tail"
+alias diff "grc diff"
 alias ps "grc ps"
 alias ping "grc ping"
 alias netstat "grc netstat"

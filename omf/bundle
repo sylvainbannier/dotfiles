@@ -1,0 +1,4 @@
+package fasd
+package fzf
+theme default
+theme ocean
