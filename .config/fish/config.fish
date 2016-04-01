@@ -16,24 +16,24 @@ set fish_plugins git php percol vundle
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
 
-# aliases
+# abbres
 
-alias o "gnome-open"
-alias web "chromium-browser"
-alias cal "ncal -MC"
-alias r "ranger"
-alias l "ls -C --group-directories-first"
-alias ll "ls -A1 --group-directories-first"
-alias lll "ls -Alh --group-directories-first --time-style=long-iso"
-alias llt "ls -Alhtr --group-directories-first --time-style=long-iso"
-alias lld "ls -GAlht"
-alias encfs_syban "encfs /home/syban/.encrypted /home/syban/.decrypted"
-alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | percol | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
-alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
-alias cheatsheet-add-last-history "history | head -n 1 >> ~/doc/cheatsheet"
-alias history-search "fish -c 'history | percol | tr -d \'\\n\' | parcellite > /dev/null'"
+abbr o "gnome-open"
+abbr web "chromium-browser"
+abbr cal "ncal -MC"
+abbr r "ranger"
+abbr l "ls -C --group-directories-first"
+abbr ll "ls -A1 --group-directories-first"
+abbr lll "ls -Alh --group-directories-first --time-style=long-iso"
+abbr llt "ls -Alhtr --group-directories-first --time-style=long-iso"
+abbr lld "ls -GAlht"
+abbr encfs_syban "encfs /home/syban/.encrypted /home/syban/.decrypted"
+abbr cheatsheet "fish -c 'cat ~/doc/cheatsheet | percol | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
+abbr cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
+abbr cheatsheet-add-last-history "history | head -n 1 >> ~/doc/cheatsheet"
+abbr history-search "fish -c 'history | percol | tr -d \'\\n\' | parcellite > /dev/null'"
 
-alias op "sed -nr 's/.*href=\"([^\"]*)\".*/\1/p' ~/.local/share/recently-used.xbel | percol | xargs gnome-open"
+abbr op "sed -nr 's/.*href=\"([^\"]*)\".*/\1/p' ~/.local/share/recently-used.xbel | percol | xargs gnome-open"
 
 # search history (oh my fish)
 # @see https://github.com/bpinto/oh-my-fish/tree/master/plugins/percol
@@ -42,9 +42,9 @@ function fish_user_key_bindings
 end
 
 
-# GIT aliases
-alias giunstage "git reset HEAD"
-alias gireverse "git checkout --"
+# GIT abbres
+abbr giunstage "git reset HEAD"
+abbr gireverse "git checkout --"
 abbr gis "git status"
 abbr gid "git diff"
 abbr giall "git add ."
@@ -57,41 +57,41 @@ abbr gib "git branch"
 abbr gip "git push"
 
 
-#git flow aliases
-alias gffs "git flow feature start"
+#git flow abbres
+abbr gffs "git flow feature start"
 
-# xrandr aliases
-alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
-alias xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --left-of eDP1"
-alias xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1200 --primary --left-of eDP1"
-alias xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --right-of eDP1"
-alias xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1280x1024 --primary --left-of eDP1"
+# xrandr abbres
+abbr xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
+abbr xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --left-of eDP1"
+abbr xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1200 --primary --left-of eDP1"
+abbr xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --right-of eDP1"
+abbr xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1280x1024 --primary --left-of eDP1"
 
 # backup
-alias backup "duplicity --include ~/.decrypted --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://backuphost/backups/laptop"
+abbr backup "duplicity --include ~/.decrypted --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://backuphost/backups/laptop"
 
 
 # colors
-alias tail "grc tail"
-alias diff "grc diff"
-alias ps "grc ps"
-alias ping "grc ping"
-alias netstat "grc netstat"
-alias cat "grc cat"
+abbr tail "grc tail"
+abbr diff "grc diff"
+abbr ps "grc ps"
+abbr ping "grc ping"
+abbr netstat "grc netstat"
+abbr cat "grc cat"
 
 # default tree settings
-alias treee "tree -L 2 | less"
+abbr treee "tree -L 2 | less"
 
 # mysql with usefull options
-alias mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
+abbr mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
 
 # creates ssh tunnel for mysql ssh_mysql <server>
-alias ssh_mysql "ssh -L 3306:localhost:3306 -fNg"
+abbr ssh_mysql "ssh -L 3306:localhost:3306 -fNg"
 
 # defaults for ag
-alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
+abbr ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
 
-alias less "less -R"
+abbr less "less -R"
 
 set -gx PATH ~/.npm-packages/bin ~/.go/bin $PATH
 set -gx NODE_PATH /home/syban/.npm-packages/lib/node_modules
