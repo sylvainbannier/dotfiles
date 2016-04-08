@@ -1,10 +1,176 @@
-"
-" NEEDED AT TOP
-"
 set nocompatible              " be iMproved, required
-
-" set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
+
+" # FILE NAVIGATION
+
+Plug 'rking/ag.vim' "file search based on ag
+
+map <c-a> :Ag
+
+" ## commands
+" | COMMAND            | RESULT                                      |
+" | :Ag word           | search word in the whole project            |
+" | :Ag word **/*.html | search word in the whole project html files |
+"
+" ## Quickfix shortcuts :
+" | SHORTCUT | RESULT                                                    |
+" | e        | open file and close the quickfix window.                  |
+" | go       | preview file (open but maintain focus on ag.vim results). |
+" | t        | open in a new tab.                                        |
+" | T        | open in new tab silently.                                 |
+" | v        | open in vertical split.                                   |
+" | gv       | open in vertical split silently.                          |
+" | q        | close the quickfix window.                                |
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "fuzzy finder
+Plug 'junegunn/fzf.vim'
+
+map <c-p> :Files<CR>
+map <c-h> :History<CR>
+map <c-c> :History:<CR>
+map <c-t> :Tags<CR>
+map <c-j> :BTags<CR>
+
+"  `Files [PATH]`    | Files (similar to  `:FZF` )
+"  `Ag [PATTERN]`    | {ag}{5} search result (ALT-A to select all, ALT-D to deselect all)
+"  `Tags [QUERY]`    | Tags in the project ( `ctags -R` )
+"  `BTags [QUERY]`   | Tags in the current buffer
+"  `History`         |  `v:oldfiles`  and open buffers
+"  `History:`        | Command history
+"  `Snippets`        | Snippets ({UltiSnips}{6})
+"  `Commits`         | Git commits (requires {fugitive.vim}{7})
+"  `BCommits`        | Git commits for the current buffer
+"
+" ## Search syntax
+"
+" | Token              | Match type           | Description                      |
+" | --------           | -------------------- | -------------------------------- |
+" | sbtrkt             | fuzzy-match          | Items that match `sbtrkt`        |
+" | ^music             | prefix-exact-match   | Items that start with `music`    |
+" | .mp3$              | suffix-exact-match   | Items that end with `.mp3`       |
+" | 'wild              | exact-match (quoted) | Items that include `wild`        |
+" | !rmx               | inverse-fuzzy-match  | Items that do not match `rmx`    |
+" | !'fire             | inverse-exact-match  | Items that do not include `fire` |
+" | sbtrki !'fire  ... | extended search mode | mix search terms with AND        |
+
+Plug 'scrooloose/nerdtree' " A tree explorer
+Plug 'jistr/vim-nerdtree-tabs' " NERDTree and tabs fixes
+Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
+
+noremap <F6> :NERDTreeTabsToggle<CR> <c-w><c-p> :NERDTreeTabsFind<CR> "toggle and find file
+" | SHORTCUT | RESULT                                                    |
+" | e        | open file and close the quickfix window.                  |
+" | go       | preview file (open but maintain focus on ag.vim results). |
+" | t        | open in a new tab.                                        |
+" | T        | open in new tab silently.                                 |
+" | v        | open in vertical split.                                   |
+" | gv       | open in vertical split silently.                          |
+" | q        | close the quickfix window.                                |
+"
+" ## result list shortcuts :
+" | SHORTCUT | RESULT                      |
+" | TAB      | toggle select line          |
+" | <c-t>    | open file in a new tab      |
+" | <c-s>    | open file in  split         |
+" | <c-v>    | open file in vertical split |
+
+Plug 'ton/vim-bufsurf' " Navigating buffers webbrowser style
+
+let g:BufSurfIgnore = 'NERD_tree'
+map  <Esc>[1;3D :BufSurfBack<CR> " =<ALT-LEFT>
+imap  <Esc>[1;3D <C-O>:BufSurfBack<CR>
+map  <Esc>[1;3C :BufSurfForward<CR> " =<ALT-RIGHT>
+imap  <Esc>[1;3C <C-O>:BufSurfForward<CR>
+
+Plug 'kshenoy/vim-signature' " toggle, display and navigate marks
+" | COMMAND | RESULT                                                |
+" | mx      | Toggle mark 'x' and display it in the leftmost column |
+" | dmx     | Remove mark 'x' where x is a-zA-Z                     |
+
+"   - naviguer simplement d'avant en arrière dans les positions éditées
+
+" | COMMAND | RESULT                                                |
+" | <c-o>      | Toggle mark 'x' and display it in the leftmost column |
+" | dmx     | Remove mark 'x' where x is a-zA-Z                     |
+"   - accéder au tag
+" - snippets : ultisnipps
+" - edition :
+"   - prendre en compte les editorconfig
+"   - commenter / décommenter des blocs
+"   - compléter automatiquement les mots clés identifiés
+"   - coller du code sans problèmes d'indentation
+"   - sélectionner le texte à copier dans l'historique du presse papier
+"   - indenter / désindenter facilement des blocs
+"   - faire des opérations est sélections sur des blocs "{['(
+"   - récupérer la documentation d'une fonction du langage : zealvim
+" - refactoring :
+"   - faire des rechercher / remplacer dans tout le projet
+"   - rechercher/replacer en respectant la casse
+" - navigation dans le fichier :
+"   - rechercher dans le fichier courant en surlignant les occurences
+"   - liste des tags
+"
+" Langages :
+" - js :
+"   - coloration syntaxique :
+"     - ecmascript 6
+"     - JSX
+"   - indentation correcte (.then...)
+"   - tags
+"   - formattage automatique
+"       - ecmascript 6
+"       - JSX
+"   - linter
+"   - completion des fonctions natives
+"   - completion des propriétés et méthodes des objets à partir des commentaires et du code
+"   - snippets : react, redux, angular
+"
+" - json :
+"   - coloration syntaxique
+"   - linter
+" - php :
+"   - debug
+"   - twig
+"   - tags
+"   - linter
+"   - completion des fonctions natives
+"   - completion des propriétés et méthodes des objets à partir des commentaires et du code
+" - markdown :
+"   - support pour les tableaux
+" - html :
+"   - completion des classes à partir du CSS
+"   - création rapide d'éléments : emmet
+"   - linter
+"     - html
+"     - bootstrap
+"   - accéder à la classe CSS / SASS d'un élément
+"   - completion des attributs
+"   - renomer rapidement des tages HTML (sans supprimer les attributs)
+"   - snippets : bootstrap
+"   - formattage automatique
+" - css :
+"   - sass
+"     - accéder à la défintion d'un mixin ou d'une variable
+"     - completion des mixinx et variables
+"   - tags
+"   - formattage automatique
+"   - linter
+"   - completion des attributs et valeurs
+" - yml :
+"   - indenter / désindenter facliement des blocs
+" - xml :
+"   - création rapide de balises
+"   - linter
+"
+" Outils externes :
+" - GIT
+"   - faire des git diff
+"   - voir les lignes modifiées
+"   - ignorer les fichiers ignorés par GIT
+
+
+
+
 
 "
 " SETTINGS
@@ -20,7 +186,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'bling/vim-airline' "footer line
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled=1
-Plug 'kshenoy/vim-signature'
+
 Plug 'nathanaelkane/vim-indent-guides' "Show indent guides
 let g:indent_guides_enable_on_vim_startup = 1
 Plug 'regedarek/ZoomWin' "togle zoom on windows
@@ -52,48 +218,35 @@ Plug 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
 "
 " FILE NAV
 "
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'sgur/ctrlp-extensions.vim' "search in history
-Plug 'ivalkeen/vim-ctrlp-tjump' " search in tags
-Plug 'FelikZ/ctrlp-py-matcher' "faster ctrlpsearch
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-let g:ctrlp_mruf_relative = 1 " search MRU in working directory
-Plug 'sjbach/lusty' " buffer switch
-Plug 'ton/vim-bufsurf'
-map <C-Up> :BufSurfBack<CR>
-imap <C-Up> <C-O>:BufSurfBack<CR>
-map <C-Down> :BufSurfForward<CR>
-imap <C-Down> <C-O>:BufSurfForward<CR>
-Plug 'tacahiroy/ctrlp-funky' "search in functions
-nnoremap <leader><leader> :CtrlPMRUFiles<CR>
-nnoremap <leader>t :CtrlPtjump<CR>
-let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
-"Symfony specific dirs ignored
-let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr', '.vimrc']
-let g:ctrlp_extensions = ['tag']
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "fuzzy finder
-Plug 'junegunn/fzf.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'sgur/ctrlp-extensions.vim' "search in history
+" Plug 'ivalkeen/vim-ctrlp-tjump' " search in tags
+" Plug 'FelikZ/ctrlp-py-matcher' "faster ctrlpsearch
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" let g:ctrlp_mruf_relative = 1 " search MRU in working directory
+" Plug 'tacahiroy/ctrlp-funky' "search in functions
+" nnoremap <leader><leader> :CtrlPMRUFiles<CR>
+" nnoremap <leader>t :CtrlPtjump<CR>
+" let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
+" "Symfony specific dirs ignored
+" let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr', '.vimrc']
+" let g:ctrlp_extensions = ['tag']
 
 
 "Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
-Plug 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
+" Plug 'majutsushi/tagbar'
+" nmap <F8> :TagbarToggle<CR>
 
 "Auto updates tags
 "Plugin 'xolox/vim-easytags'
 "let g:easytags_async=1
 
 " file tree browser
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 11
 set encoding=utf8
 
-Plug 'rking/ag.vim' "fils search based on ag
-" Plugin 'ervandew/ag' "better ag plugin ?
 
 "
 " NOTEBOOK
@@ -278,11 +431,6 @@ call plug#end()
 let skeletons#skeletonsDir = "~/.vim/bundle/vim-skeletons/skeletons/"
 call skeletons#skeletonsOn()
 colorscheme mango
-
-" needs to be there to prevent vimshel from opening file explorer
-let g:nerdtree_tabs_autofind=1
-noremap <F6> :NERDTreeTabsToggle<CR>
-noremap <c-F6> :NERDTreeTabsFind<CR>
 
 " CSS with YCM
 let g:ycm_autoclose_preview_window_after_insertion = 1
