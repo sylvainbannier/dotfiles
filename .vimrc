@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible' "defaults
 Plug 'editorconfig/editorconfig-vim' "load editorconfig file
 Plug 'MarcWeber/vim-addon-local-vimrc'
+Plug 'ludovicchabant/vim-gutentags'
 
 "
 " GUI
@@ -35,7 +36,7 @@ Plug 'goatslacker/mango.vim' "colors
 " EDITING
 "
 Plug 'sickill/vim-pasta' "pasting with indentation
-" Plugin 'jiangmiao/auto-pairs' "insert matching { [ ( ...
+Plug 'jiangmiao/auto-pairs' "insert matching { [ ( ...
 Plug 'pgilad/vim-skeletons' "files templates
 Plug 'jakobwesthoff/whitespacetrail' "removes whitespaces from end of lines
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
@@ -86,6 +87,7 @@ nmap <F8> :TagbarToggle<CR>
 " file tree browser
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 11
 set encoding=utf8
@@ -132,7 +134,7 @@ let g:UltiSnipsEditSplit="vertical"
 " SCM/GIT integration
 "
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify' "displays chneged line in gutter
+Plug 'airblade/vim-gitgutter'
 
 """"""""""""""""""""""""""""""
 " LANGUAGE SPECIFIC FEATURES "
@@ -141,41 +143,48 @@ Plug 'mhinz/vim-signify' "displays chneged line in gutter
 "
 " JAVASCRIPT
 "
-Plug 'pangloss/vim-javascript' "syntax and indent all in one
-Plug 'maksimr/vim-jsbeautify'
-Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0 " syntax and indent in .js files (not only jsx)
-Plug 'justinj/vim-react-snippets'
-
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " run npm install in bundle/tern_for_vim
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 let g:tern_map_keys=1 "enable keyboard shortcuts for tern
 Plug 'ramitos/jsctags'
 Plug 'elzr/vim-json'
+Plug 'heavenshell/vim-jsdoc'
+
 Plug 'jelera/vim-javascript-syntax'
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
+
+" REACT
+Plug 'justinj/vim-react-snippets'
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+let g:jsx_ext_required = 0 " syntax and indent in .js files (not only jsx)
 
 let g:syntastic_javascript_checkers = ['eslint']
 
 "
 " HTML
 "
-Plug 'mattn/emmet-vim'
+Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }
+Plug 'othree/html5.vim', { 'for': ['html', 'javascript'] }
+Plug 'tpope/vim-haml', { 'for': 'haml'}
 Plug 'chrisgillis/vim-bootstrap3-snippets'
 
 "
 " CSS/LESS/SASS
 "
-Plug 'hail2u/vim-css3-syntax' " CSS3
-Plug 'tpope/vim-haml' " sass too
-Plug 'groenewege/vim-less'
+Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less'] }
+Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'sass'] }
+Plug 'groenewege/vim-less', { 'for': 'less' }
+Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss'] }
 
 "
 " MARKDOWN
 "
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
 " au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown) only neede with tpope md
 let g:vim_markdown_folding_disabled=1
