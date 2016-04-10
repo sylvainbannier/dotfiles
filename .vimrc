@@ -80,12 +80,12 @@ map <c-a> :Ag
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "fuzzy finder
 Plug 'junegunn/fzf.vim'
 
-map <c-p> :Files<CR>    " files
-map <c-h> :History<CR>  " files history
-map <c-c> :History:<CR> " command history
-map <c-t> :Tags<CR>     " tags
-map <c-j> :BTags<CR>    " buffer tags
-map <c-f> :BLines<CR>   " Lines in the current buffer
+map <c-p> :Files<CR>
+map <c-h> :History<CR>
+map <c-c> :History:<CR>
+map <c-t> :Tags<CR>
+map <c-j> :BTags<CR>
+map <c-f> :BLines<CR>
 
 " ### FZF COMMANDS
 " | Ag [PATTERN] | {ag}{5} search result (ALT-A to select all, ALT-D to deselect all) |
@@ -162,7 +162,8 @@ Plug 'kshenoy/vim-signature' " toggle, display and navigate marks
 " Plug 'ludovicchabant/vim-gutentags' " updates tag file automatically on background
 
 " Plug 'majutsushi/tagbar'
-" nmap <F8> :TagbarToggle<CR> " open tags pane for current buffer
+" open tags pane for current buffer
+" map <F8> :TagbarToggle<CR>
 
 " ## WINDOWS
 
@@ -195,6 +196,7 @@ set directory=~/.vim/swap//
 
 " ## CLIPBOARD
 set clipboard=unnamedplus "sets common clipboard for x11 & vim
+Plug 'junegunn/vim-peekaboo'
 
 " # UNDO
 set undodir=~/.vim/undo//
@@ -209,10 +211,13 @@ let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_aggregate_errors = 1
 
 " ## INDENT
-set tabstop=4     " tabs are at proper location
-set shiftwidth=4  " indenting is 4 spaces (even if its tabs)
+set tabstop=2     " tabs are at proper location
+set shiftwidth=2  " indenting is 4 spaces (even if its tabs)
 set autoindent    " turns it on
 set smartindent   " does the right thing (mostly) in programs
+" use multiple of shiftwidth when shifting indent levels.
+" this is OFF so block comments don't get fudged when using ">>" and "<<"
+set noshiftround
 nnoremap <silent><TAB> >>
 nnoremap <silent><S-TAB> <<
 vnoremap <silent><TAB> >gv
@@ -256,7 +261,7 @@ Plug 'Wolfy87/vim-enmasse'           " search/replace in multiple files
 Plug 'tpope/vim-abolish'             " search/replace keeping case and other stuffs
 
 " ## AUTO COMPLETE
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 
 " ### YCM CUSTOM CONFIG
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -312,26 +317,41 @@ Plug 'othree/javascript-libraries-syntax.vim'           " extends syntax for wit
 " ### FUNCTION PARAMETERS AND AUTOCOMPLETE
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' } "autocomplete for js dont forger to add .tern_project in project root
 let g:tern_map_keys=1 "enable keyboard shortcuts for tern
+" you have to create a .tern-projet file in root
+" {
+"   "libs": [
+"     "browser",
+"     "jquery"
+"   ],
+"   "loadEagerly": [
+"     "src/**/*"
+"   ],
+"   "plugins": {
+"     "node": {}
+"   }
+" }
+" plugins other than node and requirejs should be installed with npm install -g tern-<plugin>.
+" ie : tern-jasmine
 
 " ### JSDOC
-Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' } " generates JsDoc
+Plug 'heavenshell/vim-jsdoc' " generates JsDoc
 let g:jsdoc_enable_es6 = 1 "allow arrow functions
 " | COMMAND | RESULT                                   |
 " | :JsDoc  | generates JSDoc for function on the line |
 
 " ## REACT
-Plug 'justinj/vim-react-snippets'           " snippets
-Plug 'mxw/vim-jsx', { 'for': 'javascript' } " Syntax
-let g:jsx_ext_required = 0                  " syntax and indent in .js files (not only jsx)
+Plug 'justinj/vim-react-snippets' " snippets
+Plug 'mxw/vim-jsx'                " Syntax
+let g:jsx_ext_required = 0        " syntax and indent in .js files (not only jsx)
 
 " ## NODE
 Plug 'moll/vim-node' " detect extensionless node scripts (executables) via shebang and add gf for going to node_modules files
 
 " ## HTML
-Plug 'othree/html5.vim', { 'for': ['html', 'javascript'] }    " syntax
-Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript'] } " higlight matching tags
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }     " fast html tags
-Plug 'chrisgillis/vim-bootstrap3-snippets'                    " Bootstrap snippets
+Plug 'othree/html5.vim'                    " syntax
+Plug 'gregsexton/MatchTag'                 " higlight matching tags
+Plug 'mattn/emmet-vim'                     " fast html tags
+Plug 'chrisgillis/vim-bootstrap3-snippets' " Bootstrap snippets
 
 " ## CSS/LESS/SASS
 Plug 'JulesWang/css.vim'
@@ -361,6 +381,8 @@ Plug 'evidens/vim-twig'                       " twig template
 let php_sql_query=1
 let php_htmlInStrings=1
 let php_folding=0
+let g:PHP_default_indenting = 0
+let g:PHP_outdentphpescape  = 0
 
 " ### INDENT
 " Fix indent of HTML in all PHP files -- basically adds
@@ -369,8 +391,8 @@ Plug '2072/PHP-Indenting-for-VIm'
       \| Plug 'captbaritone/better-indent-support-for-php-with-html'
 
 " ### COMPLETE
-Plug 'm2mdas/phpcomplete-extended', { 'for': 'php' }
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+" Plug 'm2mdas/phpcomplete-extended', { 'for': 'php' }
+" autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 " ### LINT
 let g:syntastic_php_checkers=['php', 'phpcs']
