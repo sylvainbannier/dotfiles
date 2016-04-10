@@ -1,48 +1,107 @@
 set nocompatible              " be iMproved, required
+
+" # MOUSE INTEGRATION
+" @see http://usevim.com/2012/05/16/mouse/
+set ttyfast " Send more characters for redraws
+set mouse=a " Enable mouse use in all modes
+set ttymouse=xterm2 " Set this to the name of your terminal that supports mouse codes.  Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
+
+" COMMANDS
+set wildmenu "better completion in menus
+set wildmode=longest:full,full
+
 call plug#begin('~/.vim/plugged')
 
-" # FILE NAVIGATION
+" # SETTINGS
+Plug 'tpope/vim-sensible' "defaults
 
+" # TOOLS INTEGRATION
+
+" ## ASYNC PROCESS
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+
+" ## GIT
+Plug 'tpope/vim-fugitive' " GIT integration
+Plug 'airblade/vim-gitgutter' " show changed lines in gutter
+Plug 'rhysd/committia.vim' " show diff in own split when editing a COMMIT_EDITMSG
+
+" ## FILESYSTEM
+Plug 'dockyard/vim-easydir' " creates dir if new file in new dir
+Plug 'tpope/vim-eunuch' " Add file manip commands like Remove, Move, Rename, SudoWrite
+Plug 'MarcWeber/vim-addon-local-vimrc' "load local vimrc from projet
+
+" ## TAGS
+set tags=tags
+
+" # NAVIGATION
+
+" ## INGORE FILES
+set wildignorecase
+set wildignore+=.git,.hg,.svn
+set wildignore+=*.aux,*.out,*.toc
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class,*.so
+set wildignore+=*.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp
+set wildignore+=*.avi,*.m4a,*.mp3,*.oga,*.ogg,*.wav,*.webm
+set wildignore+=*.eot,*.otf,*.ttf,*.woff
+set wildignore+=*.doc,*.pdf
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignore+=*.min.*
+set wildignore+=*.swp,.lock,.DS_Store,._*,*~
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*,*.gem
+set wildignore+=*/tmp/*,*/dist/*,*/bower_components/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*/cache/*
+set wildignore+=*/log/*,*/logs/*
+
+" ## SEARCH
+Plug 'haya14busa/incsearch.vim'      " incremental search (usefull for regex)
 Plug 'rking/ag.vim' "file search based on ag
 
+" ### CUSTOM CONFIG
+" Highlight all occurrence of a selected word
+set ic " case insesitive search
+set hlsearch
+highlight Search  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
+highlight SpellBad 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+highlight SyntasticError 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+highlight Visual  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
+
+" ### AG CUSTOM MAPPINGS
 map <c-a> :Ag
 
-" ## commands
-" | COMMAND            | RESULT                                      |
+" ### AG COMMANDS
 " | :Ag word           | search word in the whole project            |
 " | :Ag word **/*.html | search word in the whole project html files |
-"
-" ## Quickfix shortcuts :
-" | SHORTCUT | RESULT                                                    |
-" | e        | open file and close the quickfix window.                  |
-" | go       | preview file (open but maintain focus on ag.vim results). |
-" | t        | open in a new tab.                                        |
-" | T        | open in new tab silently.                                 |
-" | v        | open in vertical split.                                   |
-" | gv       | open in vertical split silently.                          |
-" | q        | close the quickfix window.                                |
+
+" ### AG QUICKFIX SHORTCUTS
+" | e  | open file and close the quickfix window.                  |
+" | go | preview file (open but maintain focus on ag.vim results). |
+" | t  | open in a new tab.                                        |
+" | T  | open in new tab silently.                                 |
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "fuzzy finder
 Plug 'junegunn/fzf.vim'
 
-map <c-p> :Files<CR>
-map <c-h> :History<CR>
-map <c-c> :History:<CR>
-map <c-t> :Tags<CR>
-map <c-j> :BTags<CR>
+map <c-p> :Files<CR>    " files
+map <c-h> :History<CR>  " files history
+map <c-c> :History:<CR> " command history
+map <c-t> :Tags<CR>     " tags
+map <c-j> :BTags<CR>    " buffer tags
+map <c-l> :BLines<CR>   " Lines in the current buffer
 
-"  `Files [PATH]`    | Files (similar to  `:FZF` )
-"  `Ag [PATTERN]`    | {ag}{5} search result (ALT-A to select all, ALT-D to deselect all)
-"  `Tags [QUERY]`    | Tags in the project ( `ctags -R` )
-"  `BTags [QUERY]`   | Tags in the current buffer
-"  `History`         |  `v:oldfiles`  and open buffers
-"  `History:`        | Command history
-"  `Snippets`        | Snippets ({UltiSnips}{6})
-"  `Commits`         | Git commits (requires {fugitive.vim}{7})
-"  `BCommits`        | Git commits for the current buffer
-"
-" ## Search syntax
-"
+" ### FZF COMMANDS
+" | Ag [PATTERN] | {ag}{5} search result (ALT-A to select all, ALT-D to deselect all) |
+" | Snippets     | Snippets ({UltiSnips}{6})                                          |
+" | Commits      | Git commits (requires {fugitive.vim}{7})                           |
+" | BCommits     | Git commits for the current buffer                                 |
+
+" ### FZF RESULT LIST SHORTCUTS
+" | TAB   | toggle select line            |
+" | ALT-A | select all (usefull for AG)   |
+" | ALT-D | deselect all (usefull for AG) |
+" | <c-t> | open file in a new tab        |
+" | <c-s> | open file in  split           |
+" | <c-v> | open file in vertical split   |
+
+" ### FZF SEARCH SYNTAX
 " | Token              | Match type           | Description                      |
 " | --------           | -------------------- | -------------------------------- |
 " | sbtrkt             | fuzzy-match          | Items that match `sbtrkt`        |
@@ -53,390 +112,160 @@ map <c-j> :BTags<CR>
 " | !'fire             | inverse-exact-match  | Items that do not include `fire` |
 " | sbtrki !'fire  ... | extended search mode | mix search terms with AND        |
 
+" ## TREE EXPLORER
 Plug 'scrooloose/nerdtree' " A tree explorer
 Plug 'jistr/vim-nerdtree-tabs' " NERDTree and tabs fixes
 Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
 
 noremap <F6> :NERDTreeTabsToggle<CR> <c-w><c-p> :NERDTreeTabsFind<CR> "toggle and find file
-" | SHORTCUT | RESULT                                                    |
-" | e        | open file and close the quickfix window.                  |
-" | go       | preview file (open but maintain focus on ag.vim results). |
-" | t        | open in a new tab.                                        |
-" | T        | open in new tab silently.                                 |
-" | v        | open in vertical split.                                   |
-" | gv       | open in vertical split silently.                          |
-" | q        | close the quickfix window.                                |
-"
-" ## result list shortcuts :
-" | SHORTCUT | RESULT                      |
-" | TAB      | toggle select line          |
-" | <c-t>    | open file in a new tab      |
-" | <c-s>    | open file in  split         |
-" | <c-v>    | open file in vertical split |
+
+" ## BUFFER LIST
+set hidden " hide modified buffers on change instead of closing them
 
 Plug 'ton/vim-bufsurf' " Navigating buffers webbrowser style
 
-let g:BufSurfIgnore = 'NERD_tree'
-map  <Esc>[1;3D :BufSurfBack<CR> " =<ALT-LEFT>
-imap  <Esc>[1;3D <C-O>:BufSurfBack<CR>
-map  <Esc>[1;3C :BufSurfForward<CR> " =<ALT-RIGHT>
-imap  <Esc>[1;3C <C-O>:BufSurfForward<CR>
+let g:BufSurfIgnore = 'NERD_tree, help' ""
+map  <Esc>[1;3D :BufSurfBack<CR>
+imap <Esc>[1;3D <C-O>:BufSurfBack<CR>
+map  <Esc>[1;3C :BufSurfForward<CR>
+imap <Esc>[1;3C <C-O>:BufSurfForward<CR>
 
+" ## BUFFER
+" SMARTHOME : home key gets back to line begining first
+noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+imap <silent> <Home> <C-O><Home>
+
+" Jump between words with CTRL
+nmap <C-LEFT> b
+nmap <C-RIGHT> w
+
+" moves inside long lines up and down with arrows
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+
+" ## BOOKMARKS
 Plug 'kshenoy/vim-signature' " toggle, display and navigate marks
 " | COMMAND | RESULT                                                |
 " | mx      | Toggle mark 'x' and display it in the leftmost column |
 " | dmx     | Remove mark 'x' where x is a-zA-Z                     |
 
-"   - naviguer simplement d'avant en arrière dans les positions éditées
+" ## CURSOR POSITION HISTORY
 
-" | COMMAND | RESULT                                                |
-" | <c-o>      | Toggle mark 'x' and display it in the leftmost column |
-" | dmx     | Remove mark 'x' where x is a-zA-Z                     |
-"   - accéder au tag
-" - snippets : ultisnipps
-" - edition :
-"   - prendre en compte les editorconfig
-"   - commenter / décommenter des blocs
-"   - compléter automatiquement les mots clés identifiés
-"   - coller du code sans problèmes d'indentation
-"   - sélectionner le texte à copier dans l'historique du presse papier
-"   - indenter / désindenter facilement des blocs
-"   - faire des opérations est sélections sur des blocs "{['(
-"   - récupérer la documentation d'une fonction du langage : zealvim
-" - refactoring :
-"   - faire des rechercher / remplacer dans tout le projet
-"   - rechercher/replacer en respectant la casse
-" - navigation dans le fichier :
-"   - rechercher dans le fichier courant en surlignant les occurences
-"   - liste des tags
-"
-" Langages :
-" - js :
-"   - coloration syntaxique :
-"     - ecmascript 6
-"     - JSX
-"   - indentation correcte (.then...)
-"   - tags
-"   - formattage automatique
-"       - ecmascript 6
-"       - JSX
-"   - linter
-"   - completion des fonctions natives
-"   - completion des propriétés et méthodes des objets à partir des commentaires et du code
-"   - snippets : react, redux, angular
-"
-" - json :
-"   - coloration syntaxique
-"   - linter
-" - php :
-"   - debug
-"   - twig
-"   - tags
-"   - linter
-"   - completion des fonctions natives
-"   - completion des propriétés et méthodes des objets à partir des commentaires et du code
-" - markdown :
-"   - support pour les tableaux
-" - html :
-"   - completion des classes à partir du CSS
-"   - création rapide d'éléments : emmet
-"   - linter
-"     - html
-"     - bootstrap
-"   - accéder à la classe CSS / SASS d'un élément
-"   - completion des attributs
-"   - renomer rapidement des tages HTML (sans supprimer les attributs)
-"   - snippets : bootstrap
-"   - formattage automatique
-" - css :
-"   - sass
-"     - accéder à la défintion d'un mixin ou d'une variable
-"     - completion des mixinx et variables
-"   - tags
-"   - formattage automatique
-"   - linter
-"   - completion des attributs et valeurs
-" - yml :
-"   - indenter / désindenter facliement des blocs
-" - xml :
-"   - création rapide de balises
-"   - linter
-"
-" Outils externes :
-" - GIT
-"   - faire des git diff
-"   - voir les lignes modifiées
-"   - ignorer les fichiers ignorés par GIT
+" | g;     | Go to [count] older position in change list.        |
+" | g,     | Go to [count] newer cursor position in change list. |
+" | CTRL-O | Go to [count] older position in jump list.          |
+" | CTRL-I | Go to [count] newer cursor position in jump list.   |
 
+" ## DEFINITIONS (TAGS)
+" Plug 'ludovicchabant/vim-gutentags' " updates tag file automatically on background
 
+" Plug 'majutsushi/tagbar'
+" nmap <F8> :TagbarToggle<CR> " open tags pane for current buffer
 
+" ## WINDOWS
 
+" Alt+leftarrow will go one window left, etc.
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
 
-"
-" SETTINGS
-"
-Plug 'tpope/vim-sensible' "defaults
-Plug 'editorconfig/editorconfig-vim' "load editorconfig file
-Plug 'MarcWeber/vim-addon-local-vimrc'
-Plug 'ludovicchabant/vim-gutentags'
+" # EDITING
 
-"
-" GUI
-"
-Plug 'bling/vim-airline' "footer line
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled=1
+Plug 'sickill/vim-pasta'             " pasting with indentation
+Plug 'jiangmiao/auto-pairs'          " insert matching { [ ( ...
+Plug 'godlygeek/tabular'             " align data in tables
+Plug 'jakobwesthoff/whitespacetrail' " removes whitespaces from end of lines
+Plug 'tomtom/tcomment_vim'           " comment / uncomment
+Plug 'tpope/vim-surround'            " work with surrounding tags, ' {...
+Plug 'editorconfig/editorconfig-vim' " load editorconfig file
+" Plug 'KabbAmine/zeavim.vim'        " search ZEAL documentation
 
-Plug 'nathanaelkane/vim-indent-guides' "Show indent guides
-let g:indent_guides_enable_on_vim_startup = 1
-Plug 'regedarek/ZoomWin' "togle zoom on windows
+" ENCODING
+set encoding=utf8
+
+" # BACKUPS
+" make vim put swap, backup and undo files in a special location instead of the working directory of the file being edited
+" http://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
+"set backupdir=~/.vim/backup// " can't keep backups because of this bug https://github.com/paulmillr/chokidar/issues/35
+set nowritebackup
+set directory=~/.vim/swap//
+
+" ## CLIPBOARD
+set clipboard=unnamedplus "sets common clipboard for x11 & vim
+
+" # UNDO
+set undodir=~/.vim/undo//
+Plug 'mbbill/undotree' "visualize undo tree
+
+" ## SYNTAX
+syntax on
 
 Plug 'scrooloose/syntastic'
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_aggregate_errors = 1
-Plug 'goatslacker/mango.vim' "colors
-"Plugin 'mbbill/undotree'
 
-"
-" EDITING
-"
-Plug 'sickill/vim-pasta' "pasting with indentation
-Plug 'jiangmiao/auto-pairs' "insert matching { [ ( ...
-Plug 'pgilad/vim-skeletons' "files templates
-Plug 'jakobwesthoff/whitespacetrail' "removes whitespaces from end of lines
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-surround' "work with surrounding tags, ' {...
-"Plugin 'Lokaltog/vim-easymotion' "quick moves
-Plug 'Wolfy87/vim-enmasse' "search/replace in files
-Plug 'tpope/vim-abolish' "search/replace keeping case and other stuffs
-Plug 'haya14busa/incsearch.vim' "incremental search (usefull for regex)
-"Plugin 'junegunn/vim-easy-align' "align
-"Plugin 'terryma/vim-multiple-cursors' "multiple selections
+" ## INDENT
+set tabstop=4     " tabs are at proper location
+set shiftwidth=4  " indenting is 4 spaces (even if its tabs)
+set autoindent    " turns it on
+set smartindent   " does the right thing (mostly) in programs
+nnoremap <silent><TAB> >>
+nnoremap <silent><S-TAB> <<
+vnoremap <silent><TAB> >gv
+vnoremap <silent><S-TAB> <gv
 
-"
-" FILE NAV
-"
-" Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'sgur/ctrlp-extensions.vim' "search in history
-" Plug 'ivalkeen/vim-ctrlp-tjump' " search in tags
-" Plug 'FelikZ/ctrlp-py-matcher' "faster ctrlpsearch
-" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-" let g:ctrlp_mruf_relative = 1 " search MRU in working directory
-" Plug 'tacahiroy/ctrlp-funky' "search in functions
-" nnoremap <leader><leader> :CtrlPMRUFiles<CR>
-" nnoremap <leader>t :CtrlPtjump<CR>
-" let g:ctrlp_working_path_mode = 'ra' "try to find .git in parents to set ctrlP root
-" "Symfony specific dirs ignored
-" let g:ctrlp_root_markers = ['src/', '.git/','.hg/','_darcs','.bzr', '.vimrc']
-" let g:ctrlp_extensions = ['tag']
+" # FILE TEMPLATES
+" Plug 'pgilad/vim-skeletons'          " files templates
+" let skeletons#skeletonsDir = "~/.vim/bundle/vim-skeletons/skeletons/"
+" call skeletons#skeletonsOn()
 
+" ## SNIPPETS
+Plug 'SirVer/ultisnips' "snippets
+Plug 'honza/vim-snippets' " base snippets library
 
-"Bundle 'DavidEGx/ctrlp-smarttabs' " search in tabs
-" Plug 'majutsushi/tagbar'
-" nmap <F8> :TagbarToggle<CR>
+" ### ULTISNIPS COMMANDS
+" | :UltisnipsEdit | open snippets file corresponding to this file |
 
-"Auto updates tags
-"Plugin 'xolox/vim-easytags'
-"let g:easytags_async=1
-
-" file tree browser
-Plug 'ryanoasis/vim-devicons'
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 11
-set encoding=utf8
-
-
-"
-" NOTEBOOK
-"
-Plug 'xolox/vim-notes' "notebook
-Plug 'xolox/vim-misc'
-"Plugin 'xolox/vim-shell' "easy navigation between your notes and environment like local files and directories
-
-"
-" SNIPPETS
-"
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-" use enter to insert auto complete suggestion
+" ### ULTISNIPS CUSTOM CONFIG
+" Use enter to insert auto complete suggestion :
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
 if !exists("*ExpandSnippetOrCarriageReturn")
-	function ExpandSnippetOrCarriageReturn()
-		let snippet = UltiSnips#ExpandSnippetOrJump()
-		if g:ulti_expand_or_jump_res > 0
-			return snippet
-		else
-			return "\<CR>"
-		endif
-	endfunction
+  function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+      return snippet
+    else
+      return "\<CR>"
+    endif
+  endfunction
 endif
-" <expr> : evaluate expression
-inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>" "VIM trick - "<expr>" : evaluate expression before deciding mapping to apply
 
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>" " jump to next placehodler in snippet
+let g:UltiSnipsJumpBackwardTrigger="<c-z>" " jump to previous placeholder
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit="vertical" " open ultisnipsEdit in a vertical splited window
 
-"
-" SCM/GIT integration
-"
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" ## REFACTORING
+Plug 'Wolfy87/vim-enmasse'           " search/replace in multiple files
+Plug 'tpope/vim-abolish'             " search/replace keeping case and other stuffs
 
-""""""""""""""""""""""""""""""
-" LANGUAGE SPECIFIC FEATURES "
-""""""""""""""""""""""""""""""
+" ## AUTO COMPLETE
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 
-"
-" JAVASCRIPT
-"
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
-let g:tern_map_keys=1 "enable keyboard shortcuts for tern
-Plug 'ramitos/jsctags'
-Plug 'elzr/vim-json'
-Plug 'heavenshell/vim-jsdoc'
-
-Plug 'jelera/vim-javascript-syntax'
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
-" Plug 'leafgarland/typescript-vim'
-
-" REACT
-Plug 'justinj/vim-react-snippets'
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-let g:jsx_ext_required = 0 " syntax and indent in .js files (not only jsx)
-
-let g:syntastic_javascript_checkers = ['eslint']
-
-"
-" HTML
-"
-Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript'] }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }
-Plug 'othree/html5.vim', { 'for': ['html', 'javascript'] }
-Plug 'tpope/vim-haml', { 'for': 'haml'}
-Plug 'chrisgillis/vim-bootstrap3-snippets'
-
-"
-" CSS/LESS/SASS
-"
-Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less'] }
-Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'sass'] }
-Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss'] }
-
-"
-" MARKDOWN
-"
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
-" au BufNewFile,BufRead *.md  setf markdown "Associate *.md with markdown (otherwise only README.md are regognized as markdown) only neede with tpope md
-let g:vim_markdown_folding_disabled=1
-"autocmd FileType markdown :Voom markdown
-" let g:vim_markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml'] "not working ?
-let g:vim_markdown_frontmatter=1
-
-"Plug 'vim-voom/VOoM'" 2 pane editor for markdown, asciidoc and others
-
-"
-" SQL
-"
-" Plugin 'vim-scripts/dbext.vim'
-
-"
-" NEO4J
-"
-Plug 'neo4j-contrib/cypher-vim-syntax'
-
-"
-" SPELLCHECK
-"
-Plug 'dpelle/vim-LanguageTool' "Grammar check
-let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
-
-"
-" PHP
-"
-Plug 'evidens/vim-twig'
-Plug 'vim-php/tagbar-phpctags.vim' "needs phpctags bin. better tagbar for php
-Plug '2072/PHP-Indenting-for-VIm' "better indent
-Plug 'joonty/vdebug' "debugger integration
-let g:vdebug_options = {}
-"let g:vdebug_options["port"] = 9009
-"let g:vdebug_options["path_maps"] = {
-"\    "/var/www": "/home/lxc/.../var/www"
-"\}
-"let g:vdebug_options['server'] = "local LXC IP"
-Plug 'shawncplus/phpcomplete.vim' "auto complete based on tags
-let g:syntastic_php_checkers=['php', 'phpcs']
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-set completeopt=menu,longest
-nnoremap <silent><C-B> :!ctags -f .tags.php<CR>
-set tags=.tags.php
-let php_sql_query=1
-let php_htmlInStrings=1
-let php_folding=0
-
-set makeprg=php\ -l\ %
-"let g:syntastic_php_phpcs_args="--report=csv --standard=PSR2" "DISABLED : activate with spcific projects
-"Plugin 'arnaud-lb/vim-php-namespace' "insert namespaces . DISABLED : very usefull relies on tags which make vim to slow. TODO find why
-"inoremap <Leader>u <C-O>:call PhpInsertUse()<CR> " \u to insert use
-"noremap <Leader>u :call PhpInsertUse()<CR>
-"Plugin 'StanAngeloff/php.vim' " provides better syntax outline. DISABLED : conflicts with CtrlP
-
-" PHP autocomplete
-"Bundle 'Shougo/vimproc' "Needed for phpcomplete-extended
-"Bundle 'Shougo/unite.vim' "Needed for phpcomplete-extended
-"Bundle 'm2mdas/phpcomplete-extended' " DISABLED : errors on ez publish projet
-"index
-"Bundle 'm2mdas/phpcomplete-extended-symfony' "DISABLED : relies on
-"phpcomplete-extended
-"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP "activate phpcomplete-extended
-"
-
-" cucumber syntax
-Plug 'tpope/vim-cucumber'
-
-" doc search
-" Plug 'KabbAmine/zeavim.vim' " mappgin existant
-
-" taskjuggler
-Plug 'kalafut/vim-taskjuggler'
-
-" Graphviz
-Plug 'wannesm/wmgraphviz.vim'
-
-" Asciidoc
-Plug 'dahu/vim-asciidoc' "bug ?
-
-" RAML
-Plug 'IN3D/vim-raml'
-
-" All of your Plugins must be added before the following line
-call plug#end()
-
-
-""""""""""""""""""""
-" PLUGINS SETTINGS "
-""""""""""""""""""""
-let skeletons#skeletonsDir = "~/.vim/bundle/vim-skeletons/skeletons/"
-call skeletons#skeletonsOn()
-colorscheme mango
-
-" CSS with YCM
+" ### YCM CUSTOM CONFIG
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
-let g:ycm_collect_identifiers_from_tags_files = 1
+" avoid override of my custom mapping for long lines by YCM
+let g:ycm_key_list_select_completion = [ '<C-Tab>' ]
+let g:ycm_key_list_previous_completion = [ '<C-S-Tab>' ]
+inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<C-O>gj"
+inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<C-O>gk"
+let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_semantic_triggers = {
   \ 'c' : ['->', '.'],
   \ 'objc' : ['->', '.'],
@@ -451,68 +280,139 @@ let g:ycm_semantic_triggers = {
   \ 'erlang' : [':'],
   \ }
 
-"""""""""""""""""""""""
-" NATIVE VIM SETTINGS "
-"""""""""""""""""""""""
+" ## SPELLCHECK
+Plug 'dpelle/vim-LanguageTool' "Grammar check
+let g:languagetool_jar='/usr/local/LanguageTool/languagetool-commandline.jar'
 
-set hidden " hide modified buffers on change instead of closing them
+" ## WISHLIST / TODO
+" - easy indent / unindent yml blocs
+" - search clipboard history
 
-" ignore most common directories and files in vimgrep ack CtrlP etc.
-set wildignore+=*/tmp/*,*/dist/*,*.so,*.swp,*.zip,*/bower_components/*,.git/*,.svn/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*~,*/cache/*,*/log/*,*/logs/*
 
-" make vim put swap, backup and undo files in a special location instead of the working directory of the file being edited
-" http://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
-"set backupdir=~/.vim/backup// " can't keep backups because of this bug https://github.com/paulmillr/chokidar/issues/35
-set nowritebackup
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
+" # LANGAGES
+Plug 'elzr/vim-json'                   " json
+Plug 'tpope/vim-cucumber'              " cucumber syntax
+Plug 'kalafut/vim-taskjuggler'         " taskjuggler
+Plug 'wannesm/wmgraphviz.vim'          " Graphviz
+Plug 'dahu/vim-asciidoc'               " Asciidoc
+Plug 'IN3D/vim-raml'                   " RAML
+Plug 'neo4j-contrib/cypher-vim-syntax' " Neo4j cypher syntax
 
-syntax on
+" ## JAVASCRIPT
+
+" ### JS CUSTOM CONFIG
+let g:syntastic_javascript_checkers = ['eslint']
+
+Plug 'othree/yajs.vim', { 'for': 'javascript' }         " JS syntax,
+Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " Indent from pangloss, works with yajs
+Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' }  " autoformat JS
+Plug 'othree/jspc.vim'                                  " Paramters completion
+Plug 'othree/javascript-libraries-syntax.vim'           " extends syntax for with jQuery,backbone,etc.
+
+" ### FUNCTION PARAMETERS AND AUTOCOMPLETE
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' } "autocomplete for js dont forger to add .tern_project in project root
+let g:tern_map_keys=1 "enable keyboard shortcuts for tern
+
+" ### JSDOC
+Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' } " generates JsDoc
+let g:jsdoc_enable_es6 = 1 "allow arrow functions
+" | COMMAND | RESULT                                   |
+" | :JsDoc  | generates JSDoc for function on the line |
+
+" ## REACT
+Plug 'justinj/vim-react-snippets'           " snippets
+Plug 'mxw/vim-jsx', { 'for': 'javascript' } " Syntax
+let g:jsx_ext_required = 0                  " syntax and indent in .js files (not only jsx)
+
+" ## NODE
+Plug 'moll/vim-node' " detect extensionless node scripts (executables) via shebang and add gf for going to node_modules files
+
+" ## HTML
+Plug 'othree/html5.vim', { 'for': ['html', 'javascript'] }    " syntax
+Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript'] } " higlight matching tags
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }     " fast html tags
+Plug 'chrisgillis/vim-bootstrap3-snippets'                    " Bootstrap snippets
+
+" ## CSS/LESS/SASS
+Plug 'JulesWang/css.vim'
+      \| Plug 'hail2u/vim-css3-syntax'
+      \| Plug 'cakebaker/scss-syntax.vim'
+Plug 'othree/csscomplete.vim'
+Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less'] }
+Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'sass'] }
+Plug 'groenewege/vim-less', { 'for': 'less' }
+
+" ## MARKDOWN
+Plug 'vim-pandoc/vim-pandoc-syntax' " Syntax
+let g:markdown_fenced_languages = [
+      \ 'html',
+      \ 'javascript', 'js=javascript', 'json=javascript',
+      \ 'sass',
+      \ ]
+Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
+"Plug 'vim-voom/VOoM'" 2 pane editor for markdown, asciidoc and others
+
+" ## PHP
+
+" ### SYNTAX
+Plug 'StanAngeloff/php.vim', { 'for': 'php' } " Syntax
+Plug 'evidens/vim-twig'                       " twig template
+
+let php_sql_query=1
+let php_htmlInStrings=1
+let php_folding=0
+
+" ### INDENT
+" Fix indent of HTML in all PHP files -- basically adds
+" indent/html.vim when outside of PHP block.
+Plug '2072/PHP-Indenting-for-VIm'
+      \| Plug 'captbaritone/better-indent-support-for-php-with-html'
+
+" ### COMPLETE
+Plug 'm2mdas/phpcomplete-extended', { 'for': 'php' }
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+
+" ### LINT
+let g:syntastic_php_checkers=['php', 'phpcs']
+
+" ### DEBUG
+Plug 'joonty/vdebug' "debugger integration
+let g:vdebug_options = {}
+" define this options per projet :
+"let g:vdebug_options["port"] = 9009
+"let g:vdebug_options["path_maps"] = {
+"\    "/var/www": "/home/lxc/.../var/www"
+"\}
+"let g:vdebug_options['server'] = "local LXC IP"
+
+" # GUI
+
+" ## BUFFER
 set background=dark
-
-set clipboard=unnamedplus "sets common clipboard for x11 & vim
 set cursorline "highlight current line
 set relativenumber "line numbers relative to current line
 set number " adds line number to the current line
 
-set tabstop=4     " tabs are at proper location
-"set expandtab     " don't use actual tab character (ctrl-v)
-set shiftwidth=4  " indenting is 4 spaces (even if its tabs)
-set autoindent    " turns it on
-set smartindent   " does the right thing (mostly) in programs
+Plug 'nathanaelkane/vim-indent-guides' "Show indent guides
+let g:indent_guides_enable_on_vim_startup = 1
 
-set ic " case insesitive search
+Plug 'tyru/current-func-info.vim' " display current function
 
-" @see http://usevim.com/2012/05/16/mouse/
-" Send more characters for redraws
-set ttyfast
-" Enable mouse use in all modes
-set mouse=a
-" Set this to the name of your terminal that supports mouse codes.
-" Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
-set ttymouse=xterm2
+" ## THEME
+Plug 'goatslacker/mango.vim' "colors
 
-" Highlight all occurrence of a selected word
-set hlsearch
-highlight Search  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
-highlight SpellBad 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
-highlight SyntasticError 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
-highlight Visual  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
-
-" command menu
-set wildmenu "better completion in menus
-set wildmode=longest:full,full
-
+" ## FONT
 if has("gui_running")
-	if has("gui_gtk2")
-		set guifont=Monospace\ 9
+  if has("gui_gtk2")
+    set guifont=Monospace\ 9
 
-		"removes toolbars
-		":set guioptions-=m  "remove menu bar
-		:set guioptions-=T  "remove toolbar
-	endif
+    "removes toolbars
+    ":set guioptions-=m  "remove menu bar
+    :set guioptions-=T  "remove toolbar
+  endif
 endif
 
+" ## CURSOR
 " different cursor shape in insert mode
 silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
 if has("autocmd")
@@ -521,51 +421,23 @@ if has("autocmd")
   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
 endif
 
-"
-" SHORTCUTS
-"
-"
-nnoremap <silent><TAB> >>
-nnoremap <silent><S-TAB> <<
-vnoremap <silent><TAB> >gv
-vnoremap <silent><S-TAB> <gv
+" ## STATUS LINE
+Plug 'bling/vim-airline' "footer line
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled=1
 
-" Alt+leftarrow will go one window left, etc.
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+" ## ICONS
+Plug 'ryanoasis/vim-devicons'
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 11
 
+" ## WINDOWS
 " changes windows size with num pag + and -
-if bufwinnr(1)
-	map <kMinus> :10winc <<CR>
-	nmap <silent> <C-Right> :10winc ><CR>
-endif
+" if bufwinnr(1)
+"   map <kMinus> :10winc <<CR>
+"   nmap <silent> <C-Right> :10winc ><CR>
+" endif
 
-" SMARTHOME : home key gets back to line begining first
-noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
-imap <silent> <Home> <C-O><Home>
+call plug#end()
 
-" same moves as in insert mode
-nmap <C-Left> b
-nmap <C-Right> w
-
-" moves inside long lines up and down with arrows
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-" removes <Up> and <Down> from YCM selects keys and add them back manually to
-" avoid override of my custom mapping by YCM
-let g:ycm_key_list_select_completion = [ '<C-Tab>' ]
-let g:ycm_key_list_previous_completion = [ '<C-S-Tab>' ]
-inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<C-O>gj"
-inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<C-O>gk"
-
-" FIX slow ctags issue
-" http://www.stefanwienert.de/blog/2012/02/29/vim-sane-and-fast-auto-completion-with-ctags/
-autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-set path=.
-set tags=tags
+colorscheme mango
 
