@@ -85,7 +85,7 @@ map <c-h> :History<CR>  " files history
 map <c-c> :History:<CR> " command history
 map <c-t> :Tags<CR>     " tags
 map <c-j> :BTags<CR>    " buffer tags
-map <c-l> :BLines<CR>   " Lines in the current buffer
+map <c-f> :BLines<CR>   " Lines in the current buffer
 
 " ### FZF COMMANDS
 " | Ag [PATTERN] | {ag}{5} search result (ALT-A to select all, ALT-D to deselect all) |
