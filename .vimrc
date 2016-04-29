@@ -117,7 +117,12 @@ Plug 'scrooloose/nerdtree' " A tree explorer
 Plug 'jistr/vim-nerdtree-tabs' " NERDTree and tabs fixes
 Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
 
-noremap <F6> :NERDTreeTabsToggle<CR> <c-w><c-p> :NERDTreeTabsFind<CR> "toggle and find file
+"toggle and find file
+noremap <F6> :NERDTreeTabsToggle<CR> <c-w><c-p> :NERDTreeTabsFind<CR>
+let g:NERDTreeWinSize = 40
+
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeShowBookmarks = 1
 
 " ## BUFFER LIST
 set hidden " hide modified buffers on change instead of closing them
@@ -176,7 +181,7 @@ nmap <silent> <A-Right> :wincmd l<CR>
 " # EDITING
 
 Plug 'sickill/vim-pasta'             " pasting with indentation
-Plug 'jiangmiao/auto-pairs'          " insert matching { [ ( ...
+" Plug 'jiangmiao/auto-pairs'          " insert matching { [ ( ... [BUG ! no ^ on letters with this plugin
 Plug 'godlygeek/tabular'             " align data in tables
 Plug 'jakobwesthoff/whitespacetrail' " removes whitespaces from end of lines
 Plug 'tomtom/tcomment_vim'           " comment / uncomment
@@ -197,6 +202,14 @@ set directory=~/.vim/swap//
 " ## CLIPBOARD
 set clipboard=unnamedplus "sets common clipboard for x11 & vim
 Plug 'junegunn/vim-peekaboo'
+
+" Select with Shift+Down / Shift+Up
+imap <S-Up> <Esc>vgk
+nmap <S-Up> <Esc>vgk
+vmap <S-Up> gk
+imap <S-Down> <Esc>vgj
+nmap <S-Down> <Esc>vgj
+vmap <S-Down> gj
 
 " # UNDO
 set undodir=~/.vim/undo//
@@ -449,8 +462,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled=1
 
 " ## ICONS
-Plug 'ryanoasis/vim-devicons'
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 11
+" Plug 'ryanoasis/vim-devicons'
+" set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 11
 
 " ## WINDOWS
 " changes windows size with num pag + and -
