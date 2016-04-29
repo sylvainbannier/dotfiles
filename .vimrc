@@ -119,8 +119,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
 
 "toggle and find file
 noremap <F6> :NERDTreeTabsToggle<CR> <c-w><c-p> :NERDTreeTabsFind<CR>
+inoremap <F6> <Esc>:NERDTreeTabsToggle<CR> <c-w><c-p> :NERDTreeTabsFind<CR>
 let g:NERDTreeWinSize = 40
-
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeShowBookmarks = 1
 
