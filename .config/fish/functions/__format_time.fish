@@ -1,0 +1,1 @@
+/home/syban/.config/fisherman/pure/__format_time.fish

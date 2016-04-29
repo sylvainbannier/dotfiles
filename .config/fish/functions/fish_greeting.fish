@@ -1,2 +1,1 @@
-function fish_greeting
-end
+/home/syban/.config/fisherman/pure/fish_greeting.fish
