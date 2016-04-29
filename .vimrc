@@ -274,7 +274,7 @@ Plug 'Wolfy87/vim-enmasse'           " search/replace in multiple files
 Plug 'tpope/vim-abolish'             " search/replace keeping case and other stuffs
 
 " ## AUTO COMPLETE
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 
 " ### YCM CUSTOM CONFIG
 let g:ycm_autoclose_preview_window_after_insertion = 1
