@@ -59,10 +59,10 @@ Plug 'rking/ag.vim' "file search based on ag
 " Highlight all occurrence of a selected word
 set ic " case insesitive search
 set hlsearch
-highlight Search  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
-highlight SpellBad 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
-highlight SyntasticError 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
-highlight Visual  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
+" highlight Search  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
+" highlight SpellBad 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+" highlight SyntasticError 	term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+" highlight Visual  ctermfg=Black	ctermbg=yellow	cterm=bold	guifg=#404040	gui=bold
 
 " ### AG CUSTOM MAPPINGS
 map <c-a> :Ag
@@ -86,6 +86,7 @@ map <c-c> :History:<CR>
 map <c-t> :Tags<CR>
 map <c-j> :BTags<CR>
 map <c-f> :BLines<CR>
+map <c-s> :Snippets<CR>
 
 " ### FZF COMMANDS
 " | Ag [PATTERN] | {ag}{5} search result (ALT-A to select all, ALT-D to deselect all) |
@@ -431,10 +432,20 @@ set number " adds line number to the current line
 Plug 'nathanaelkane/vim-indent-guides' "Show indent guides
 let g:indent_guides_enable_on_vim_startup = 1
 
+" ## custom colors for indents
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+
 Plug 'tyru/current-func-info.vim' " display current function
 
 " ## THEME
-Plug 'goatslacker/mango.vim' "colors
+Plug 'goatslacker/mango.vim'
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+" let g:solarized_termcolors=256
+" Plug 'altercation/vim-colors-solarized'
 
 " ## FONT
 if has("gui_running")
@@ -475,4 +486,5 @@ let g:airline#extensions#tabline#enabled=1
 call plug#end()
 
 colorscheme mango
+" colorscheme solarized
 

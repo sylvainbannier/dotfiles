@@ -1,3 +1,9 @@
+# configs for other utilities
+
+set -gx FZF_ALT_C_COMMAND 'ag --nocolor --ignore \'node_modules\' --ignore \'.git\' --ignore \'.svn\' --ignore \'*.swp\' --ignore \'*~\'  --ignore \'*/vendor/*\' --ignore \'*.min.js\' --ignore \'dist\' -g ""'
+set -gx FZF_DEFAULT_COMMAND 'ag --nocolor --ignore \'node_modules\' --ignore \'.git\' --ignore \'.svn\' --ignore \'*.swp\' --ignore \'*~\'  --ignore \'*/vendor/*\' --ignore \'*.min.js\' --ignore \'dist\' -g ""'
+set -gx TERM 'xterm-256color'
+
 # abbres
 
 alias o "gnome-open"
@@ -10,9 +16,10 @@ alias lll "ls -Alh --group-directories-first --time-style=long-iso"
 alias llt "ls -Alhtr --group-directories-first --time-style=long-iso"
 alias lld "ls -GAlht"
 alias encfs_syban "encfs $HOME/.encrypted $HOME/.decrypted"
-alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | percol | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
+alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | fzf | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
 alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
 alias cheatsheet-add-last-history "history | head -n 1 >> ~/doc/cheatsheet"
+abbr d "fasd -l | fzf --tac --tiebreak=index -q (commandline -b) | read -l fzf_last_select; [ \$fzf_last_select  ]; and commandline -rb 'cd '\$fzf_last_select"
 
 # GIT abbres
 abbr giunstage "git reset HEAD"
@@ -29,11 +36,11 @@ abbr gib "git branch"
 abbr gip "git push"
 
 # xrandr abbres
-abbr xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
-abbr xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --left-of eDP1"
-abbr xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1200 --primary --left-of eDP1"
-abbr xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --right-of eDP1"
-abbr xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1280x1024 --primary --left-of eDP1"
+alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800x600 --same-as eDP1"
+alias xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --left-of eDP1"
+alias xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1200 --primary --left-of eDP1"
+alias xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --right-of eDP1"
+alias xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1280x1024 --primary --left-of eDP1"
 
 # backup
 alias backup "duplicity --include ~/.decrypted --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://backuphost/backups/laptop"
@@ -57,7 +64,7 @@ alias mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
 abbr ssh_mysql "ssh -L 3306:localhost:3306 -fNg"
 
 # defaults for ag
-alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
+# alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
 
 # fixes ansi colors issues
 # alias less "less -R"
@@ -70,4 +77,8 @@ set -x JAVA_HOME "/usr/lib/jvm/java-7-openjdk-amd64"
 
 # GULP competion
 complete -c gulp -a "(gulp --tasks-simple)" -f
+
+set fisher_home ~/.local/share/fisherman
+set fisher_config ~/.config/fisherman
+source $fisher_home/config.fish
 
