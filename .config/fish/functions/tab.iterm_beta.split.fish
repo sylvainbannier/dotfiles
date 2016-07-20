@@ -1,0 +1,1 @@
+/home/syban/.config/fisherman/tab/functions/tab.iterm_beta.split.fish

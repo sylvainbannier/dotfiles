@@ -54,6 +54,7 @@ set wildignore+=*/log/*,*/logs/*
 " ## SEARCH
 Plug 'haya14busa/incsearch.vim'      " incremental search (usefull for regex)
 Plug 'rking/ag.vim' "file search based on ag
+Plug 'dyng/ctrlsf.vim' "file search with context
 
 " ### CUSTOM CONFIG
 " Highlight all occurrence of a selected word
@@ -182,13 +183,20 @@ nmap <silent> <A-Right> :wincmd l<CR>
 " # EDITING
 
 Plug 'sickill/vim-pasta'             " pasting with indentation
-" Plug 'jiangmiao/auto-pairs'          " insert matching { [ ( ... [BUG ! no ^ on letters with this plugin
+Plug 'Raimondi/delimitMate' "another auto pair alternative
+" let g:delimitMate_jump_expansion = 1
+" let g:delimitMate_balance_matchpairs = 1
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
 Plug 'godlygeek/tabular'             " align data in tables
 Plug 'jakobwesthoff/whitespacetrail' " removes whitespaces from end of lines
 Plug 'tomtom/tcomment_vim'           " comment / uncomment
 Plug 'tpope/vim-surround'            " work with surrounding tags, ' {...
 Plug 'editorconfig/editorconfig-vim' " load editorconfig file
 " Plug 'KabbAmine/zeavim.vim'        " search ZEAL documentation
+" Plug 'blindFS/vim-regionsyntax'    " enable syntax for specific region
+Plug 'easymotion/vim-easymotion'     " new moves based on character search
+map <Leader> <Plug>(easymotion-prefix)
 
 " ENCODING
 set encoding=utf8
@@ -197,8 +205,10 @@ set encoding=utf8
 " make vim put swap, backup and undo files in a special location instead of the working directory of the file being edited
 " http://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
 "set backupdir=~/.vim/backup// " can't keep backups because of this bug https://github.com/paulmillr/chokidar/issues/35
+set nobackup
 set nowritebackup
-set directory=~/.vim/swap//
+" set directory=~/.vim/swap//
+set noswapfile
 
 " ## CLIPBOARD
 set clipboard=unnamedplus "sets common clipboard for x11 & vim
@@ -226,7 +236,7 @@ let g:syntastic_aggregate_errors = 1
 
 " ## INDENT
 set tabstop=2     " tabs are at proper location
-set shiftwidth=2  " indenting is 4 spaces (even if its tabs)
+set shiftwidth=2  " indenting is 3 spaces (even if its tabs)
 set autoindent    " turns it on
 set smartindent   " does the right thing (mostly) in programs
 " use multiple of shiftwidth when shifting indent levels.
@@ -236,6 +246,8 @@ nnoremap <silent><TAB> >>
 nnoremap <silent><S-TAB> <<
 vnoremap <silent><TAB> >gv
 vnoremap <silent><S-TAB> <gv
+vmap <silent><TAB> >gv
+vmap <silent><S-TAB> <gv
 
 " # FILE TEMPLATES
 " Plug 'pgilad/vim-skeletons'          " files templates
@@ -251,24 +263,24 @@ Plug 'honza/vim-snippets' " base snippets library
 
 " ### ULTISNIPS CUSTOM CONFIG
 " Use enter to insert auto complete suggestion :
-let g:UltiSnipsExpandTrigger = "<nop>"
-let g:ulti_expand_or_jump_res = 0
-if !exists("*ExpandSnippetOrCarriageReturn")
-  function ExpandSnippetOrCarriageReturn()
-    let snippet = UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-      return snippet
-    else
-      return "\<CR>"
-    endif
-  endfunction
-endif
-inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>" "VIM trick - "<expr>" : evaluate expression before deciding mapping to apply
+" let g:UltiSnipsExpandTrigger = "<nop>"
+" let g:ulti_expand_or_jump_res = 0
+" if !exists("*ExpandSnippetOrCarriageReturn")
+"   function ExpandSnippetOrCarriageReturn()
+"     let snippet = UltiSnips#ExpandSnippetOrJump()
+"     if g:ulti_expand_or_jump_res > 0
+"       return snippet
+"     else
+"       return "\<CR>"
+"     endif
+"   endfunction
+" endif
+" inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>" "VIM trick - "<expr>" : evaluate expression before deciding mapping to apply
 
 let g:UltiSnipsJumpForwardTrigger="<c-b>" " jump to next placehodler in snippet
 let g:UltiSnipsJumpBackwardTrigger="<c-z>" " jump to previous placeholder
 
-let g:UltiSnipsEditSplit="vertical" " open ultisnipsEdit in a vertical splited window
+" let g:UltiSnipsEditSplit="vertical" " open ultisnipsEdit in a vertical splited window
 
 " ## REFACTORING
 Plug 'Wolfy87/vim-enmasse'           " search/replace in multiple files
@@ -354,18 +366,23 @@ let g:jsdoc_enable_es6 = 1 "allow arrow functions
 " | :JsDoc  | generates JSDoc for function on the line |
 
 " ## REACT
-Plug 'justinj/vim-react-snippets' " snippets
-Plug 'mxw/vim-jsx'                " Syntax
+Plug 'justinj/vim-react-snippets' " react snippets
+Plug 'alexbyk/vim-ultisnips-react' " eS6 react snippets
+Plug 'mlaursen/vim-react-snippets' " more react snippets
+Plug'mxw/vim-jsx'                " Syntax
 let g:jsx_ext_required = 0        " syntax and indent in .js files (not only jsx)
 
 " ## NODE
 Plug 'moll/vim-node' " detect extensionless node scripts (executables) via shebang and add gf for going to node_modules files
 
 " ## HTML
-Plug 'othree/html5.vim'                    " syntax
-Plug 'gregsexton/MatchTag'                 " higlight matching tags
-Plug 'mattn/emmet-vim'                     " fast html tags
-Plug 'chrisgillis/vim-bootstrap3-snippets' " Bootstrap snippets
+Plug 'othree/html5.vim'                       " syntax
+Plug 'gregsexton/MatchTag'                    " higlight matching tags
+Plug 'mattn/emmet-vim'                        " fast html tags
+Plug 'chrisgillis/vim-bootstrap3-snippets'    " Bootstrap snippets
+Plug 'briancollins/vim-jst'                   " Bootstrap snippets
+" au BufNewFile,BufRead *.ejs set filetype=html " sets ejs to html
+Plug 'nikvdp/ejs-syntax'
 
 " ## CSS/LESS/SASS
 Plug 'JulesWang/css.vim'

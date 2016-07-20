@@ -1,3 +1,43 @@
+# vim: set tabstop=2 shiftwidth=2 expandtab:
+
+snippet describe "describe test bloc" b
+describe("${1:My component}", () => {
+  $0
+});
+endsnippet
+
+snippet it "it test bloc" b
+it("${1:should do ...}", () => {
+  $0
+});
+endsnippet
+
+snippet react-component "React component" b
+const ${1:MyComponent} = React.createClass({
+  propTypes: { ${2} },
+  getInitialState() {},
+  render() {
+    return (<div>$0</div>);
+  }
+});
+endsnippet
+
+snippet react-proptype-function-required "React propType function" b
+  ${1:myProp}:React.PropTypes.func.isRequired
+  $0
+endsnippet
+
+snippet react-handle-event "react handle event" b
+/**
+ * @param {SyntheticEvent} event
+ * @returns {undefined}
+ */
+handle${1:Event}(event) {
+  event.preventDefault();
+  $0
+},
+endsnippet
+
 snippet sb-angular-ngroute "créé une nouvelle route dans un module existant"
 angular.module('${1:url}RouteModule',[ngRoute])
 .config(function($routeProvider, $locationProvider) {
@@ -139,4 +179,44 @@ endsnippet
 
 snippet cl "console log"
 console.log($0)
+endsnippet
+
+snippet fetch-json "html5 fetch json"
+fetch('${1:/data.json}')
+.then(function(response) {
+  return response.json()
+}).then(function(json) {
+  ${0}
+}).catch(function(ex) {
+  console.log('parsing failed', ex)
+})
+endsnippet
+
+snippet react-functionnal-component "pure fonctionnal component"
+const React = require('react');
+export default (props) => <div className="${1:my-component}">${0}</div>
+endsnippet
+
+snippet es6-export "ECMASCRIPT 6 export" b
+export default function() {
+  ${0}
+}
+endsnippet
+
+snippet react-getDefaultProps "before getInitialState" b
+getDefaultProps : function() {
+  ${0}
+}
+endsnippet
+
+snippet es6-import "import" b
+import defaultMember from "module-name";
+import * as name from "module-name";
+import { member } from "module-name";
+import { member as alias } from "module-name";
+import { member1 , member2 } from "module-name";
+import { member1 , member2 as alias2 , [...] } from "module-name";
+import defaultMember, { member [ , [...] ] } from "module-name";
+import defaultMember, * as name from "module-name";
+import "module-name";
 endsnippet

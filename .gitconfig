@@ -5,8 +5,16 @@
 	default = simple
 [core]
 	excludesfile = ~/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
 	co = checkout
 	br = branch
 	ci = commit
 	st = status
+	d = difftool
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[interactive]
+	diffFilter = diff-so-fancy | less --tabs=4 -RFX

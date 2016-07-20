@@ -49,9 +49,11 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
+bindsym Ctrl+Shift+Tab focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+bindsym Ctrl+Tab focus right
 
 # move focused window
 # bindsym $mod+Shift+j move left
@@ -92,43 +94,66 @@ bindsym $mod+q focus parent
 #bindsym $mod+d focus child
 
 # auto assign workspaces on output
-workspace term output eDP1
-workspace 1:chrome output eDP1
-workspace 2:ide output HDMI1
-workspace 3:web output HDMI1
-workspace 4:im output HDMI1
-workspace 5:mail output HDMI1
-workspace 6:notes output HDMI1
-workspace 7:specs output HDMI1
-workspace 8:files output HDMI1
-workspace 9:doc output eDP1
-workspace 10:perso output HDMI1
+#
+# those workspaces map the dev workflow
+workspace ²:run output eDP1
+bindsym $mod+twosuperior workspace ²:run
+bindsym $mod+Shift+twosuperior move container to workspace ²:run
 
-# switch to workspace
-bindsym $mod+twosuperior workspace term
-bindsym $mod+ampersand workspace 1:chrome
-bindsym $mod+eacute workspace 2:ide
-bindsym $mod+quotedbl workspace 3:web
-bindsym $mod+apostrophe workspace 4:im
-bindsym $mod+parenleft workspace 5:mail
-bindsym $mod+minus workspace 6:notes
-bindsym $mod+egrave workspace 7:specs
-bindsym $mod+underscore workspace 8:files
-bindsym $mod+ccedilla workspace 9:doc
+workspace 1:plan output eDP1
+bindsym $mod+ampersand workspace 1:plan
+bindsym $mod+Shift+ampersand move container to workspace 1:plan
+# assign [class="office"] 1:specs
+
+workspace 2:test output eDP1
+bindsym $mod+eacute workspace 2:test
+bindsym $mod+Shift+eacute move container to workspace 2:test
+
+workspace 3:dev output HDMI1
+bindsym $mod+quotedbl workspace 3:dev
+bindsym $mod+Shift+quotedbl move container to workspace 3:dev
+# assign [class="Eclipse"] 3:dev
+
+workspace 4:publish output eDP1
+bindsym $mod+apostrophe workspace 4:publish
+bindsym $mod+Shift+apostrophe move container to workspace 4:publish
+
+
+# those workspaces are for everything else
+workspace 5:help output eDP1
+bindsym $mod+parenleft workspace 5:help
+bindsym $mod+Shift+5 move container to workspace 5:help
+# assign [class="Firefox"] 3:web
+# assign [class="Vimperator"] 3:web
+assign [class="Zeal"] 5:help
+
+workspace 6:other output eDP1
+bindsym $mod+minus workspace 6:other
+bindsym $mod+Shift+minus move container to workspace 6:other
+
+workspace 7:monitor output eDP1
+bindsym $mod+egrave workspace 7:monitor
+bindsym $mod+Shift+egrave move container to workspace 7:monitor
+
+workspace 8:watch output eDP1
+bindsym $mod+underscore workspace 8:watch
+bindsym $mod+Shift+underscore move container to workspace 8:watch
+
+workspace 9:talk output eDP1
+bindsym $mod+ccedilla workspace 9:talk
+bindsym $mod+Shift+ccedilla move container to workspace 9:talk
+assign [class="Gmail"] 9:talk
+# assign [class="Thunderbird"] 9:talk
+# assign [class="Jitsi"] 9:talk
+assign [class="Slack"] 9:talk
+assign [class="Hangouts"] 9:talk
+assign [class="Buddy List"] 9:talk
+assign [class="Pidgin"] 9:talk
+
+workspace 10:perso output eDP1
 bindsym $mod+agrave workspace 10:perso
-
-# move focused container to workspace
-bindsym $mod+Shift+twosuperior move container to workspace term
-bindsym $mod+Shift+ampersand move container to workspace 1:chrome
-bindsym $mod+Shift+eacute move container to workspace 2:ide
-bindsym $mod+Shift+quotedbl move container to workspace 3:web
-bindsym $mod+Shift+apostrophe move container to workspace 4:im
-bindsym $mod+Shift+5 move container to workspace 5:mail
-bindsym $mod+Shift+minus move container to workspace 6:notes
-bindsym $mod+Shift+egrave move container to workspace 7:specs
-bindsym $mod+Shift+underscore move container to workspace 8:files
-bindsym $mod+Shift+ccedilla move container to workspace 9:doc
 bindsym $mod+Shift+agrave move container to workspace 10:perso
+assign [class="Google Keep"] 10:perso
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -203,20 +228,6 @@ bar {
         status_command i3status
 }
 
-# application classes assignement
-assign [class="Eclipse"] 2:ide
-assign [class="Firefox"] 3:web
-assign [class="Gmail"] 5:mail
-assign [class="Thunderbird"] 5:mail
-assign [class="Vimperator"] 3:web
-assign [class="Jitsi"] 4:im
-assign [class="Slack"] 4:im
-assign [class="Hangouts"] 4:im
-assign [class="Buddy List"] 4:im
-assign [class="Pidgin"] 4:im
-assign [class="Zeal"] 9:doc
-assign [class="Google Keep"] 10:perso
-assign [class="office"] 7:specs
 
 
 # apps shortcuts

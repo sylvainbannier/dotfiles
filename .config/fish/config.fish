@@ -44,6 +44,7 @@ alias xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mo
 
 # backup
 alias backup "duplicity --include ~/.decrypted --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://backuphost/backups/laptop"
+alias backup_local "duplicity --include ~/.decrypted --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ file:////home/syban/drive/backup"
 
 
 # colors
@@ -64,21 +65,22 @@ alias mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
 abbr ssh_mysql "ssh -L 3306:localhost:3306 -fNg"
 
 # defaults for ag
-# alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
+alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
 
 # fixes ansi colors issues
-# alias less "less -R"
+alias less "less -R"
 
-set -gx PATH ~/.npm-packages/bin ~/.go/bin $PATH
+set -gx PATH ~/.npm-packages/bin $PATH
+set -gx PATH ~/.go/bin $PATH
 set -gx NODE_PATH /home/syban/.npm-packages/lib/node_modules
 
-# set -x JAVA_HOME "/usr/lib/jvm/java-8-oracle"
-set -x JAVA_HOME "/usr/lib/jvm/java-7-openjdk-amd64"
+set -x JAVA_HOME "/usr/lib/jvm/java-8-oracle"
+# set -x JAVA_HOME "/usr/lib/jvm/java-7-openjdk-amd64"
 
 # GULP competion
 complete -c gulp -a "(gulp --tasks-simple)" -f
 
-set fisher_home ~/.local/share/fisherman
-set fisher_config ~/.config/fisherman
-source $fisher_home/config.fish
+# set fisher_home ~/.local/share/fisherman
+# set fisher_config ~/.config/fisherman
+# source $fisher_home/config.fish
 
