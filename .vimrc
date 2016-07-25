@@ -263,22 +263,23 @@ Plug 'honza/vim-snippets' " base snippets library
 
 " ### ULTISNIPS CUSTOM CONFIG
 " Use enter to insert auto complete suggestion :
-" let g:UltiSnipsExpandTrigger = "<nop>"
-" let g:ulti_expand_or_jump_res = 0
-" if !exists("*ExpandSnippetOrCarriageReturn")
-"   function ExpandSnippetOrCarriageReturn()
-"     let snippet = UltiSnips#ExpandSnippetOrJump()
-"     if g:ulti_expand_or_jump_res > 0
-"       return snippet
-"     else
-"       return "\<CR>"
-"     endif
-"   endfunction
-" endif
-" inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>" "VIM trick - "<expr>" : evaluate expression before deciding mapping to apply
+" (defaults to tab otherwise, which conflicts with indent mappings)
+" careful : this setting conflicts with delimate
+let g:UltiSnipsExpandTrigger="<nop>"
+let g:UltiSnipsJumpForwardTrigger="<tab>" " jump to next placehodler in snippet
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>" " jump to previous placeholder
+let g:ulti_expand_or_jump_res = 0
+function! <SID>ExpandSnippetOrReturn()
+  let snippet = UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res > 0
+    return snippet
+  else
+    return "\<C-Y>"
+  endif
+endfunction
+imap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "<Plug>delimitMateCR"
+"VIM trick - "<expr>" : evaluate expression before deciding mapping to apply
 
-let g:UltiSnipsJumpForwardTrigger="<c-b>" " jump to next placehodler in snippet
-let g:UltiSnipsJumpBackwardTrigger="<c-z>" " jump to previous placeholder
 
 " let g:UltiSnipsEditSplit="vertical" " open ultisnipsEdit in a vertical splited window
 
