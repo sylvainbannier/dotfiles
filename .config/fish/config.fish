@@ -43,8 +43,9 @@ alias xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1
 alias xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1280x1024 --primary --left-of eDP1"
 
 # backup
-alias backup "duplicity --include ~/.decrypted --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ scp://backuphost/backups/laptop"
-alias backup_local "duplicity --include ~/.decrypted --include ~/doc/cheatsheet --include ~/.vim/bundle/vim-notes/misc/notes/user --include ~/TODO --exclude '**' ~ file:////home/syban/drive/backup"
+set backup_src "--include ~/.decrypted --include ~/doc/cheatsheet --include ~/dotfiles --exclude '**'"
+abbr backup_ssh "duplicity $backup_src ~ scp://backuphost/backups/laptop"
+abbr backup_usb "duplicity $backup_src ~ file:///media/syban/cle/backup"
 
 
 # colors
