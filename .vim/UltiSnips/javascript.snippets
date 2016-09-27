@@ -1,5 +1,35 @@
 # vim: set tabstop=2 shiftwidth=2 expandtab:
 
+snippet react-pure-component "React pure component" b
+export const ${1:myComponent} = (props) => <div className="$1">$1$0</div>
+endsnippet
+
+snippet react-storybook-story "React storybook story" b
+storiesOf(\`${1:myComponent}\`, module)
+.add(\`${2:first state}\`, () => (
+  <$1>$0</$1>
+));
+endsnippet
+
+snippet react-jsx-condition-with-fragment "condition avec opérateur ternaire produisant différents éléments de même niveau" b
+{someCondition?
+  createFragment({
+    key1: <SomeJSXComponent/>,
+    key2: someVar
+  }):null
+}
+endsnippet
+
+snippet immutable-js-update-list-item-by-key "Update list item" b
+${1:list}.update(
+  $1.findIndex(function(item) {
+    return item.get(${2:"key_property"}) ===${3:"search_key"};
+  }), function(item) {
+    return item.set(${4: "value_property" },${5: "new value" });
+  }
+);
+endsnippet
+
 snippet describe "describe test bloc" b
 describe("${1:My component}", () => {
   $0

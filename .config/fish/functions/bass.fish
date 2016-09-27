@@ -1,0 +1,1 @@
+/home/syban/.config/fisherman/bass/functions/bass.fish

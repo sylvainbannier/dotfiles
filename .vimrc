@@ -48,7 +48,7 @@ set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignore+=*.min.*
 set wildignore+=*.swp,.lock,.DS_Store,._*,*~
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*,*.gem
-set wildignore+=*/tmp/*,*/dist/*,*/bower_components/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*/cache/*
+set wildignore+=*/tmp/*,*/dist/*,*/bower_components/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*/cache/*,*/target/*,*/build/*
 set wildignore+=*/log/*,*/logs/*
 
 " ## SEARCH
@@ -188,6 +188,7 @@ Plug 'Raimondi/delimitMate' "another auto pair alternative
 " let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
+Plug 'vim-scripts/vis'               " enables bloc operations ex : :'<,'>B s/pattern/replace/g
 Plug 'godlygeek/tabular'             " align data in tables
 Plug 'jakobwesthoff/whitespacetrail' " removes whitespaces from end of lines
 Plug 'tomtom/tcomment_vim'           " comment / uncomment
@@ -197,6 +198,11 @@ Plug 'editorconfig/editorconfig-vim' " load editorconfig file
 " Plug 'blindFS/vim-regionsyntax'    " enable syntax for specific region
 Plug 'easymotion/vim-easymotion'     " new moves based on character search
 map <Leader> <Plug>(easymotion-prefix)
+
+" adds new line in normal mode
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
 
 " ENCODING
 set encoding=utf8
@@ -335,8 +341,11 @@ Plug 'neo4j-contrib/cypher-vim-syntax' " Neo4j cypher syntax
 " ### JS CUSTOM CONFIG
 let g:syntastic_javascript_checkers = ['eslint']
 
-Plug 'othree/yajs.vim', { 'for': 'javascript' }         " JS syntax,
-Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " Indent from pangloss, works with yajs
+Plug 'isRuslan/vim-es6' "curently in test
+" those two pllugins used in conjonction works great two (I keep them during
+" vim-es6 test)
+" Plug 'othree/yajs.vim', { 'for': 'javascript' }         " JS syntax,
+" Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " Indent from pangloss, works with yajs
 Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' }  " autoformat JS
 Plug 'othree/jspc.vim'                                  " Paramters completion
 Plug 'othree/javascript-libraries-syntax.vim'           " extends syntax for with jQuery,backbone,etc.
@@ -395,13 +404,14 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'sass'] }
 Plug 'groenewege/vim-less', { 'for': 'less' }
 
 " ## MARKDOWN
+Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax' " Syntax
 let g:markdown_fenced_languages = [
       \ 'html',
       \ 'javascript', 'js=javascript', 'json=javascript',
       \ 'sass',
       \ ]
-Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
+" Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
 "Plug 'vim-voom/VOoM'" 2 pane editor for markdown, asciidoc and others
 
 " ## PHP
@@ -500,6 +510,26 @@ let g:airline#extensions#tabline#enabled=1
 "   map <kMinus> :10winc <<CR>
 "   nmap <silent> <C-Right> :10winc ><CR>
 " endif
+" Plug 'vim-scripts/ZoomWin' "allow zoom toogle of windows
+Plug 'regedarek/ZoomWin' "allow zoom toogle of windows
+
+map <silent> <c-w><c-b> :ZoomWin<CR>
+
+" Read-only .doc through antiword
+autocmd BufReadPre *.doc silent set ro
+autocmd BufReadPost *.doc silent %!antiword "%"
+
+" Read-only odt/odp through odt2txt
+autocmd BufReadPre *.odt,*.odp silent set ro
+autocmd BufReadPost *.odt,*.odp silent %!odt2txt "%"
+
+" Read-only pdf through pdftotext
+autocmd BufReadPre *.pdf silent set ro
+autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+
+" Read-only rtf through unrtf
+autocmd BufReadPre *.rtf silent set ro
+autocmd BufReadPost *.rtf silent %!unrtf --text
 
 call plug#end()
 

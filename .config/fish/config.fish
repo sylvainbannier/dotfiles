@@ -1,7 +1,7 @@
 # configs for other utilities
 
-set -gx FZF_ALT_C_COMMAND 'ag --nocolor --ignore \'node_modules\' --ignore \'.git\' --ignore \'.svn\' --ignore \'*.swp\' --ignore \'*~\'  --ignore \'*/vendor/*\' --ignore \'*.min.js\' --ignore \'dist\' -g ""'
-set -gx FZF_DEFAULT_COMMAND 'ag --nocolor --ignore \'node_modules\' --ignore \'.git\' --ignore \'.svn\' --ignore \'*.swp\' --ignore \'*~\'  --ignore \'*/vendor/*\' --ignore \'*.min.js\' --ignore \'dist\' -g ""'
+set -gx FZF_ALT_C_COMMAND 'ag --nocolor --ignore \'node_modules\' --ignore \'.git\' --ignore \'.svn\' --ignore \'*.swp\' --ignore \'*~\'  --ignore \'*/vendor/*\' --ignore \'*.min.*\' --ignore \'dist\' --ignore \'*/target/*\' --ignore \'*/build/*\' -g ""'
+set -gx FZF_DEFAULT_COMMAND 'ag --nocolor --ignore \'node_modules\' --ignore \'.git\' --ignore \'.svn\' --ignore \'*.swp\' --ignore \'*~\'  --ignore \'*/vendor/*\' --ignore \'*.min.*\' --ignore \'dist\' --ignore \'*/target/*\' --ignore \'*/build/*\' -g ""'
 set -gx TERM 'xterm-256color'
 
 # abbres
@@ -20,6 +20,7 @@ alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | fzf | sed \'s/^[^:]*:\s*//g\' 
 alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
 alias cheatsheet-add-last-history "history | head -n 1 >> ~/doc/cheatsheet"
 abbr d "fasd -l | fzf --tac --tiebreak=index -q (commandline -b) | read -l fzf_last_select; [ \$fzf_last_select  ]; and commandline -rb 'cd '\$fzf_last_select"
+abbr f "grep --line-buffered --color=never -r [a-zA-Z] * | sort | uniq | fzf --preview=\"echo {} | cut -d':' -f1|xargs pygmentize -g\" | cut -d':' -f1 | xargs pygmentize -g"
 
 # GIT abbres
 abbr giunstage "git reset HEAD"
@@ -40,7 +41,6 @@ alias xrandr-pres "xrandr --output eDP1 --mode 800x600 --output HDMI1 --mode 800
 alias xrandr-office "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1080 --primary --left-of eDP1"
 alias xrandr-home "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1920x1200 --primary --left-of eDP1"
 alias xrandr-airpl "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1680x1050 --primary --right-of eDP1"
-alias xrandr-airpl-thi "xrandr --output eDP1 --mode 1600x900 --output HDMI1 --mode 1280x1024 --primary --left-of eDP1"
 
 # backup
 set backup_src "--include ~/.decrypted --include ~/doc/cheatsheet --include ~/dotfiles --exclude '**'"
@@ -66,7 +66,9 @@ alias mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
 abbr ssh_mysql "ssh -L 3306:localhost:3306 -fNg"
 
 # defaults for ag
-alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.js' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
+alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.*' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
+
+alias sag "sag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.*' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20"
 
 # fixes ansi colors issues
 alias less "less -R"
@@ -85,3 +87,17 @@ complete -c gulp -a "(gulp --tasks-simple)" -f
 # set fisher_config ~/.config/fisherman
 # source $fisher_home/config.fish
 
+function fuck -d "Correct your previous console command"
+    set -l exit_code $status
+    set -x TF_ALIAS fuck
+    set -l fucked_up_command $history[1]
+    thefuck $fucked_up_command | read -l unfucked_command
+    if [ "$unfucked_command" != "" ]
+        eval $unfucked_command
+        if test $exit_code -ne 0
+            history --delete $fucked_up_command
+            history --merge ^ /dev/null
+            return 0
+        end
+    end
+end

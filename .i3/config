@@ -248,5 +248,5 @@ bindsym $mod+w exec chromium-browser
 
 # WM_CLASS(STRING) = "Google-chrome (/tmp/.com.google.Chrome.LGl7BD)", "Google-chrome"
 # for_window [class="^Google-chrome \(/tmp/\.com\.google.*$"] floating enable
-# for_window [instance="Google-chrome"] floating enable
+for_window [instance="gcolor2"] floating enable
 
