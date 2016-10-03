@@ -1,0 +1,1 @@
+/home/syban/.config/fisherman/menu/menu.fish
