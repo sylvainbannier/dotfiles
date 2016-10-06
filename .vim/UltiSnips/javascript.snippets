@@ -25,6 +25,15 @@ $0
 endsnippet
 
 global !p
+
+def generateFakes(args):
+  result = ""
+  argList = args.split(",")
+  for arg in argList:
+    dep = "  " + arg.strip() + ": faker.lorem.words,\n"
+    result = result + dep
+  return result.rstrip()
+
 def generateProptypes(args):
   result = ""
   argList = args.split(",")
@@ -33,11 +42,11 @@ def generateProptypes(args):
     result = result + dep
   return result.rstrip()
 
-def generateDivs(args):
+def generateDivs(args,comp):
   result = ""
   argList = args.split(",")
   for arg in argList:
-    div = "  <div className={cn(mod) + '__" + arg.strip() + "'}>{" + arg.strip() + "}</div>\n"
+    div = "  <div className='" + comp + "__" + arg.strip() + "'>{" + arg.strip() + "}</div>\n"
     result = result + div
   return result.rstrip()
 
@@ -55,13 +64,30 @@ import React from 'react';
 //import './style.css';
 
 /* styles :
+.$1 {}
 `!p snip.rv = generateStyles(t[2],t[1])`
 */
 
-const cn = (modifier, base = '$1') => modifier?base + '--' + modifier:base;
+/* stories :
+import React from 'react';
+import { storiesOf, action, linkTo } from '@kadira/storybook';
+import faker from 'faker';
+import { $1 } from './$1'
 
-const ${1:MyComponent} = ({ mod, ${2:prop1} }) => <div className={cn(mod)}>
-`!p snip.rv = generateDivs(t[2])`
+const minimal$1 = {
+}
+const complete$1 = {
+  ...minimal$1,
+`!p snip.rv = generateFakes(t[2])`
+}
+storiesOf(`$1`, module)
+.add(`$1`, () => <div> <$1 {...complete$1}/> <img src={require('./screenshots/$1.png')}/>
+.add(`$1 minimal`, () => <div> <$1 {...minimal$1}/> <img src={require('./screenshots/$1-minimal.png')}/>
+</div>)
+*/
+
+const ${1:MyComponent} = ({ mod, ${2:prop1} }) => <div className="$1">
+`!p snip.rv = generateDivs(t[2],t[1])`
 $0
 </div>;
 
