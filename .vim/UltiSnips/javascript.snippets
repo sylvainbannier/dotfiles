@@ -41,8 +41,9 @@ def getPropsFromFlow(args):
       primitives = ['boolean','number','string', 'any', 'array']
       if t in primitives :
         prop['type'] = t
+      elif re.search('\(' + '|'.join(primitives) + '\)\[\]',t) is not None:
+        prop['type'] = 'array'
       elif re.search('\( *\) *=> *\{ *\}',t) is not None:
-        # match functions
         prop['type'] = 'func'
       else:
         prop['type'] = t + ' pick one : ' + '|'.join(primitives) + '|Array<type>|()=>{}|{}'
@@ -64,7 +65,7 @@ def generateFakes(args):
     elif prop['type'] == 'boolean':
       value = 'faker.random.boolean()'
     elif prop['type'] == 'array':
-      value = '[]'
+      value = 'Array(faker.random.number({max:10})).fill("").map((e,k) => faker.lorem.words())'
     elif prop['type'] == 'func':
       value = 'action("' + prop['name'] + '")'
     else:
