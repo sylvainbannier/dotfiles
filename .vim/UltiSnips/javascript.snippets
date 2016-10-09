@@ -33,7 +33,6 @@ def getPropsFromFlow(args):
   for arg in argList:
     m = re.search('([^:? ]+)(\?)? *: *(.+)',arg.strip())
     if m is not None:
-      # prop = {'name':"",'required':False,'type':""}
       prop = {}
       prop['name'] = m.group(1)
       prop['required'] = (m.group(2) != '?')
@@ -50,33 +49,26 @@ def getPropsFromFlow(args):
       result.append(prop)
   return result
 
-# TODO generate data based on flow types :
-# func => use action
-# string => use fakerjs
-# array => generate multiple values
-def generateFakes(args):
+def generateFakes(args,required):
   result = ""
   for prop in getPropsFromFlow(args):
-    required = '?' if (prop['required']) else ''
-    if prop['type'] == 'string':
-      value = 'faker.lorem.words()'
-    elif prop['type'] == 'number':
-      value = 'faker.random.number()'
-    elif prop['type'] == 'boolean':
-      value = 'faker.random.boolean()'
-    elif prop['type'] == 'array':
-      value = 'Array(faker.random.number({max:10})).fill("").map((e,k) => faker.lorem.words())'
-    elif prop['type'] == 'func':
-      value = 'action("' + prop['name'] + '")'
-    else:
-      value = '{}'
-    dep = "  " + prop['name'] + ": "+ value + ",\n"
-    result = result + dep
+    if prop['required'] == required:
+      if prop['type'] == 'string':
+        value = 'faker.lorem.words()'
+      elif prop['type'] == 'number':
+        value = 'faker.random.number()'
+      elif prop['type'] == 'boolean':
+        value = 'faker.random.boolean()'
+      elif prop['type'] == 'array':
+        value = 'Array(faker.random.number({max:10})).fill("").map((e,k) => faker.lorem.words())'
+      elif prop['type'] == 'func':
+        value = 'action("' + prop['name'] + '")'
+      else:
+        value = '{}'
+      dep = "  " + prop['name'] + ": "+ value + ",\n"
+      result = result + dep
   return result.rstrip()
 
-# TODO generate data based on flow types
-# type => type
-# ? => ! is required
 def generateProptypes(args):
   result = ""
   for prop in getPropsFromFlow(args):
@@ -98,15 +90,18 @@ def generateProptypes(args):
   return result.rstrip()
 
 # TODO generate data based on flow types
-# func => link + onClick + label
-# ? => condition on display
 # generate methods for func
 # generate maps for arrays
 # generate array items for arrays
 def generateJSX(args,comp):
   result = ""
   for prop in getPropsFromFlow(args):
-    jsx = "<div className='" + comp + "__" + prop['name'] + "'>{" + prop['name'] + "}</div>"
+    if prop['type'] == 'func':
+      jsx = "<a className='" + comp + "__" + prop['name'] + "' onClick={" + prop['name'] + "}>" + prop['name'] + "</a>"
+    elif prop['type'] == 'array':
+      jsx = "<div className='" + comp + "__" + prop['name'] + "'>{" + prop['name'] + ".map((e,k) => <div className='" + comp + "__" + prop['name'] + "Item' key={k}>{e}</div> )}</div>"
+    else:
+      jsx = "<div className='" + comp + "__" + prop['name'] + "'>{" + prop['name'] + "}</div>"
     jsx = '{' + prop['name'] + ' && ' + jsx + '}' if (not prop['required']) else jsx
     result = result + "  " + jsx + "\n"
   return result.rstrip()
@@ -134,43 +129,51 @@ endglobal
 snippet react-component-stateless "React stateless component"
 /* @flow */
 import React from 'react';
-//import './style.css';
 
+// import './style.css';
 /* styles :
 .$1 {}
 `!p snip.rv = generateStyles(t[2],t[1])`
 */
 
-/* stories :
-import React from 'react';
+// stories :
+// Comment the following 2 lines if you move story to another file
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import faker from 'faker';
-import { $1 } from '.'
+const story = () => {
+  // Uncomment those lines if you move stories to another file
+  // import React from 'react';
+  // import { storiesOf, action, linkTo } from '@kadira/storybook';
+  // import faker from 'faker';
+  // import { $1 } from '.'
 
-const minimal$1 = {
+  const minimal$1 = {
+  `!p snip.rv = generateFakes(t[2],True)`
+  }
+  const complete$1 = {
+    ...minimal$1,
+  `!p snip.rv = generateFakes(t[2],False)`
+  }
+  storiesOf('$1', module)
+  .add('$1', () => <div> <$1 {...complete$1}/>
+  {/* <img src={require('./screenshot.png')}/> */}
+  </div>)
+  .add('$1 minimal', () => <div> <$1 {...minimal$1}/>
+  {/* <img src={require('./screenshot--minimal.png')}/> */}
+  </div>)
 }
-const complete$1 = {
-  ...minimal$1,
-`!p snip.rv = generateFakes(t[2])`
-}
-storiesOf('$1', module)
-.add('$1', () => <div> <$1 {...complete$1}/> <img src={require('./screenshot.png')}/></div>)
-.add('$1 minimal', () => <div> <$1 {...minimal$1}/> <img src={require('./screenshot--minimal.png')}/></div>)
-*/
+export {story}
 
-const ${1:MyComponent} = (
-{
+const ${1:MyComponent} = ({
 `!p snip.rv = generateFunctionArgs(t[2])`
 } : {
 ${2:prop1?:string}
-} :
-) => <div className="$1">
+}) => <div className="$1">
 `!p snip.rv = generateJSX(t[2],t[1])`
 $0
 </div>;
 
 $1.propTypes = {
-  mod: React.PropTypes.string,
 `!p snip.rv = generateProptypes(t[2])`
 };
 
