@@ -36,7 +36,7 @@ def getPropsFromFlow(args):
       # prop = {'name':"",'required':False,'type':""}
       prop = {}
       prop['name'] = m.group(1)
-      prop['required'] = (m.group(2) == '?')
+      prop['required'] = (m.group(2) != '?')
       t = m.group(3)
       primitives = ['boolean','number','string', 'any', 'array']
       if t in primitives :
@@ -107,7 +107,7 @@ def generateJSX(args,comp):
   result = ""
   for prop in getPropsFromFlow(args):
     jsx = "<div className='" + comp + "__" + prop['name'] + "'>{" + prop['name'] + "}</div>"
-    jsx = '{' + prop['name'] + ' && ' + jsx + '}' if (prop['required']) else jsx
+    jsx = '{' + prop['name'] + ' && ' + jsx + '}' if (not prop['required']) else jsx
     result = result + "  " + jsx + "\n"
   return result.rstrip()
 
