@@ -106,8 +106,9 @@ def generateProptypes(args):
 def generateJSX(args,comp):
   result = ""
   for prop in getPropsFromFlow(args):
-    div = "  <div className='" + comp + "__" + prop['name'] + "'>{" + prop['name'] + "}</div>\n"
-    result = result + div
+    jsx = "<div className='" + comp + "__" + prop['name'] + "'>{" + prop['name'] + "}</div>"
+    jsx = '{' + prop['name'] + ' && ' + jsx + '}' if (prop['required']) else jsx
+    result = result + "  " + jsx + "\n"
   return result.rstrip()
 
 # TODO
