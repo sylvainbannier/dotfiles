@@ -80,7 +80,20 @@ def generateFakes(args):
 def generateProptypes(args):
   result = ""
   for prop in getPropsFromFlow(args):
-    dep = "  " + prop['name'] + ": React.PropTypes.string,\n"
+    required = '.isRequired' if (prop['required']) else ''
+    if prop['type'] == 'string':
+      value = 'string'
+    elif prop['type'] == 'number':
+      value = 'number'
+    elif prop['type'] == 'boolean':
+      value = 'bool'
+    elif prop['type'] == 'array':
+      value = 'array'
+    elif prop['type'] == 'func':
+      value = 'func'
+    else:
+      value = 'node'
+    dep = "  " + prop['name'] + ": React.PropTypes." + value + required + ",\n"
     result = result + dep
   return result.rstrip()
 
