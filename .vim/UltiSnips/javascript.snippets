@@ -26,22 +26,31 @@ endsnippet
 
 global !p
 
+# TODO generate data based on flow types :
+# func => use action
+# string => use fakerjs
 def generateFakes(args):
   result = ""
   argList = args.split(",")
   for arg in argList:
-    dep = "  " + arg.strip() + ": faker.lorem.words,\n"
+    dep = "  " + arg.strip() + ": faker.lorem.words(),\n"
     result = result + dep
   return result.rstrip()
 
+# TODO generate data based on flow types
+# type => faker type
+# ? => ! is required
 def generateProptypes(args):
   result = ""
   argList = args.split(",")
   for arg in argList:
-    dep = "  " + arg.strip() + ": React.propTypes.string,\n"
+    dep = "  " + arg.strip() + ": React.PropTypes.string,\n"
     result = result + dep
   return result.rstrip()
 
+# TODO generate data based on flow types
+# func => link + onClick + label
+# ? => condition on display
 def generateDivs(args,comp):
   result = ""
   argList = args.split(",")
@@ -72,7 +81,7 @@ import React from 'react';
 import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import faker from 'faker';
-import { $1 } from './$1'
+import { $1 } from '.'
 
 const minimal$1 = {
 }
@@ -80,10 +89,9 @@ const complete$1 = {
   ...minimal$1,
 `!p snip.rv = generateFakes(t[2])`
 }
-storiesOf(`$1`, module)
-.add(`$1`, () => <div> <$1 {...complete$1}/> <img src={require('./screenshots/$1.png')}/>
-.add(`$1 minimal`, () => <div> <$1 {...minimal$1}/> <img src={require('./screenshots/$1-minimal.png')}/>
-</div>)
+storiesOf('$1', module)
+.add('$1', () => <div> <$1 {...complete$1}/> <img src={require('./screenshot.png')}/></div>)
+.add('$1 minimal', () => <div> <$1 {...minimal$1}/> <img src={require('./screenshot--minimal.png')}/></div>)
 */
 
 const ${1:MyComponent} = ({ mod, ${2:prop1} }) => <div className="$1">

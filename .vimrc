@@ -385,6 +385,9 @@ let g:jsx_ext_required = 0        " syntax and indent in .js files (not only jsx
 " ## NODE
 Plug 'moll/vim-node' " detect extensionless node scripts (executables) via shebang and add gf for going to node_modules files
 
+" ## FLOW
+" Plug 'flowtype/vim-flow' "facebook flow syntax
+
 " ## HTML
 Plug 'othree/html5.vim'                       " syntax
 Plug 'gregsexton/MatchTag'                    " higlight matching tags
