@@ -91,8 +91,6 @@ def generateProptypes(args):
 
 # TODO generate data based on flow types
 # generate methods for func
-# generate maps for arrays
-# generate array items for arrays
 def generateJSX(args,comp):
   result = ""
   for prop in getPropsFromFlow(args):
@@ -120,12 +118,15 @@ def generateStyles(args,comp):
 def generateFunctionArgs(args):
   result = ""
   for prop in getPropsFromFlow(args):
-    arg = prop['name'] + ",\n"
+    arg = prop['name'] + ", "
     result = result + arg
   return result.rstrip()
 
 endglobal
 
+# TODO:
+# generate inline styles ? for layout ?
+# generate tests too (snapshot, screenshot)
 snippet react-component-stateless "React stateless component"
 /* @flow */
 import React from 'react';
@@ -136,37 +137,35 @@ import React from 'react';
 `!p snip.rv = generateStyles(t[2],t[1])`
 */
 
-// stories :
-// Comment the following 2 lines if you move story to another file
-import { storiesOf, action, linkTo } from '@kadira/storybook';
+// './fixture.js'
+import { action, linkTo } from '@kadira/storybook';
 import faker from 'faker';
-const story = () => {
-  // Uncomment those lines if you move stories to another file
-  // import React from 'react';
-  // import { storiesOf, action, linkTo } from '@kadira/storybook';
-  // import faker from 'faker';
-  // import { $1 } from '.'
 
-  const minimal$1 = {
-  `!p snip.rv = generateFakes(t[2],True)`
-  }
-  const complete$1 = {
-    ...minimal$1,
-  `!p snip.rv = generateFakes(t[2],False)`
-  }
-  storiesOf('$1', module)
-  .add('$1', () => <div> <$1 {...complete$1}/>
-  {/* <img src={require('./screenshot.png')}/> */}
-  </div>)
-  .add('$1 minimal', () => <div> <$1 {...minimal$1}/>
-  {/* <img src={require('./screenshot--minimal.png')}/> */}
-  </div>)
+export const required = {
+`!p snip.rv = generateFakes(t[2],True)`
 }
-export {story}
 
-const ${1:MyComponent} = ({
-`!p snip.rv = generateFunctionArgs(t[2])`
-} : {
+export const optional = {
+  ...required,
+`!p snip.rv = generateFakes(t[2],False)`
+}
+
+// './story.js'
+import React from 'react';
+import { storiesOf } from '@kadira/storybook';
+import { required, optional } from './fixtures.js'
+import { $1 } from '.'
+
+storiesOf('$1', module)
+.add('$1', () => <div> <$1 {...optional}/>
+{/* <img src={require('./screenshot.png')}/> */}
+</div>)
+.add('$1 required', () => <div> <$1 {...required}/>
+{/* <img src={require('./screenshot--required.png')}/> */}
+</div>)
+
+// './index.js'
+const ${1:MyComponent} = ({ `!p snip.rv = generateFunctionArgs(t[2])` } : {
 ${2:prop1?:string}
 }) => <div className="$1">
 `!p snip.rv = generateJSX(t[2],t[1])`

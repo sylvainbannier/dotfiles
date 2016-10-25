@@ -317,6 +317,7 @@ let g:ycm_semantic_triggers = {
   \ 'lua' : ['.', ':'],
   \ 'erlang' : [':'],
   \ }
+let g:ycm_filetype_blacklist = {} "enables YCM form pandoc, text, etc...
 
 " ## SPELLCHECK
 Plug 'dpelle/vim-LanguageTool' "Grammar check
@@ -376,10 +377,9 @@ let g:jsdoc_enable_es6 = 1 "allow arrow functions
 " | :JsDoc  | generates JSDoc for function on the line |
 
 " ## REACT
-Plug 'justinj/vim-react-snippets' " react snippets
-Plug 'alexbyk/vim-ultisnips-react' " eS6 react snippets
-Plug 'mlaursen/vim-react-snippets' " more react snippets
-Plug'mxw/vim-jsx'                " Syntax
+Plug 'epilande/vim-es2015-snippets'
+Plug 'epilande/vim-react-snippets'
+Plug 'mxw/vim-jsx'                " Syntax
 let g:jsx_ext_required = 0        " syntax and indent in .js files (not only jsx)
 
 " ## NODE
@@ -414,8 +414,8 @@ let g:markdown_fenced_languages = [
       \ 'javascript', 'js=javascript', 'json=javascript',
       \ 'sass',
       \ ]
-" Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
-"Plug 'vim-voom/VOoM'" 2 pane editor for markdown, asciidoc and others
+Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \X => uncheck
+" Plug 'vim-voom/VOoM'" 2 pane editor for markdown, asciidoc and others
 
 " ## PHP
 
