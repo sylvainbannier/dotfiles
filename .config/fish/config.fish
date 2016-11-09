@@ -3,6 +3,7 @@
 set -gx FZF_ALT_C_COMMAND 'ag --nocolor --ignore \'node_modules\' --ignore \'.git\' --ignore \'.svn\' --ignore \'*.swp\' --ignore \'*~\'  --ignore \'*/vendor/*\' --ignore \'*.min.*\' --ignore \'dist\' --ignore \'*/target/*\' --ignore \'*/build/*\' -g ""'
 set -gx FZF_DEFAULT_COMMAND 'ag --nocolor --ignore \'node_modules\' --ignore \'.git\' --ignore \'.svn\' --ignore \'*.swp\' --ignore \'*~\'  --ignore \'*/vendor/*\' --ignore \'*.min.*\' --ignore \'dist\' --ignore \'*/target/*\' --ignore \'*/build/*\' -g ""'
 set -gx TERM 'xterm-256color'
+set -gx NO_AT_BRIDGE 1
 
 # abbres
 
@@ -16,7 +17,7 @@ alias lll "ls -Alh --group-directories-first --time-style=long-iso"
 alias llt "ls -Alhtr --group-directories-first --time-style=long-iso"
 alias lld "ls -GAlht"
 alias encfs_syban "encfs $HOME/.encrypted $HOME/.decrypted"
-alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | fzf | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | parcellite'"
+alias cheatsheet "fish -c 'cat ~/doc/cheatsheet | fzf | sed \'s/^[^:]*:\s*//g\' | tr -d \'\\n\' | clipit'"
 alias cheatsheet-edit "fish -c 'vim ~/doc/cheatsheet'"
 alias cheatsheet-add-last-history "history | head -n 1 >> ~/doc/cheatsheet"
 abbr d "fasd -l | fzf --tac --tiebreak=index -q (commandline -b) | read -l fzf_last_select; [ \$fzf_last_select  ]; and commandline -rb 'cd '\$fzf_last_select"

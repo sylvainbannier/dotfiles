@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+:set nocompatible              " be iMproved, required
 
 " # MOUSE INTEGRATION
 " @see http://usevim.com/2012/05/16/mouse/
@@ -87,6 +87,7 @@ map <c-c> :History:<CR>
 map <c-t> :Tags<CR>
 map <c-j> :BTags<CR>
 map <c-f> :BLines<CR>
+map <c-l> :Lines<CR>
 map <c-s> :Snippets<CR>
 
 " ### FZF COMMANDS
@@ -202,7 +203,6 @@ map <Leader> <Plug>(easymotion-prefix)
 " adds new line in normal mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
-
 
 " ENCODING
 set encoding=utf8
@@ -490,12 +490,16 @@ if has("gui_running")
 endif
 
 " ## CURSOR
-" different cursor shape in insert mode
-silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+" set cursor to block in gnome > 3.16 in normal mode
 if has("autocmd")
-  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+  au InsertEnter,InsertChange *
+    \ if v:insertmode == 'i' |
+    \   silent execute '!echo -ne "\e[6 q"' | redraw! |
+    \ elseif v:insertmode == 'r' |
+    \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+    \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
 " ## STATUS LINE

@@ -1,0 +1,20 @@
+snippet holiday "Holiday" b
+leaves holiday "${1:name}"	${2:yyyy-mm-dd}
+endsnippet
+
+snippet resource "Resource" b
+resource ${1:resourceid} "${2:name}"
+endsnippet
+
+snippet task "Task" b
+task ${1:taskid} "${2:Task name}" {
+  effort ${3:1d}
+  length ${3:1d}
+  allocate ${4:resourceid}
+  depends !${5:taskid} {
+    gapduration: ${6:Od}
+    onstart
+    onend
+  }
+}
+endsnippet
