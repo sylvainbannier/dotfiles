@@ -545,30 +545,19 @@ call plug#end()
 colorscheme mango
 " colorscheme solarized
 
-function! TextEnableCodeSnip() abort
-  let ft=toupper('css')
-  let group='textGroup'.ft
+function! EnableStyledComponentsCSS() abort
   if exists('b:current_syntax')
     let s:current_syntax=b:current_syntax
-    " Remove current syntax definition, as some syntax files (e.g. cpp.vim)
-    " do nothing if b:current_syntax is defined.
     unlet b:current_syntax
   endif
-  execute 'syntax include @'.group.' syntax/css.vim'
-  try
-    execute 'syntax include @'.group.' after/syntax/css.vim'
-  catch
-  endtry
+  syntax include @CSS syntax/css.vim
   if exists('s:current_syntax')
     let b:current_syntax=s:current_syntax
   else
     unlet b:current_syntax
   endif
-  execute 'syntax region textSnip'.ft.'
-  \ matchgroup=SpecialComment
-  \ start=/styled.*`/ end="`"
-  \ contains=@'.group
+  syntax region textSnipcss matchgroup=StyledComponents start=/styled.*`/ end="`" contains=@CSS
 endfunction
 
-autocmd FileType javascript.jsx call TextEnableCodeSnip()
+autocmd FileType javascript.jsx call EnableStyledComponentsCSS()
 
