@@ -1,5 +1,13 @@
 # vim: set tabstop=2 shiftwidth=2 expandtab:
 
+snippet scmp "Styled Component" b
+styled.${1:div}\`
+&{
+  $0
+}
+\`
+endsnippet
+
 snippet react-pure-component "React pure component" b
 export const ${1:myComponent} = (props) => <div className="$1">$1$0</div>
 endsnippet

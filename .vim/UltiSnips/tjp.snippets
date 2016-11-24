@@ -18,3 +18,16 @@ task ${1:taskid} "${2:Task name}" {
   }
 }
 endsnippet
+
+snippet journalentry "journalentry"
+journalentry ${1:2016-11-15} "${2:title}" {
+  author ${3:author}
+  alert ${4:red}
+  summary -8<-
+    ${5:summary}
+  ->8-
+  details -8<-
+    ${0}
+  ->8-
+}
+endsnippet

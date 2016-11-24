@@ -48,7 +48,7 @@ set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignore+=*.min.*
 set wildignore+=*.swp,.lock,.DS_Store,._*,*~
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*,*.gem
-set wildignore+=*/tmp/*,*/dist/*,*/bower_components/*,*/node_modules/*,*/coverage/*,*/phonegap/*,*/cache/*,*/target/*,*/build/*
+set wildignore+=*/tmp/*,*/dist/*,*/bower_components/*,*/node_modules/*,yarn.lock,*/coverage/*,*/phonegap/*,*/cache/*,*/target/*,*/build/*
 set wildignore+=*/log/*,*/logs/*
 
 " ## SEARCH
@@ -382,6 +382,8 @@ Plug 'epilande/vim-react-snippets'
 Plug 'mxw/vim-jsx'                " Syntax
 let g:jsx_ext_required = 0        " syntax and indent in .js files (not only jsx)
 
+
+"
 " ## NODE
 Plug 'moll/vim-node' " detect extensionless node scripts (executables) via shebang and add gf for going to node_modules files
 
@@ -542,4 +544,31 @@ call plug#end()
 
 colorscheme mango
 " colorscheme solarized
+
+function! TextEnableCodeSnip() abort
+  let ft=toupper('css')
+  let group='textGroup'.ft
+  if exists('b:current_syntax')
+    let s:current_syntax=b:current_syntax
+    " Remove current syntax definition, as some syntax files (e.g. cpp.vim)
+    " do nothing if b:current_syntax is defined.
+    unlet b:current_syntax
+  endif
+  execute 'syntax include @'.group.' syntax/css.vim'
+  try
+    execute 'syntax include @'.group.' after/syntax/css.vim'
+  catch
+  endtry
+  if exists('s:current_syntax')
+    let b:current_syntax=s:current_syntax
+  else
+    unlet b:current_syntax
+  endif
+  execute 'syntax region textSnip'.ft.'
+  \ matchgroup=SpecialComment
+  \ start=/styled.*`/ end="`"
+  \ contains=@'.group
+endfunction
+
+autocmd FileType javascript.jsx call TextEnableCodeSnip()
 

@@ -222,7 +222,7 @@ bindsym XF86AudioMute exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '0%'"
 # require xbacklight package
 bindsym XF86MonBrightnessDown exec xbacklight -steps 1 -time 0 -dec 5
 bindsym XF86MonBrightnessUp exec xbacklight -steps 1 -time 0 -inc 5
-bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
+# bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # move workspaces and containers
 bindsym $mod+x move workspace to output right

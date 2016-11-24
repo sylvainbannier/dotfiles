@@ -67,9 +67,9 @@ alias mysql "mysql --tee=mysql_(date +%F_%I-%M-%S).log"
 abbr ssh_mysql "ssh -L 3306:localhost:3306 -fNg"
 
 # defaults for ag
-alias ag "ag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.*' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
+alias ag "ag -S --ignore '*jquery*.js' --ignore 'yarn.lock' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.*' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20 --pager 'less -RX'"
 
-alias sag "sag -S --ignore '*jquery*.js' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.*' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20"
+alias sag "sag -S --ignore '*jquery*.js' --ignore 'yarn.lock' --ignore 'yui' --ignore '.git' --ignore '.svn' --ignore '*.swp' --ignore '*~' --ignore 'tiny_mce*' --ignore 'modernizr*' --ignore '*/vendor/*' --ignore '*.min.*' --ignore '*/plugins/*' --ignore '*.sql' --max-count 20"
 
 # fixes ansi colors issues
 alias less "less -R"
