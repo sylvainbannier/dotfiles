@@ -48,7 +48,8 @@ set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignore+=*.min.*
 set wildignore+=*.swp,.lock,.DS_Store,._*,*~
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*,*.gem
-set wildignore+=*/tmp/*,*/dist/*,*/bower_components/*,*/node_modules/*,yarn.lock,*/coverage/*,*/phonegap/*,*/cache/*,*/target/*,*/build/*
+" set wildignore+=*/tmp/*,*/dist/*,*/bower_components/*,*/node_modules/*,yarn.lock,*/coverage/*,*/phonegap/*,*/cache/*,*/target/*,*/build/*
+set wildignore+=*/tmp/*,*/dist/*,*/bower_components/*,node_modules/**,yarn.lock,*/coverage/*,*/phonegap/*,*/cache/*,*/target/*,*/build/*
 set wildignore+=*/log/*,*/logs/*
 
 " ## SEARCH
@@ -378,7 +379,8 @@ let g:jsdoc_enable_es6 = 1 "allow arrow functions
 
 " ## REACT
 Plug 'epilande/vim-es2015-snippets'
-Plug 'epilande/vim-react-snippets'
+" Plug 'epilande/vim-react-snippets'
+Plug 'mlaursen/vim-react-snippets'
 Plug 'mxw/vim-jsx'                " Syntax
 let g:jsx_ext_required = 0        " syntax and indent in .js files (not only jsx)
 

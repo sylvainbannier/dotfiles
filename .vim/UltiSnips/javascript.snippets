@@ -99,7 +99,7 @@ def generateProptypes(args):
 
 # TODO generate data based on flow types
 # generate methods for func
-def generateJSX(args,comp):
+def generateBEMJSX(args,comp):
   result = ""
   for prop in getPropsFromFlow(args):
     if prop['type'] == 'func':
@@ -108,6 +108,21 @@ def generateJSX(args,comp):
       jsx = "<div className='" + comp + "__" + prop['name'] + "'>{" + prop['name'] + ".map((e,k) => <div className='" + comp + "__" + prop['name'] + "Item' key={k}>{e}</div> )}</div>"
     else:
       jsx = "<div className='" + comp + "__" + prop['name'] + "'>{" + prop['name'] + "}</div>"
+    jsx = '{' + prop['name'] + ' && ' + jsx + '}' if (not prop['required']) else jsx
+    result = result + "  " + jsx + "\n"
+  return result.rstrip()
+
+# TODO generate data based on flow types
+# generate methods for func
+def generateJSX(args,comp):
+  result = ""
+  for prop in getPropsFromFlow(args):
+    if prop['type'] == 'func':
+      jsx = "<div onClick={" + prop['name'] + "}>" + prop['name'] + "</div>"
+    elif prop['type'] == 'array':
+      jsx = "<div>{" + prop['name'] + ".map((e,k) => <div key={k}>{e}</div> )}</div>"
+    else:
+      jsx = "<div>{" + prop['name'] + "}</div>"
     jsx = '{' + prop['name'] + ' && ' + jsx + '}' if (not prop['required']) else jsx
     result = result + "  " + jsx + "\n"
   return result.rstrip()
@@ -133,9 +148,8 @@ def generateFunctionArgs(args):
 endglobal
 
 # TODO:
-# generate inline styles ? for layout ?
 # generate tests too (snapshot, screenshot)
-snippet react-component-stateless "React stateless component"
+snippet react-component-stateless-bem "React stateless component with BEM"
 /* @flow */
 import React from 'react';
 
@@ -145,7 +159,7 @@ import React from 'react';
 `!p snip.rv = generateStyles(t[2],t[1])`
 */
 
-// './fixture.js'
+// './fixtures.js'
 import { action, linkTo } from '@kadira/storybook';
 import faker from 'faker';
 
@@ -176,7 +190,7 @@ storiesOf('$1', module)
 const ${1:MyComponent} = ({ `!p snip.rv = generateFunctionArgs(t[2])` } : {
 ${2:prop1?:string}
 }) => <div className="$1">
-`!p snip.rv = generateJSX(t[2],t[1])`
+`!p snip.rv = generateBEMJSX(t[2],t[1])`
 $0
 </div>;
 
@@ -185,6 +199,55 @@ $1.propTypes = {
 };
 
 export { $1 };
+endsnippet
+
+snippet react-component-stateless-styled "React stateless component with styled-components"
+/* @flow */
+import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div\`
+
+\`
+
+const ${1:MyComponent} = ({ `!p snip.rv = generateFunctionArgs(t[2])` } : {
+${2:prop1?:string}
+}) => <Wrapper>
+`!p snip.rv = generateJSX(t[2],t[1])`
+</Wrapper>;
+
+$1.propTypes = {
+`!p snip.rv = generateProptypes(t[2])`
+};
+
+export { $1 };
+
+$0
+
+// move this part to './story.js'
+import React from 'react';
+import { action, linkTo } from '@kadira/storybook';
+import { storiesOf } from '@kadira/storybook';
+import faker from 'faker';
+import { $1 } from '.'
+
+export const required = {
+`!p snip.rv = generateFakes(t[2],True)`
+}
+
+export const optional = {
+  ...required,
+`!p snip.rv = generateFakes(t[2],False)`
+}
+
+storiesOf('$3', module)
+.add('$1', () => <div> <$1 {...optional}/>
+{/* <img src={require('./screenshot.png')}/> */}
+</div>)
+.add('$1 required', () => <div> <$1 {...required}/>
+{/* <img src={require('./screenshot--required.png')}/> */}
+</div>)
+
 endsnippet
 
 snippet react-jsx-condition-with-fragment "condition avec opérateur ternaire produisant différents éléments de même niveau" b
