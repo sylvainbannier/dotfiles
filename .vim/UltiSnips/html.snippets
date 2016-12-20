@@ -1,5 +1,61 @@
 # eZ Publish
 
+snippet ez-background-from-content "Background image from content" b
+style="background-image: url('{{ ez_field_value(content, 'image').uri }}');"
+endsnippet
+
+snippet ez-raw-image-url "Raw imageurl from content" b
+{{ ez_field_value(content, 'image').uri }}
+endsnippet
+
+snippet ez-translate "Translate text" b
+{{ 'Contact us!'|trans }}
+endsnippet
+
+snippet render-esi-with-controller "renders a template with controller"
+{{ render_esi(controller('app.controller.menu:getChildNodesAction', {
+    template: 'pagelayout_header.html.twig'
+})) }}
+endsnippet
+
+snippet render-view-type "render with a specific view type" b
+{{ render_esi(controller('ez_content:viewAction', {
+    locationId: location.id,
+    contentId: content.id,
+    viewType: 'blog_post'
+})) }}
+endsnippet
+
+snippet ez-render-field "Render field" b
+{{ ez_render_field(content, 'description') }}
+endsnippet
+
+snippet ez-render-image-field "render image field" b
+{{ ez_render_field(post, 'image', {
+   parameters: {
+       alias: 'blog_post_line',
+       class: 'img-responsive img-rounded'
+   }
+}) }}
+endsnippet
+
+snippet ez-loop-render "render items in loop" b
+{% if ${1:blog_posts}|length() > 0 %}
+    {% for ${2:item} in $1 %}
+        {{ render_esi(controller('ez_content:viewAction', {
+            locationId: $2.contentInfo.mainLocationId,
+            contentId: $e.contentInfo.id,
+            viewType: '${3:line}'
+        })) }}
+    {% endfor %}
+{% endif %}
+{% if $1.haveToPaginate() %}
+    {{ pagerfanta($1, 'twitter_bootstrap3_translated', {
+        routeName: location
+    }) }}
+{% endif %}
+endsnippet
+
 # https://raw.githubusercontent.com/dspe/ez5_cheatsheet/master/eng/templates.md
 
 snippet eZ-Retrieve-a-view-parameter "eZ Retrieve a view parameter"

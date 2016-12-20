@@ -7,3 +7,5 @@ tags
 target
 build
 yarn.lock
+cache
+logs

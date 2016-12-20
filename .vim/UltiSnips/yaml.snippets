@@ -1,5 +1,61 @@
 # ez
 
+snippet ez-view-type "new view type configuration with controller and params" b
+blog_post:
+    random_blog_posts:
+        controller: ez_query:ContentQueryAction
+        params:
+            random_posts_limit: '%app.blog_post.random_posts_limit%'
+            query:
+                query_type: AppBundle:LatestContent
+                parameters:
+                    location_id: '%app.home.blog_location_id%'
+                assign_results_to: random_blog_posts
+        template: parts\random_blog_posts.html.twig
+        match:
+            Identifier\ContentType: [blog_post]
+endsnippet
+
+snippet ez-view-match "Match cirteria for views" b
+Id\Content                   	 //Matches the ID number of the Content item
+Id\ContentType               	 //Matches the ID number of the Content Type that the Content item is an instance of
+Id\ContentTypeGroup          	 //Matches the ID number of the group containing the Content Type that the Content item is an instance of
+Id\Location                  	 //Matches the ID number of a Location.  In the case of a Content item, matched against the main location.
+Id\ParentContentType         	 //Matches the ID number of the parent Content Type.  In the case of a Content item, matched against the main location.
+Id\ParentLocation            	 //Matches the ID number of the parent Location.  In the case of a Content item, matched against the main location.
+Id\Remote                    	 //Matches the remoteId of either content or Location, depending on the object matched.
+Id\Section                   	 //Matches the ID number of the Section that the Content item belongs to.
+Id\State                     	 //Not supported yet.
+Identifier\ContentType       	 //Matches the identifier of the Content Type that the Content item is an instance of.
+Identifier\ParentContentType 	 //Matches the identifier of the parent Content Type.  In the case of a Content item, matched against the main Location.
+Identifier\Section           	 //Matches the identifier of the Section that the Content item belongs to.
+Identifier\State             	 //Not supported yet.
+Depth                        	 //Matches the depth of the Location. The depth of a top level Location is 1.
+UrlAlias                     	 //Matches the virtual URL of the Location (i.e. /My/Content-Uri).  Important: Matches when the UrlAlias of the location starts with the value passed.  Not supported for Content (aka content_view).
+endsnippet
+
+
+snippet ez-global-parameter "global parameter available in twig" b
+twig:
+    globals:
+        contactLocationId: %app.layout.contact_location_id%
+# then add `app.layout.contact_location_id: 60` in parameters
+endsnippet
+
+snippet ez-view-parameter "enable paramter available in content view" b
+content_view:
+    full:
+        home_page:
+            template: full\home_page.html.twig
+            params:
+                blog_location_id: '%app.home.blog_location_id%'
+                gallery_location_id: '%app.home.gallery_location_id%'
+                contact_location_id: '%app.layout.contact_location_id%'
+            match:
+                Identifier\ContentType: [home_page]
+# then add `app.layout.contact_location_id: 60` in parameters
+endsnippet
+
 snippet ez-location-view-content-type-ruleset "eZ location view ruleset based on content type identifier"
 # A simple unique key for your matching ruleset
 $1_$2:

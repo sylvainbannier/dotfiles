@@ -200,6 +200,7 @@ Plug 'editorconfig/editorconfig-vim' " load editorconfig file
 " Plug 'blindFS/vim-regionsyntax'    " enable syntax for specific region
 Plug 'easymotion/vim-easymotion'     " new moves based on character search
 map <Leader> <Plug>(easymotion-prefix)
+Plug 'unblevable/quick-scope'        " hightlight f/F characters
 
 " adds new line in normal mode
 nmap <S-Enter> O<Esc>
@@ -383,6 +384,7 @@ Plug 'epilande/vim-es2015-snippets'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'mxw/vim-jsx'                " Syntax
 let g:jsx_ext_required = 0        " syntax and indent in .js files (not only jsx)
+" Plug 'fleischie/vim-styled-components' " React styled-components support
 
 
 "
@@ -425,7 +427,8 @@ Plug 'vitalk/vim-simple-todo' "simple todo list \i => adds a toto \x => checks \
 
 " ### SYNTAX
 Plug 'StanAngeloff/php.vim', { 'for': 'php' } " Syntax
-Plug 'evidens/vim-twig'                       " twig template
+Plug 'lumiliet/vim-twig'                      " twig template
+au BufRead,BufNewFile *.twig set filetype=html.twig
 
 let php_sql_query=1
 let php_htmlInStrings=1

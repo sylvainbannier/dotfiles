@@ -137,3 +137,7 @@ export NO_AT_BRIDGE=1
 
 
 
+
+# tabtab source for yarn package
+# uninstall by removing these lines or running `tabtab uninstall yarn`
+[ -f /home/syban/.config/yarn/global/node_modules/tabtab/.completions/yarn.bash ] && . /home/syban/.config/yarn/global/node_modules/tabtab/.completions/yarn.bash

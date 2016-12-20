@@ -1,11 +1,85 @@
 # vim: set tabstop=2 shiftwidth=2 expandtab:
+snippet react-redux-inject-specific-props "Inject todos of a specific user depending on props, and inject props.userId into the action" b
+
+import * as actionCreators from './actionCreators'
+
+function mapStateToProps(state) {
+  return { todos: state.todos }
+}
+
+function mergeProps(stateProps, dispatchProps, ownProps) {
+  return Object.assign({}, ownProps, {
+    todos: stateProps.todos[ownProps.userId],
+    addTodo: (text) => dispatchProps.addTodo(ownProps.userId, text)
+  })
+}
+
+export default connect(mapStateToProps, actionCreators, mergeProps)(TodoApp)
+
+endsnippet
+
+
+
+snippet react-router-match "React router match" b
+<Match ${3:exactly} pattern="${1:/path/:param}" component={${2:Component}} />$0
+endsnippet
+
+snippet react-router-miss "React router miss" b
+<Miss component={${1:NoMatch}}/>$0
+endsnippet
+
+snippet React-router-link "React router link" b
+<Link to="${1:/path}">$0</Link>
+endsnippet
+
+snippet React-router-link-subpath "React router link to subpath" b
+<Link to={\`${pathname}${1:/path}\` }>$0</Link>
+endsnippet
+
+snippet react-router-link-children-function "Children function for full control" b
+<Link to="/courses">{
+  ({isActive, location, href, onClick, transition}) =>
+    <RaisedButton label="Courses" onClick={onClick} primary={isActive} href={href} />
+}</Link>
+endsnippet
+
+snippet react-router-nomatch "React router nomatch" b
+const NoMatch = ({ location }) => (
+  <div>
+    <h2>Whoops</h2>
+    <p>Sorry but {location.pathname} didn’t match any pages</p>
+  </div>
+)
+endsnippet
+
+snippet react-router-page "React router page" b
+const ${1:PageComponent} = ({ pathname, pattern, params }) => (
+  $0
+)
+endsnippet
+
+snippet react-router-import-page "React router import page" b
+import { Match, Miss, Link } from 'react-router'
+endsnippet
+
+snippet react-router-app "React router App" b
+import { BrowserRouter, Match, Miss, Link } from 'react-router'
+const App = () => (
+  <BrowserRouter>
+    // Match, Miss, Link...
+    $0
+  </BrowserRouter>
+)
+endsnippet
 
 snippet scmp "Styled Component" b
-styled.${1:div}\`
-&{
+styled.${1:div}\`&{
   $0
-}
-\`
+}\`
+endsnippet
+
+snippet styled-component-import "Styled-component import" b
+import styled, {ThemeProvider} from 'styled-components';
 endsnippet
 
 snippet react-pure-component "React pure component" b
@@ -206,9 +280,9 @@ snippet react-component-stateless-styled "React stateless component with styled-
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div\`
-
-\`
+const Wrapper = styled.div\`&{
+  width:100%;
+}\`
 
 const ${1:MyComponent} = ({ `!p snip.rv = generateFunctionArgs(t[2])` } : {
 ${2:prop1?:string}
@@ -240,7 +314,7 @@ export const optional = {
 `!p snip.rv = generateFakes(t[2],False)`
 }
 
-storiesOf('$3', module)
+storiesOf('${3:$1}', module)
 .add('$1', () => <div> <$1 {...optional}/>
 {/* <img src={require('./screenshot.png')}/> */}
 </div>)
@@ -248,6 +322,12 @@ storiesOf('$3', module)
 {/* <img src={require('./screenshot--required.png')}/> */}
 </div>)
 
+endsnippet
+
+snippet react-styled-component "React Styled Component" b
+const ${1:StyledComponent} = styled.${2:div}\`&{
+  $0
+}\`
 endsnippet
 
 snippet react-jsx-condition-with-fragment "condition avec opérateur ternaire produisant différents éléments de même niveau" b
