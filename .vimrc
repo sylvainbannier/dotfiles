@@ -57,6 +57,8 @@ Plug 'haya14busa/incsearch.vim'      " incremental search (usefull for regex)
 Plug 'rking/ag.vim' "file search based on ag
 Plug 'dyng/ctrlsf.vim' "file search with context
 
+" nmap<C-F>f <Plug>CtrSFPrompt
+
 " ### CUSTOM CONFIG
 " Highlight all occurrence of a selected word
 set ic " case insesitive search
@@ -85,7 +87,7 @@ Plug 'junegunn/fzf.vim'
 map <c-p> :Files<CR>
 map <c-h> :History<CR>
 map <c-c> :History:<CR>
-map <c-t> :Tags<CR>
+" map <c-t> :Tags<CR>
 map <c-j> :BTags<CR>
 map <c-f> :BLines<CR>
 map <c-l> :Lines<CR>
@@ -566,3 +568,5 @@ endfunction
 
 autocmd FileType javascript.jsx call EnableStyledComponentsCSS()
 
+command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
+    \ | diffthis | wincmd p | diffthis

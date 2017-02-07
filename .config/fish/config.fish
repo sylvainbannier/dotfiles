@@ -76,8 +76,9 @@ alias less "less -R"
 
 set -gx PATH ~/.npm-packages/bin $PATH
 set -gx PATH ~/.go/bin $PATH
-set -gx PATH ~/.go/bin $PATH
 set -gx PATH ~/.config/yarn/global/node_modules/.bin $PATH
+set -gx PATH ~/.cargo/bin $PATH
+
 set -gx NODE_PATH /home/syban/.npm-packages/lib/node_modules
 
 set -x JAVA_HOME "/usr/lib/jvm/java-8-oracle"

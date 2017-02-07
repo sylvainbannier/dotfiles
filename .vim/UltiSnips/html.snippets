@@ -1,5 +1,38 @@
 # eZ Publish
 
+snippet ez-relation-list-loop "loop through relation list" b
+{% for contentId in ez_field_value(content,'${1:field}').destinationContentIds %}
+    <div class="$1__item">
+        {{ render( controller( "ez_content:viewAction", {'contentId': contentId, 'viewType': ${2:line}} ) ) }}
+    </div>
+{% endfor %}
+endsnippet
+
+snippet ez-render-field-BEM "Render field with BEM" b
+{% if not ez_is_field_empty( ${3:content}, "${1:field_identifier}" ) %}
+    <div class="${2:component}__$1">{{ ez_render_field($3, '$1') }}</div>
+{% endif %}
+$0
+endsnippet
+
+snippet ez-render-relation "render relation field with custom template" b
+{% for contentId in ez_field_value(${3:content},'${1:field}').destinationContentIds %}
+    {{ render( controller( "ez_content:viewAction", {'contentId': contentId, 'viewType': '${2:view}', 'noLayout': 1} ) ) }}
+{% endfor %}
+endsnippet
+
+snippet ez-loop-if-defined-and-not-emtpy "loop if defined and not empty" b
+{% if ${1:item_array} is defined and $1 is not empty %}
+    {% for ${2:item} in $1 %}
+        <li><a href="{{ path($2) }}">{{ ez_content_name($2.contentinfo) }}</a></li>
+    {% endfor %}
+{% endif %}
+endsnippet
+
+snippet ez-image-asset "Insert image asset" b
+    <img src="{{ asset('${1:assets/images/image.png}') }}" />
+endsnippet
+
 snippet ez-background-from-content "Background image from content" b
 style="background-image: url('{{ ez_field_value(content, 'image').uri }}');"
 endsnippet
@@ -9,16 +42,16 @@ snippet ez-raw-image-url "Raw imageurl from content" b
 endsnippet
 
 snippet ez-translate "Translate text" b
-{{ 'Contact us!'|trans }}
+{{ '${1:text}'|trans }}
 endsnippet
 
-snippet render-esi-with-controller "renders a template with controller"
+snippet ez-render-esi-with-controller "renders a template with controller"
 {{ render_esi(controller('app.controller.menu:getChildNodesAction', {
     template: 'pagelayout_header.html.twig'
 })) }}
 endsnippet
 
-snippet render-view-type "render with a specific view type" b
+snippet ez-render-view-type "render with a specific view type" b
 {{ render_esi(controller('ez_content:viewAction', {
     locationId: location.id,
     contentId: content.id,
@@ -27,14 +60,14 @@ snippet render-view-type "render with a specific view type" b
 endsnippet
 
 snippet ez-render-field "Render field" b
-{{ ez_render_field(content, 'description') }}
+{{ ez_render_field(${2:content}, '${1:field}') }}
 endsnippet
 
 snippet ez-render-image-field "render image field" b
-{{ ez_render_field(post, 'image', {
+{{ ez_render_field(${3:content}, '${1:image_field}', {
    parameters: {
-       alias: 'blog_post_line',
-       class: 'img-responsive img-rounded'
+       alias: '${2:alias}',
+       class: '$1'
    }
 }) }}
 endsnippet
@@ -44,7 +77,7 @@ snippet ez-loop-render "render items in loop" b
     {% for ${2:item} in $1 %}
         {{ render_esi(controller('ez_content:viewAction', {
             locationId: $2.contentInfo.mainLocationId,
-            contentId: $e.contentInfo.id,
+            contentId: $2.contentInfo.id,
             viewType: '${3:line}'
         })) }}
     {% endfor %}
@@ -81,10 +114,6 @@ endsnippet
 
 snippet eZ-Get-a-FieldType "eZ Get a FieldType"
 {{ content.getField( 'url' ).value.link }}
-endsnippet
-
-snippet ez-render-field "render field"
-{{ ez_render_field( content, '${2:field_identifier}' ) }}
 endsnippet
 
 snippet ez-field-value "render field"
@@ -192,27 +221,27 @@ snippet ezpublish.siteaccess "ezpublish.siteaccess"
 ezpublish.siteaccess
 endsnippet
 
-snippet ezpublish.requestedUriString "ezpublish.requestedUriString"
+snippet ez-requestedUriString "ezpublish.requestedUriString"
 ezpublish.requestedUriString
 endsnippet
 
-snippet ezpublish.systemUriString "ezpublish.systemUriString"
+snippet ez-systemUriString "ezpublish.systemUriString"
 ezpublish.systemUriString
 endsnippet
 
-snippet ezpublish.viewParameters "ezpublish.viewParameters"
+snippet ez-viewParameters "ezpublish.viewParameters"
 ezpublish.viewParameters
 endsnippet
 
-snippet ezpublish.viewParametersString "ezpublish.viewParametersString"
+snippet ez-viewParametersString "ezpublish.viewParametersString"
 ezpublish.viewParametersString
 endsnippet
 
-snippet ezpublish.siteName "ezpublish.siteName"
+snippet ez-siteName "ezpublish.siteName"
 ezpublish.siteName
 endsnippet
 
-snippet ezpublish.legacy "ezpublish.legacy"
+snippet ez-legacy "ezpublish.legacy"
 ezpublish.legacy
 endsnippet
 

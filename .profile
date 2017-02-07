@@ -26,3 +26,5 @@ if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
 fi
 
 PIDGINLANG=fr
+
+export PATH="$HOME/.cargo/bin:$PATH"
