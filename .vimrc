@@ -198,7 +198,7 @@ Plug 'jakobwesthoff/whitespacetrail' " removes whitespaces from end of lines
 Plug 'tomtom/tcomment_vim'           " comment / uncomment
 Plug 'tpope/vim-surround'            " work with surrounding tags, ' {...
 Plug 'editorconfig/editorconfig-vim' " load editorconfig file
-" Plug 'KabbAmine/zeavim.vim'        " search ZEAL documentation
+Plug 'KabbAmine/zeavim.vim'        " search ZEAL documentation
 " Plug 'blindFS/vim-regionsyntax'    " enable syntax for specific region
 Plug 'easymotion/vim-easymotion'     " new moves based on character search
 map <Leader> <Plug>(easymotion-prefix)

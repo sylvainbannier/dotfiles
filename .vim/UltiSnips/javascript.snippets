@@ -1,4 +1,28 @@
 # vim: set tabstop=2 shiftwidth=2 expandtab:
+
+snippet react-import "React import" b
+import React from 'react';
+endsnippet
+
+snippet react-router-v4-route-render "React router route render" b
+<Route exact path="/:routeId" render={({match:{
+isExact,
+params,
+path,
+url
+}}) =>
+<div>
+  {console.log(isExact,params,path,url)}
+</div>
+}/>
+endsnippet
+
+snippet react-router-v4-route-component "React router route component" b
+<Route exact path="/:routeId" component={MyComp}/>
+endsnippet
+
+
+
 snippet react-redux-inject-specific-props "Inject todos of a specific user depending on props, and inject props.userId into the action" b
 
 import * as actionCreators from './actionCreators'
