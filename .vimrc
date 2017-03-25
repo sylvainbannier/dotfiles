@@ -186,6 +186,7 @@ nmap <silent> <A-Right> :wincmd l<CR>
 
 " # EDITING
 
+Plug 'tpope/vim-repeat'              " use repeat with plugins
 Plug 'sickill/vim-pasta'             " pasting with indentation
 Plug 'Raimondi/delimitMate' "another auto pair alternative
 " let g:delimitMate_jump_expansion = 1
