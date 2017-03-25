@@ -386,7 +386,7 @@ Plug 'epilande/vim-es2015-snippets'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'mxw/vim-jsx'                " Syntax
 let g:jsx_ext_required = 0        " syntax and indent in .js files (not only jsx)
-" Plug 'fleischie/vim-styled-components' " React styled-components support
+Plug 'fleischie/vim-styled-components' " React styled-components support
 
 
 "
@@ -552,21 +552,25 @@ call plug#end()
 colorscheme mango
 " colorscheme solarized
 
-function! EnableStyledComponentsCSS() abort
-  if exists('b:current_syntax')
-    let s:current_syntax=b:current_syntax
-    unlet b:current_syntax
-  endif
-  syntax include @CSS syntax/css.vim
-  if exists('s:current_syntax')
-    let b:current_syntax=s:current_syntax
-  else
-    unlet b:current_syntax
-  endif
-  syntax region textSnipcss matchgroup=StyledComponents start=/styled.*`/ end="`" contains=@CSS
-endfunction
+" function! EnableStyledComponentsCSS() abort
+"   if exists('b:current_syntax')
+"     let s:current_syntax=b:current_syntax
+"     unlet b:current_syntax
+"   endif
+"   syntax include @CSS syntax/css.vim
+"   if exists('s:current_syntax')
+"     let b:current_syntax=s:current_syntax
+"   else
+"     unlet b:current_syntax
+"   endif
+"   syntax region textSnipcss matchgroup=StyledComponents start=/styled.*`/ end="`" contains=@CSS
+" endfunction
 
-autocmd FileType javascript.jsx call EnableStyledComponentsCSS()
+" autocmd FileType javascript.jsx call EnableStyledComponentsCSS()
 
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
     \ | diffthis | wincmd p | diffthis
+
+" auto reads from disk on buffer change
+set autoread
+autocmd FocusGained * checktime
