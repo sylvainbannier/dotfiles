@@ -88,7 +88,7 @@ map <c-p> :Files<CR>
 map <c-h> :History<CR>
 map <c-c> :History:<CR>
 " map <c-t> :Tags<CR>
-map <c-j> :BTags<CR>
+" map <c-j> :BTags<CR>
 map <c-f> :BLines<CR>
 map <c-l> :Lines<CR>
 map <c-s> :Snippets<CR>
@@ -240,10 +240,22 @@ Plug 'mbbill/undotree' "visualize undo tree
 " ## SYNTAX
 syntax on
 
-Plug 'scrooloose/syntastic'
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_aggregate_errors = 1
+" Plug 'scrooloose/syntastic'
+" let g:syntastic_error_symbol = '✗'
+" let g:syntastic_warning_symbol = '⚠'
+" let g:syntastic_aggregate_errors = 1
+
+Plug 'w0rp/ale' "syntastic alternative with async
+let g:ale_linters = {
+\   'javascript': ['eslint','flow'],
+\}
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_keep_list_window_open = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+nmap <silent> <C-k> <Plug>(ale_next_wrap)
+nmap <silent> <C-j> <Plug>(ale_previous_wrap)
+
 
 " ## INDENT
 set tabstop=2     " tabs are at proper location
@@ -300,6 +312,7 @@ Plug 'tpope/vim-abolish'             " search/replace keeping case and other stu
 
 " ## AUTO COMPLETE
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }  " Autocomplete make sure to follow installs steps https://github.com/Valloric/YouCompleteMe
 
 " ### YCM CUSTOM CONFIG
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -345,16 +358,17 @@ Plug 'neo4j-contrib/cypher-vim-syntax' " Neo4j cypher syntax
 " ## JAVASCRIPT
 
 " ### JS CUSTOM CONFIG
-let g:syntastic_javascript_checkers = ['eslint']
-
-Plug 'isRuslan/vim-es6' "curently in test
+" let g:syntastic_javascript_checkers = ['eslint'] # not needed as I use
+" vim-ale
+Plug 'pangloss/vim-javascript'
+" Plug 'isRuslan/vim-es6' "curently in test
 " those two pllugins used in conjonction works great two (I keep them during
 " vim-es6 test)
 " Plug 'othree/yajs.vim', { 'for': 'javascript' }         " JS syntax,
 " Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " Indent from pangloss, works with yajs
-Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' }  " autoformat JS
-Plug 'othree/jspc.vim'                                  " Paramters completion
-Plug 'othree/javascript-libraries-syntax.vim'           " extends syntax for with jQuery,backbone,etc.
+" Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' }  " autoformat JS
+" Plug 'othree/jspc.vim'                                  " Paramters completion
+" Plug 'othree/javascript-libraries-syntax.vim'           " extends syntax for with jQuery,backbone,etc.
 
 " ### FUNCTION PARAMETERS AND AUTOCOMPLETE
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' } "autocomplete for js dont forger to add .tern_project in project root
@@ -395,7 +409,7 @@ Plug 'fleischie/vim-styled-components' " React styled-components support
 Plug 'moll/vim-node' " detect extensionless node scripts (executables) via shebang and add gf for going to node_modules files
 
 " ## FLOW
-" Plug 'flowtype/vim-flow' "facebook flow syntax
+Plug 'flowtype/vim-flow' "facebook flow syntax
 
 " ## HTML
 Plug 'othree/html5.vim'                       " syntax

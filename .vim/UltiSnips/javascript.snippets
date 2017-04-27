@@ -1,5 +1,24 @@
 # vim: set tabstop=2 shiftwidth=2 expandtab:
 
+snippet react-contructor "React component constructor" b
+constructor(props) {
+  super(props);
+  this.state = {
+    ...
+  }
+}
+endsnippet
+
+snippet react-router-query-params "React router query params" b
+const params = new URLSearchParams(props.location.search);
+const searchQuery = params.get("q");
+endsnippet
+
+snippet react-router-route "React router route" b
+<Route path="${1:path}" component={${2:Component}} />
+$0
+endsnippet
+
 snippet react-import "React import" b
 import React from 'react';
 endsnippet
