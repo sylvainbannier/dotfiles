@@ -410,6 +410,7 @@ Plug 'moll/vim-node' " detect extensionless node scripts (executables) via sheba
 
 " ## FLOW
 Plug 'flowtype/vim-flow' "facebook flow syntax
+let g:flow#autoclose = 1
 
 " ## HTML
 Plug 'othree/html5.vim'                       " syntax

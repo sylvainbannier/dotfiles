@@ -44,10 +44,10 @@ bindsym $mod+Shift+a kill
 bindsym $mod+d exec --no-startup-id "rofi -show combi -switchers combi -combi-modi drun,window,run"
 
 # change focus
-# bindsym $mod+j focus left
-# bindsym $mod+k focus down
-# bindsym $mod+l focus up
-# bindsym $mod+m focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+m focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -208,8 +208,8 @@ exec --no-startup-id java -cp /usr/local/LanguageTool/languagetool-server.jar or
 workspace_auto_back_and_forth yes
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Shift+Tab move container to workspace back_and_forth; workspace back_and_forth
-bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
-bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+# bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
+# bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 bindsym $mod+Shift+l exec "gnome-screensaver-command --lock "
 focus_follows_mouse no
 
